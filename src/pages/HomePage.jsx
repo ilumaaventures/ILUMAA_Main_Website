@@ -8,10 +8,17 @@ import {
   CheckCircle2,
   Cloud,
   Cpu,
+  Handshake,
+  Heart,
   LineChart,
   Quote,
+  Rocket,
   Scale,
+  Target,
+  TrendingUp,
   Users,
+  Zap,
+  Brain
 } from "lucide-react";
 
 const serviceItems = [
@@ -28,12 +35,12 @@ const serviceItems = [
 ];
 
 const whyChooseUs = [
-  "Human-Centered Strategic Thinking",
-  "Integrated Consulting & Technology Expertise",
-  "Data & AI-Driven Decision Making",
-  "Scalable & Future-Ready Solutions",
-  "Industry-Focused Consulting",
-  "Long-Term Strategic Partnerships",
+  { title: "Human-Centered Strategic Thinking", icon: Brain },
+  { title: "Integrated Consulting & Technology Expertise", icon: Zap },
+  { title: "Data & AI-Driven Decision Making", icon: TrendingUp },
+  { title: "Scalable & Future-Ready Solutions", icon: Rocket },
+  { title: "Industry-Focused Consulting", icon: Target },
+  { title: "Long-Term Strategic Partnerships", icon: Handshake },
 ];
 
 const solutionSections = [
@@ -199,27 +206,25 @@ function HomePage() {
           </div>
 
           <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {whyChooseUs.map((item, index) => (
-              <motion.article
-                key={item}
-                initial={{ opacity: 0, y: 18 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55, delay: 0.16 + index * 0.06 }}
-                className="light-card rounded-[1.45rem] p-6"
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-blue-600">
-                    Point 0{index + 1}
-                  </p>
+            {whyChooseUs.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <motion.article
+                  key={item.title}
+                  initial={{ opacity: 0, y: 18 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.55, delay: 0.16 + index * 0.06 }}
+                  className="light-card rounded-[1.45rem] p-6 flex flex-col items-center justify-center text-center"
+                >
                   <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-blue-50 text-blue-600">
-                    <CheckCircle2 size={18} />
+                    <Icon size={18} />
                   </span>
-                </div>
-                <h3 className="mt-6 font-heading text-[1.2rem] font-semibold leading-8 text-slate-950">
-                  {item}
-                </h3>
-              </motion.article>
-            ))}
+                  <h3 className="mt-6 font-heading text-[1.2rem] font-semibold leading-8 text-slate-950">
+                    {item.title}
+                  </h3>
+                </motion.article>
+              );
+            })}
           </div>
 
           <div id="approach" className="mt-12">
@@ -271,16 +276,11 @@ function HomePage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.45, delay: index * 0.05 }}
-                  className="light-card rounded-[1.45rem] p-6"
+                  className="light-card rounded-[1.45rem] p-6 flex flex-col items-center justify-center text-center"
                 >
-                  <div className="flex items-start justify-between gap-4">
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-blue-600">
-                      Service {String(index + 1).padStart(2, "0")}
-                    </p>
-                    <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-blue-50 text-blue-600">
-                      <Icon size={18} />
-                    </span>
-                  </div>
+                  <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-blue-50 text-blue-600">
+                    <Icon size={18} />
+                  </span>
                   <h3 className="mt-6 font-heading text-[1.18rem] font-semibold leading-8 text-slate-950">
                     {item.title}
                   </h3>
@@ -406,7 +406,7 @@ function HomePage() {
                 <button
                   type="button"
                   disabled
-                  className="inline-flex cursor-not-allowed items-center justify-center rounded-full border border-white/20 px-6 py-4 text-[12px] font-semibold uppercase tracking-[0.16em] text-white opacity-60"
+                  className="inline-flex items-center justify-center rounded-full border border-white/20 px-6 py-4 text-[12px] font-semibold uppercase tracking-[0.16em] text-white opacity-600"
                 >
                   Contact Us
                 </button>

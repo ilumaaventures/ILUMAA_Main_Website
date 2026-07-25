@@ -97,21 +97,21 @@ function Footer({ isTechnologyPage }) {
             <h3 className="font-heading text-lg font-bold text-slate-950">Follow Us</h3>
             <div className="mt-5 flex flex-col gap-4">
               <a
-                href="#"
+                
                 className="inline-flex items-center gap-3 text-sm uppercase tracking-[0.14em] text-slate-600 transition hover:text-slate-950"
               >
                 <Linkedin size={16} className="text-accent-cyan" />
                 LinkedIn
               </a>
               <a
-                href="#"
+                
                 className="inline-flex items-center gap-3 text-sm uppercase tracking-[0.14em] text-slate-600 transition hover:text-slate-950"
               >
                 <Instagram size={16} className="text-accent-cyan" />
                 Instagram
               </a>
               <a
-                href="#"
+                
                 className="inline-flex items-center gap-3 text-sm uppercase tracking-[0.14em] text-slate-600 transition hover:text-slate-950"
               >
                 <Facebook size={16} className="text-accent-cyan" />
