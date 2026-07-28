@@ -190,7 +190,9 @@ function Hero({ isLoaded }) {
                   <div className="dashboard-card card-chart">
                     {/* Speech Bubble */}
                     <div className="speech-bubble">
-                      <span className="speech-text">People ops, made simpler.</span>
+                      <span className="speech-text">
+                        People ops, made simpler.
+                      </span>
                       <span className="speech-arrow"></span>
                     </div>
 
@@ -205,7 +207,7 @@ function Hero({ isLoaded }) {
 
                     {/* Waving Hand character peeking */}
                     <div className="waving-hand-container">
-                      <span className="waving-emoji">👋</span>
+                      {/* <span className="waving-emoji">👋</span> */}
                     </div>
                   </div>
                 </div>
