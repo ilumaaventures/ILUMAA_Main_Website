@@ -154,46 +154,278 @@
   align-items: center;
   position: relative;
 }
-.iluma-tech-page .hero-image-glow-wrapper {
+
+/* Dashboard container & wrapper with 3D tilting */
+.iluma-tech-page .hero-dashboard-wrapper {
   position: relative;
   width: 100%;
   max-width: 480px;
-  border-radius: 20px;
-  padding: 8px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
-  box-shadow: 
-    0 20px 40px -15px rgba(59, 130, 246, 0.4),
-    0 0 50px 5px rgba(139, 92, 246, 0.15),
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
-  overflow: hidden;
-  animation: heroImgFloat 6s ease-in-out infinite alternate;
-}
-.iluma-tech-page .hero-main-img {
-  width: 100%;
-  height: auto;
-  max-height: 420px;
-  object-fit: cover;
-  border-radius: 14px;
-  display: block;
+  z-index: 5;
+  perspective: 1200px;
+  transform-style: preserve-3d;
 }
 
-@keyframes heroImgFloat {
+.iluma-tech-page .hero-dashboard-card {
+  width: 100%;
+  background: linear-gradient(135deg, rgba(15, 22, 42, 0.85) 0%, rgba(9, 13, 26, 0.95) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 24px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transform-style: preserve-3d;
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.6),
+    0 0 40px 2px rgba(59, 130, 246, 0.15),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+  animation: heroDashboardFloat 6s ease-in-out infinite alternate;
+  transition: transform 0.5s ease;
+}
+
+/* Header dots */
+.iluma-tech-page .dashboard-header {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 24px;
+}
+.iluma-tech-page .dashboard-header .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.iluma-tech-page .dashboard-header .dot-red { background: #ef4444; opacity: 0.85; }
+.iluma-tech-page .dashboard-header .dot-yellow { background: #f59e0b; opacity: 0.85; }
+.iluma-tech-page .dashboard-header .dot-green { background: #10b981; opacity: 0.85; }
+
+/* Grid layout for two cards */
+.iluma-tech-page .dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.iluma-tech-page .dashboard-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 20px;
+  min-height: 165px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.iluma-tech-page .dashboard-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Metric card styling */
+.iluma-tech-page .card-metric {
+  justify-content: center;
+}
+.iluma-tech-page .metric-number {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(32px, 3.8vw, 46px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #ffffff 30%, #a5b4fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.iluma-tech-page .metric-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  color: #94a3b8;
+  margin-top: 10px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+/* Chart card styling */
+.iluma-tech-page .card-chart {
+  justify-content: flex-end;
+  padding-bottom: 12px;
+}
+
+/* Speech bubble inside chart card */
+.iluma-tech-page .speech-bubble {
+  position: absolute;
+  top: 16px;
+  left: 14px;
+  background: #ffffff;
+  color: #0f172a;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+  animation: bubbleFloat 3s ease-in-out infinite alternate;
+  z-index: 2;
+}
+
+.iluma-tech-page .speech-arrow {
+  position: absolute;
+  bottom: -5px;
+  left: 18px;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #ffffff;
+}
+
+/* Bar chart styling */
+.iluma-tech-page .bar-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  height: 60px;
+  padding-left: 4px;
+  z-index: 1;
+}
+
+.iluma-tech-page .chart-bar {
+  width: 10px;
+  border-radius: 4px 4px 0 0;
+  background: linear-gradient(to top, rgba(139, 92, 246, 0.45) 0%, rgba(59, 130, 246, 0.9) 100%);
+  transform-origin: bottom;
+  animation: barAnimate 2.5s ease-in-out infinite alternate;
+}
+
+.iluma-tech-page .bar-1 { height: 35%; animation-delay: 0.1s; }
+.iluma-tech-page .bar-2 { height: 65%; animation-delay: 0.3s; }
+.iluma-tech-page .bar-3 { height: 50%; animation-delay: 0.5s; }
+.iluma-tech-page .bar-4 { height: 85%; animation-delay: 0.2s; }
+.iluma-tech-page .bar-5 { height: 40%; animation-delay: 0.4s; }
+
+/* Character hand peeking and waving */
+.iluma-tech-page .waving-hand-container {
+  position: absolute;
+  bottom: -4px;
+  right: 6px;
+  z-index: 2;
+}
+
+.iluma-tech-page .waving-emoji {
+  font-size: 2.8rem;
+  display: block;
+  transform-origin: 70% 70%;
+  animation: handWaveAnimation 2.8s ease-in-out infinite;
+}
+
+/* Pills row */
+.iluma-tech-page .dashboard-pills {
+  display: flex;
+  gap: 8px;
+}
+
+.iluma-tech-page .dashboard-pill {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #cbd5e1;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  transition: all 0.25s ease;
+  cursor: default;
+}
+
+.iluma-tech-page .dashboard-pill:hover {
+  background: rgba(59, 130, 246, 0.12);
+  border-color: rgba(59, 130, 246, 0.35);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* Floating Badge */
+.iluma-tech-page .dashboard-badge {
+  position: absolute;
+  bottom: -15px;
+  left: -20px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  color: #0f172a;
+  padding: 10px 16px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  box-shadow: 
+    0 15px 30px -10px rgba(0, 0, 0, 0.3),
+    0 0 15px 2px rgba(59, 130, 246, 0.15);
+  z-index: 10;
+  animation: badgeFloatAnimation 4s ease-in-out infinite alternate;
+}
+
+.iluma-tech-page .badge-glow {
+  position: absolute;
+  inset: -1px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(255,255,255,1), rgba(255,255,255,0));
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.iluma-tech-page .badge-icon {
+  font-size: 0.95rem;
+  animation: pulseIcon 1.5s ease-in-out infinite alternate;
+}
+
+/* Animations */
+@keyframes heroDashboardFloat {
   0% {
-    transform: translateY(0) rotate(1deg);
+    transform: translateY(0) rotateY(-6deg) rotateX(4deg) rotateZ(0.5deg);
     box-shadow: 
-      0 20px 40px -15px rgba(59, 130, 246, 0.4),
-      0 0 50px 5px rgba(139, 92, 246, 0.15),
+      0 20px 40px -15px rgba(0, 0, 0, 0.5),
+      0 0 35px 2px rgba(59, 130, 246, 0.1),
       inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
   }
   100% {
-    transform: translateY(-12px) rotate(-1deg);
+    transform: translateY(-12px) rotateY(-10deg) rotateX(7deg) rotateZ(-0.5deg);
     box-shadow: 
-      0 30px 50px -10px rgba(59, 130, 246, 0.5),
-      0 0 70px 15px rgba(139, 92, 246, 0.25),
+      0 32px 55px -10px rgba(0, 0, 0, 0.6),
+      0 0 50px 10px rgba(139, 92, 246, 0.2),
       inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
   }
+}
+
+@keyframes bubbleFloat {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-4px); }
+}
+
+@keyframes barAnimate {
+  0% { transform: scaleY(0.9); }
+  100% { transform: scaleY(1.08); }
+}
+
+@keyframes handWaveAnimation {
+  0%, 100% { transform: rotate(0deg); }
+  15% { transform: rotate(18deg); }
+  30% { transform: rotate(-8deg); }
+  45% { transform: rotate(14deg); }
+  60% { transform: rotate(-4deg); }
+  75% { transform: rotate(8deg); }
+}
+
+@keyframes badgeFloatAnimation {
+  0% { transform: translateY(0) scale(1); }
+  100% { transform: translateY(-6px) scale(1.01); }
+}
+
+@keyframes pulseIcon {
+  0% { transform: scale(1); filter: drop-shadow(0 0 1px rgba(234,179,8,0.2)); }
+  100% { transform: scale(1.15); filter: drop-shadow(0 0 4px rgba(234,179,8,0.6)); }
 }
 
 /* Mobile responsive styles */
@@ -223,8 +455,18 @@
   .iluma-tech-page .hero-image-col {
     width: 100%;
   }
-  .iluma-tech-page .hero-image-glow-wrapper {
+  .iluma-tech-page .hero-dashboard-wrapper {
     max-width: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .iluma-tech-page .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+  .iluma-tech-page .dashboard-badge {
+    left: 10px;
+    bottom: -22px;
   }
 }
 .iluma-tech-page .btn{position:relative;font-family:var(--body);font-size:14px;font-weight:500;padding:15px 30px;border-radius:999px;display:inline-flex;align-items:center;gap:10px;}

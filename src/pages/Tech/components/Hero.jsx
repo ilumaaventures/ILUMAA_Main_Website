@@ -111,7 +111,7 @@ function Hero({ isLoaded }) {
         duration: 0.9,
         delay: 0.75,
       });
-      gsap.from(".hero-image-glow-wrapper", {
+      gsap.from(".hero-dashboard-wrapper", {
         opacity: 0,
         x: 40,
         scale: 0.96,
@@ -169,12 +169,61 @@ function Hero({ isLoaded }) {
           </div>
           {/* Right */}
           <div className="hero-image-col">
-            <div className="hero-image-glow-wrapper">
-              <img
-                src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGRhc2hib2FyZHxlbnwwfHwwfHx8MA%3D%3D"
-                alt="Hero Image"
-                className="hero-main-img"
-              />
+            <div className="hero-dashboard-wrapper">
+              <div className="hero-dashboard-card">
+                {/* Header Dots */}
+                <div className="dashboard-header">
+                  <span className="dot dot-red"></span>
+                  <span className="dot dot-yellow"></span>
+                  <span className="dot dot-green"></span>
+                </div>
+
+                {/* Dashboard Grid */}
+                <div className="dashboard-grid">
+                  {/* Left Metric Card */}
+                  <div className="dashboard-card card-metric">
+                    <div className="metric-number">98.4%</div>
+                    <div className="metric-title">Operational clarity</div>
+                  </div>
+
+                  {/* Right Chart Card */}
+                  <div className="dashboard-card card-chart">
+                    {/* Speech Bubble */}
+                    <div className="speech-bubble">
+                      <span className="speech-text">People ops, made simpler.</span>
+                      <span className="speech-arrow"></span>
+                    </div>
+
+                    {/* Chart Bars */}
+                    <div className="bar-chart">
+                      <span className="chart-bar bar-1"></span>
+                      <span className="chart-bar bar-2"></span>
+                      <span className="chart-bar bar-3"></span>
+                      <span className="chart-bar bar-4"></span>
+                      <span className="chart-bar bar-5"></span>
+                    </div>
+
+                    {/* Waving Hand character peeking */}
+                    <div className="waving-hand-container">
+                      <span className="waving-emoji">👋</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bottom Row Pills */}
+                <div className="dashboard-pills">
+                  <span className="dashboard-pill">People</span>
+                  <span className="dashboard-pill">Finance</span>
+                  <span className="dashboard-pill">Cloud</span>
+                </div>
+              </div>
+
+              {/* Floating Badge (bottom left, overlapping) */}
+              <div className="dashboard-badge">
+                <span className="badge-glow"></span>
+                <span className="badge-icon">⚡</span>
+                <span className="badge-text">+41% faster operations</span>
+              </div>
             </div>
           </div>
         </div>
