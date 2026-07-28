@@ -22,13 +22,62 @@ const techPills = [
 ];
 
 const orbits = [
-  { dur: "26s", size: "26px", color: "#63a4ff", label: "React", width: "180px", height: "180px" },
-  { dur: "34s", size: "22px", color: "#7cf1ff", label: "Node", width: "280px", height: "280px" },
-  { dur: "20s", size: "30px", color: "#b18aff", label: "Docker", width: "380px", height: "380px" },
-  { dur: "44s", size: "24px", color: "#63a4ff", label: "AWS", width: "470px", height: "470px" },
-  { dur: "16s", size: "20px", color: "#7cf1ff", label: "Python", width: "560px", height: "560px" },
-  { dur: "52s", size: "28px", color: "#b18aff", label: "OpenAI", width: "610px", height: "610px" },
-  { dur: "38s", size: "18px", color: "#f97066", label: "Redis", width: "250px", height: "250px" },
+  {
+    dur: "26s",
+    size: "26px",
+    color: "#63a4ff",
+    label: "Innovation",
+    width: "180px",
+    height: "180px",
+  },
+  {
+    dur: "34s",
+    size: "22px",
+    color: "#7cf1ff",
+    label: "Trust",
+    width: "280px",
+    height: "280px",
+  },
+  {
+    dur: "20s",
+    size: "30px",
+    color: "#b18aff",
+    label: "Creativity",
+    width: "380px",
+    height: "380px",
+  },
+  {
+    dur: "44s",
+    size: "24px",
+    color: "#63a4ff",
+    label: "Quality",
+    width: "470px",
+    height: "470px",
+  },
+  {
+    dur: "16s",
+    size: "20px",
+    color: "#7cf1ff",
+    label: "Security",
+    width: "560px",
+    height: "560px",
+  },
+  {
+    dur: "52s",
+    size: "28px",
+    color: "#b18aff",
+    label: "Scalability",
+    width: "610px",
+    height: "610px",
+  },
+  {
+    dur: "38s",
+    size: "18px",
+    color: "#f97066",
+    label: "Performance",
+    width: "250px",
+    height: "250px",
+  },
 ];
 
 function TechStack() {
@@ -58,7 +107,7 @@ function TechStack() {
             start: "top 85%",
             toggleActions: "play none none none",
           },
-        }
+        },
       );
       if (anim.scrollTrigger) triggers.push(anim.scrollTrigger);
     });
@@ -70,14 +119,17 @@ function TechStack() {
 
   return (
     <section id="tech" ref={containerRef}>
-      <div className="section-head" style={{ margin: "0 auto 20px", textAlign: "center" }}>
+      <div
+        className="section-head"
+        style={{ margin: "0 auto 20px", textAlign: "center" }}
+      >
         <div className="eyebrow" style={{ justifyContent: "center" }}>
           Our Stack
         </div>
         <h2>
-          A galaxy of
+          Welcome to
           <br />
-          <span className="grad-text">production-grade technology.</span>
+          <span className="grad-text">the ILumaa technology universe.</span>
         </h2>
       </div>
 

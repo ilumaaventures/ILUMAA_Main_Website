@@ -33,7 +33,7 @@ function PathSelection() {
             start: "top 88%",
             toggleActions: "play none none none",
           },
-        }
+        },
       );
       if (anim.scrollTrigger) triggers.push(anim.scrollTrigger);
     });
@@ -51,7 +51,7 @@ function PathSelection() {
           trigger: head,
           start: "top 85%",
         },
-      }
+      },
     );
     if (headAnim.scrollTrigger) triggers.push(headAnim.scrollTrigger);
 
@@ -73,24 +73,22 @@ function PathSelection() {
       <div className="path-grid">
         <article className="path-card" data-idx="1">
           <div className="path-header">
-            <span className="num">01</span>
             <span className="path-icon">
               <Layers size={18} />
             </span>
           </div>
           <h3>Run your business better</h3>
           <p>
-            Bring finance, accounting, people operations and workforce
-            workflows into focused products your team can adopt quickly.
+            Bring finance, accounting, people operations and workforce workflows
+            into focused products your team can adopt quickly.
           </p>
-          <a href="#products">
+          <a href="#projects">
             Explore our products <ArrowRight size={14} className="arrow-icon" />
           </a>
         </article>
 
         <article className="path-card" data-idx="2">
           <div className="path-header">
-            <span className="num">02</span>
             <span className="path-icon">
               <Code2 size={18} />
             </span>
@@ -107,7 +105,6 @@ function PathSelection() {
 
         <article className="path-card" data-idx="3">
           <div className="path-header">
-            <span className="num">03</span>
             <span className="path-icon">
               <BookOpen size={18} />
             </span>

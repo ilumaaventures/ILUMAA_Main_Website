@@ -16,7 +16,7 @@ function Services() {
 
     cards.forEach((el, i) => {
       const fromLeft = i % 2 === 0;
-      
+
       const anim = gsap.fromTo(
         el,
         {
@@ -37,7 +37,7 @@ function Services() {
             start: "top 88%",
             toggleActions: "play none none none",
           },
-        }
+        },
       );
 
       if (anim.scrollTrigger) triggers.push(anim.scrollTrigger);
@@ -58,7 +58,7 @@ function Services() {
           trigger: head,
           start: "top 85%",
         },
-      }
+      },
     );
     if (headAnim.scrollTrigger) triggers.push(headAnim.scrollTrigger);
 
@@ -74,7 +74,7 @@ function Services() {
         <h2>
           Five disciplines.
           <br />
-          <span className="grad-text">One system of intelligence.</span>
+          <span className="grad-text">One ILumaa ecosystem.</span>
         </h2>
       </div>
       <div className="services-grid">
@@ -90,7 +90,8 @@ function Services() {
           </div>
           <h3>Artificial Intelligence</h3>
           <p>
-            Custom models, agentic pipelines, and LLM infrastructure engineered to reason, retrieve, and act.
+            Custom models, agentic pipelines, and LLM infrastructure engineered
+            to reason, retrieve, and act.
           </p>
         </div>
 
@@ -113,7 +114,8 @@ function Services() {
           </div>
           <h3>Web Platforms</h3>
           <p>
-            High-performance web applications with cinematic interfaces and rock-solid architecture.
+            High-performance web applications with cinematic interfaces and
+            rock-solid architecture.
           </p>
         </div>
 
@@ -137,7 +139,8 @@ function Services() {
           </div>
           <h3>Mobile Products</h3>
           <p>
-            Native-grade iOS and Android experiences, built for speed, offline resilience, and delight.
+            Native-grade iOS and Android experiences, built for speed, offline
+            resilience, and delight.
           </p>
         </div>
 
@@ -154,7 +157,13 @@ function Services() {
                   strokeDasharray="4 5"
                 />
                 <defs>
-                  <linearGradient id="servicesG1" x1="0" y1="0" x2="200" y2="120">
+                  <linearGradient
+                    id="servicesG1"
+                    x1="0"
+                    y1="0"
+                    x2="200"
+                    y2="120"
+                  >
                     <stop stopColor="#63a4ff" />
                     <stop offset="1" stopColor="#7cf1ff" />
                   </linearGradient>
@@ -164,7 +173,8 @@ function Services() {
           </div>
           <h3>Cloud Infrastructure</h3>
           <p>
-            Elastic, observable, cost-efficient infrastructure across AWS — built to scale without surprises.
+            Elastic, observable, cost-efficient infrastructure across AWS —
+            built to scale without surprises.
           </p>
         </div>
 
@@ -183,7 +193,8 @@ function Services() {
           </div>
           <h3>Enterprise Systems</h3>
           <p>
-            Unified ERP platforms that connect finance, ops, and people into one glowing source of truth.
+            Unified ERP platforms that connect finance, ops, and people into one
+            glowing source of truth.
           </p>
         </div>
       </div>

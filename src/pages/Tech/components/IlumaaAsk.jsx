@@ -1,28 +1,39 @@
 import React, { useState, useEffect, useRef } from "react";
-import { MessageSquare, X, Send, Sparkles, CornerDownLeft, Info } from "lucide-react";
+import {
+  MessageSquare,
+  X,
+  Send,
+  Sparkles,
+  CornerDownLeft,
+  Info,
+} from "lucide-react";
 import mascotImg from "../../../assets/ilumaa-mascot.png";
 
 const PRESETS = [
   {
     id: "ai",
     question: "Tell me about your AI capabilities",
-    reply: "At ILumaa, we engineer custom AI solutions from the ground up. This includes:\n\n• **Agentic Pipelines & LLMs**: Intelligent workflows that reason, plan, and execute multi-step operations.\n• **Retrieval-Augmented Generation (RAG)**: Connect your custom datasets securely to language models.\n• **Custom Fine-Tuning**: Adapt state-of-the-art open-weights models to your specific brand, tone, or technical domain.\n• **Automation Systems**: Eliminate manual processing tasks using NLP, text classification, and structured data extraction."
+    reply:
+      "At ILumaa, we engineer custom AI solutions from the ground up. This includes:\n\n• **Agentic Pipelines & LLMs**: Intelligent workflows that reason, plan, and execute multi-step operations.\n• **Retrieval-Augmented Generation (RAG)**: Connect your custom datasets securely to language models.\n• **Custom Fine-Tuning**: Adapt state-of-the-art open-weights models to your specific brand, tone, or technical domain.\n• **Automation Systems**: Eliminate manual processing tasks using NLP, text classification, and structured data extraction.",
   },
   {
     id: "tech",
     question: "What technologies do you specialize in?",
-    reply: "We specialize in modern, high-performance technology stacks:\n\n• **Frontend**: React, Next.js, Vite, Tailwind CSS, Framer Motion, and Three.js for cinematic, fluid interfaces.\n• **Backend & APIs**: Node.js, Express, Python (FastAPI/Django), and Golang.\n• **Databases**: MongoDB, PostgreSQL, Redis, and vector databases (Pinecone/Chroma).\n• **Cloud & DevOps**: AWS (Lambda, ECS, RDS, S3), CI/CD automation, and robust monitoring."
+    reply:
+      "We specialize in modern, high-performance technology stacks:\n\n• **Frontend**: React, Next.js, Vite, Tailwind CSS, Framer Motion, and Three.js for cinematic, fluid interfaces.\n• **Backend & APIs**: Node.js, Express, Python (FastAPI/Django), and Golang.\n• **Databases**: MongoDB, PostgreSQL, Redis, and vector databases (Pinecone/Chroma).\n• **Cloud & DevOps**: AWS (Lambda, ECS, RDS, S3), CI/CD automation, and robust monitoring.",
   },
   {
     id: "erp",
     question: "Can you build a custom ERP/Billing app?",
-    reply: "Absolutely. We have extensive experience building scalable business systems. For example:\n\n• [TalentCIO](https://talentcio.in): A comprehensive human resources and talent intelligence ecosystem.\n• [Flance](https://flance.in): A secure payroll, GST invoicing, and financial management suite.\n\nWe can build custom inventory, payroll, invoicing, and reporting tools tailor-made for your workflow."
+    reply:
+      "Absolutely. We have extensive experience building scalable business systems. For example:\n\n• [TalentCIO](https://talentcio.in): A comprehensive human resources and talent intelligence ecosystem.\n• [Flance](https://flance.in): A secure payroll, GST invoicing, and financial management suite.\n\nWe can build custom inventory, payroll, invoicing, and reporting tools tailor-made for your workflow.",
   },
   {
     id: "start",
     question: "How do we get started?",
-    reply: "Getting started with ILumaa is simple:\n\n1. **Discovery Call**: We chat about your project, goals, and technical bottlenecks.\n2. **Detailed Proposal**: We supply a clean scoping document, architectural draft, and project quote.\n3. **Development Phase**: We build in two-week agile sprints, giving you live staging access to watch progress.\n4. **Launch & Support**: We deploy your solution and offer ongoing maintenance contracts."
-  }
+    reply:
+      "Getting started with ILumaa is simple:\n\n1. **Discovery Call**: We chat about your project, goals, and technical bottlenecks.\n2. **Detailed Proposal**: We supply a clean scoping document, architectural draft, and project quote.\n3. **Development Phase**: We build in two-week agile sprints, giving you live staging access to watch progress.\n4. **Launch & Support**: We deploy your solution and offer ongoing maintenance contracts.",
+  },
 ];
 
 function IlumaaAsk() {
@@ -32,8 +43,11 @@ function IlumaaAsk() {
       id: "welcome",
       text: "Hi! I'm ILumaa Ask, your technical agent assistant. How can I help you build your next-gen solution today?",
       sender: "ai",
-      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-    }
+      timestamp: new Date().toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
+    },
   ]);
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
@@ -56,7 +70,10 @@ function IlumaaAsk() {
       id: `user-${Date.now()}`,
       text: text,
       sender: "user",
-      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      timestamp: new Date().toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
     };
 
     setMessages((prev) => [...prev, userMsg]);
@@ -69,23 +86,53 @@ function IlumaaAsk() {
       const lower = text.toLowerCase();
 
       // Simple contextual responses
-      if (lower.includes("ai") || lower.includes("agent") || lower.includes("llm") || lower.includes("gpt")) {
-        replyText = PRESETS.find(p => p.id === "ai").reply;
-      } else if (lower.includes("tech") || lower.includes("stack") || lower.includes("react") || lower.includes("node") || lower.includes("database")) {
-        replyText = PRESETS.find(p => p.id === "tech").reply;
-      } else if (lower.includes("erp") || lower.includes("billing") || lower.includes("invoice") || lower.includes("payroll") || lower.includes("finance") || lower.includes("flance") || lower.includes("talentcio")) {
-        replyText = PRESETS.find(p => p.id === "erp").reply;
-      } else if (lower.includes("start") || lower.includes("hire") || lower.includes("contact") || lower.includes("price") || lower.includes("cost") || lower.includes("call")) {
-        replyText = PRESETS.find(p => p.id === "start").reply;
+      if (
+        lower.includes("ai") ||
+        lower.includes("agent") ||
+        lower.includes("llm") ||
+        lower.includes("gpt")
+      ) {
+        replyText = PRESETS.find((p) => p.id === "ai").reply;
+      } else if (
+        lower.includes("tech") ||
+        lower.includes("stack") ||
+        lower.includes("react") ||
+        lower.includes("node") ||
+        lower.includes("database")
+      ) {
+        replyText = PRESETS.find((p) => p.id === "tech").reply;
+      } else if (
+        lower.includes("erp") ||
+        lower.includes("billing") ||
+        lower.includes("invoice") ||
+        lower.includes("payroll") ||
+        lower.includes("finance") ||
+        lower.includes("flance") ||
+        lower.includes("talentcio")
+      ) {
+        replyText = PRESETS.find((p) => p.id === "erp").reply;
+      } else if (
+        lower.includes("start") ||
+        lower.includes("hire") ||
+        lower.includes("contact") ||
+        lower.includes("price") ||
+        lower.includes("cost") ||
+        lower.includes("call")
+      ) {
+        replyText = PRESETS.find((p) => p.id === "start").reply;
       } else {
-        replyText = "Thanks for asking! I specialize in answering questions about ILumaa's technical capabilities, custom software development, and AI integrations.\n\nTo schedule a quick discussion with our engineering team, you can [Book a Discovery Call](https://ilumaa.com/contact) or type another question about our AI, Web, Mobile, or ERP experience!";
+        replyText =
+          "Thanks for asking! I specialize in answering questions about ILumaa's technical capabilities, custom software development, and AI integrations.\n\nTo schedule a quick discussion with our engineering team, you can [Book a Discovery Call](https://ilumaa.com/contact) or type another question about our AI, Web, Mobile, or ERP experience!";
       }
 
       const aiMsg = {
         id: `ai-${Date.now()}`,
         text: replyText,
         sender: "ai",
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        timestamp: new Date().toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
       };
 
       setMessages((prev) => [...prev, aiMsg]);
@@ -129,9 +176,12 @@ function IlumaaAsk() {
           if (matchText.startsWith("**")) {
             // Bold
             lineParts.push(
-              <strong key={`b-${matchStart}`} className="font-semibold text-slate-150">
+              <strong
+                key={`b-${matchStart}`}
+                className="font-semibold text-slate-150"
+              >
                 {matchText.slice(2, -2)}
-              </strong>
+              </strong>,
             );
           } else {
             // Link
@@ -146,7 +196,7 @@ function IlumaaAsk() {
                   className="text-cyan-400 hover:text-cyan-300 underline font-medium"
                 >
                   {linkMatch[1]}
-                </a>
+                </a>,
               );
             }
           }
@@ -162,13 +212,18 @@ function IlumaaAsk() {
         return (
           <div key={lIdx} className="flex gap-2 items-start mt-2 ml-1">
             <span className="text-purple-400 mt-2 shrink-0 block w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
-            <span className="text-slate-300 leading-relaxed text-[13.5px]">{lineParts}</span>
+            <span className="text-slate-300 leading-relaxed text-[13.5px]">
+              {lineParts}
+            </span>
           </div>
         );
       }
 
       return (
-        <p key={lIdx} className="text-slate-300 leading-relaxed text-[13.5px] mt-1.5 first:mt-0">
+        <p
+          key={lIdx}
+          className="text-slate-300 leading-relaxed text-[13.5px] mt-1.5 first:mt-0"
+        >
           {lineParts}
         </p>
       );
@@ -181,7 +236,7 @@ function IlumaaAsk() {
       {!isOpen && (
         <div className="flex flex-col items-center select-none">
           {/* Mascot Character Image */}
-          <div 
+          <div
             onClick={() => setIsOpen(true)}
             className="pointer-events-auto cursor-pointer w-[220px] h-[340px] mb-[-16px] transform hover:scale-[1.03] hover:-translate-y-3 active:scale-95 transition-transform duration-300 ease-out z-10"
           >
@@ -191,14 +246,18 @@ function IlumaaAsk() {
               className="w-full h-full object-contain"
             />
           </div>
-          
+
           {/* Ask Ilumaa Button */}
           <button
             onClick={() => setIsOpen(true)}
             className="pointer-events-auto relative flex items-center gap-2 rounded-full bg-gradient-to-r from-[#0d1e4c] to-[#1e40af] px-8 py-4 text-white shadow-[0_12px_40px_rgba(0,0,0,0.6),0_0_24px_rgba(56,189,248,0.25)] border border-blue-500/30 transition-all duration-300 hover:scale-105 active:scale-95 focus:outline-none z-0"
           >
-            <span className="text-cyan-400 font-bold text-lg leading-none animate-pulse">✦</span>
-            <span className="font-semibold text-sm tracking-wide">Ask Ilumaa</span>
+            <span className="text-cyan-400 font-bold text-lg leading-none animate-pulse">
+              ✦
+            </span>
+            <span className="font-semibold text-sm tracking-wide">
+              Ask ILUMAA
+            </span>
           </button>
         </div>
       )}
@@ -219,10 +278,12 @@ function IlumaaAsk() {
               </div>
               <div>
                 <h4 className="text-sm font-semibold text-slate-100 flex items-center gap-1.5 font-heading">
-                  ILumaa Ask
+                  Ask Ilumaa
                   <Sparkles className="h-3 w-3 text-cyan-400 animate-pulse" />
                 </h4>
-                <p className="text-[10px] text-cyan-400 font-mono tracking-wider font-medium">ONLINE EXPERT</p>
+                <p className="text-[10px] text-cyan-400 font-mono tracking-wider font-medium">
+                  ONLINE EXPERT
+                </p>
               </div>
             </div>
             <button
@@ -257,7 +318,9 @@ function IlumaaAsk() {
                   )}
                   <span
                     className={`block mt-1 text-[9px] text-right font-mono ${
-                      msg.sender === "user" ? "text-cyan-200/70" : "text-slate-500"
+                      msg.sender === "user"
+                        ? "text-cyan-200/70"
+                        : "text-slate-500"
                     }`}
                   >
                     {msg.timestamp}
