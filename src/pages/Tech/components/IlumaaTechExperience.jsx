@@ -9,6 +9,7 @@ import TechStack from "./TechStack";
 import Work from "./Work";
 import About from "./About";
 import Process from "./Process";
+import Team from "./Team";
 import CTA from "./CTA";
 import ProjectModal from "./ProjectModal";
 import IlumaaAsk from "./IlumaaAsk";
@@ -89,6 +90,7 @@ function IlumaaTechExperience() {
         <Work projects={projects} onSelectProject={setSelectedProjectIndex} />
         <About />
         <Process />
+        {/* <Team /> */}
         <CTA />
       </div>
       <IlumaaAsk />

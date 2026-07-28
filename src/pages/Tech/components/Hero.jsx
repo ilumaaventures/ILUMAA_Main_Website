@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -13,12 +13,44 @@ const codeSnippets = [
   { text: "GET /v1/infer 200 OK", left: "62%", top: "15%" },
 ];
 
+const tabData = {
+  people: {
+    metric: "98.4%",
+    metricLabel: "Operational clarity",
+    bubble: "People ops, made simpler.",
+    badgeIcon: "⚡",
+    badge: "+41% faster operations",
+    bars: [35, 65, 50, 85, 40]
+  },
+  finance: {
+    metric: "99.9%",
+    metricLabel: "Billing accuracy",
+    bubble: "Instant GST invoicing.",
+    badgeIcon: "💳",
+    badge: "70% time saved on payroll",
+    bars: [70, 45, 90, 55, 80]
+  },
+  cloud: {
+    metric: "99.99%",
+    metricLabel: "Core platform uptime",
+    bubble: "Scales to 10M+ users.",
+    badgeIcon: "☁️",
+    badge: "Zero-downtime deployments",
+    bars: [40, 80, 30, 95, 60]
+  }
+};
+
 function Hero({ isLoaded }) {
   const snippetsRef = useRef([]);
   const hudTLRef = useRef(null);
   const hudTRRef = useRef(null);
   const innerRef = useRef(null);
   const cueRef = useRef(null);
+  
+  const imageColRef = useRef(null);
+  const cardRef = useRef(null);
+  
+  const [activeTab, setActiveTab] = useState("people");
 
   useEffect(() => {
     // Initial scroll animation setup (fades elements as you scroll down the long hero container)
@@ -87,6 +119,54 @@ function Hero({ isLoaded }) {
     };
   }, []);
 
+  // Mouse tilt interaction effect
+  useEffect(() => {
+    const isTouch = window.matchMedia("(hover:none)").matches || window.innerWidth < 900;
+    if (isTouch) return;
+
+    const col = imageColRef.current;
+    const card = cardRef.current;
+    if (!col || !card) return;
+
+    const handleMouseMove = (e) => {
+      const rect = col.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      // Calculate tilt angles (limit rotation to +/- 10 degrees)
+      const rotateX = (centerY - y) / 10;
+      const rotateY = (x - centerX) / 10;
+
+      gsap.to(card, {
+        rotateX: rotateX,
+        rotateY: rotateY,
+        transformPerspective: 1000,
+        duration: 0.4,
+        ease: "power2.out"
+      });
+    };
+
+    const handleMouseLeave = () => {
+      gsap.to(card, {
+        rotateX: 0,
+        rotateY: 0,
+        duration: 0.8,
+        ease: "power3.out"
+      });
+    };
+
+    col.addEventListener("mousemove", handleMouseMove);
+    col.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => {
+      col.removeEventListener("mousemove", handleMouseMove);
+      col.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, []);
+
   // Entry play-in animations trigger once loader confirms completion
   useEffect(() => {
     if (isLoaded) {
@@ -123,6 +203,8 @@ function Hero({ isLoaded }) {
       gsap.from(".scroll-cue", { opacity: 0, duration: 1, delay: 1.1 });
     }
   }, [isLoaded]);
+
+  const activeData = tabData[activeTab];
 
   return (
     <div id="hero-wrap">
@@ -168,9 +250,9 @@ function Hero({ isLoaded }) {
             </div>
           </div>
           {/* Right */}
-          <div className="hero-image-col">
+          <div className="hero-image-col" ref={imageColRef}>
             <div className="hero-dashboard-wrapper">
-              <div className="hero-dashboard-card">
+              <div className="hero-dashboard-card" ref={cardRef}>
                 {/* Header Dots */}
                 <div className="dashboard-header">
                   <span className="dot dot-red"></span>
@@ -182,8 +264,8 @@ function Hero({ isLoaded }) {
                 <div className="dashboard-grid">
                   {/* Left Metric Card */}
                   <div className="dashboard-card card-metric">
-                    <div className="metric-number">98.4%</div>
-                    <div className="metric-title">Operational clarity</div>
+                    <div className="metric-number">{activeData.metric}</div>
+                    <div className="metric-title">{activeData.metricLabel}</div>
                   </div>
 
                   {/* Right Chart Card */}
@@ -191,40 +273,60 @@ function Hero({ isLoaded }) {
                     {/* Speech Bubble */}
                     <div className="speech-bubble">
                       <span className="speech-text">
-                        People ops, made simpler.
+                        {activeData.bubble}
                       </span>
                       <span className="speech-arrow"></span>
                     </div>
 
                     {/* Chart Bars */}
                     <div className="bar-chart">
-                      <span className="chart-bar bar-1"></span>
-                      <span className="chart-bar bar-2"></span>
-                      <span className="chart-bar bar-3"></span>
-                      <span className="chart-bar bar-4"></span>
-                      <span className="chart-bar bar-5"></span>
+                      {activeData.bars.map((barH, idx) => (
+                        <span
+                          key={idx}
+                          className={`chart-bar bar-${idx + 1}`}
+                          style={{ height: `${barH}%` }}
+                        ></span>
+                      ))}
                     </div>
 
                     {/* Waving Hand character peeking */}
                     <div className="waving-hand-container">
-                      {/* <span className="waving-emoji">👋</span> */}
+                      <span className="waving-emoji">👋</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Bottom Row Pills */}
                 <div className="dashboard-pills">
-                  <span className="dashboard-pill">People</span>
-                  <span className="dashboard-pill">Finance</span>
-                  <span className="dashboard-pill">Cloud</span>
+                  <span
+                    className={`dashboard-pill ${activeTab === "people" ? "active" : ""}`}
+                    onMouseEnter={() => setActiveTab("people")}
+                    onClick={() => setActiveTab("people")}
+                  >
+                    People
+                  </span>
+                  <span
+                    className={`dashboard-pill ${activeTab === "finance" ? "active" : ""}`}
+                    onMouseEnter={() => setActiveTab("finance")}
+                    onClick={() => setActiveTab("finance")}
+                  >
+                    Finance
+                  </span>
+                  <span
+                    className={`dashboard-pill ${activeTab === "cloud" ? "active" : ""}`}
+                    onMouseEnter={() => setActiveTab("cloud")}
+                    onClick={() => setActiveTab("cloud")}
+                  >
+                    Cloud
+                  </span>
                 </div>
               </div>
 
               {/* Floating Badge (bottom left, overlapping) */}
               <div className="dashboard-badge">
                 <span className="badge-glow"></span>
-                <span className="badge-icon">⚡</span>
-                <span className="badge-text">+41% faster operations</span>
+                <span className="badge-icon">{activeData.badgeIcon}</span>
+                <span className="badge-text">{activeData.badge}</span>
               </div>
             </div>
           </div>

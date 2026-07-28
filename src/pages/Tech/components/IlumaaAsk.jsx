@@ -231,14 +231,14 @@ function IlumaaAsk() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-[999] font-body flex items-end justify-end pointer-events-none">
+    <div className="iluma-ask-widget pointer-events-none">
       {/* Floating Mascot Button */}
       {!isOpen && (
         <div className="flex flex-col items-center select-none">
           {/* Mascot Character Image */}
           <div
             onClick={() => setIsOpen(true)}
-            className="pointer-events-auto cursor-pointer w-[220px] h-[340px] mb-[-16px] transform hover:scale-[1.03] hover:-translate-y-3 active:scale-95 transition-transform duration-300 ease-out z-10"
+            className="iluma-ask-mascot"
           >
             <img
               src={mascotImg}
@@ -250,7 +250,7 @@ function IlumaaAsk() {
           {/* Ask Ilumaa Button */}
           <button
             onClick={() => setIsOpen(true)}
-            className="pointer-events-auto relative flex items-center gap-2 rounded-full bg-gradient-to-r from-[#0d1e4c] to-[#1e40af] px-8 py-4 text-white shadow-[0_12px_40px_rgba(0,0,0,0.6),0_0_24px_rgba(56,189,248,0.25)] border border-blue-500/30 transition-all duration-300 hover:scale-105 active:scale-95 focus:outline-none z-0"
+            className="iluma-ask-btn"
           >
             <span className="text-cyan-400 font-bold text-lg leading-none animate-pulse">
               ✦
@@ -264,7 +264,7 @@ function IlumaaAsk() {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="pointer-events-auto flex h-[520px] w-[380px] flex-col rounded-2xl border border-slate-800/80 bg-slate-950/90 text-white shadow-[0_20px_50px_rgba(3,7,18,0.6)] backdrop-blur-xl transition-all duration-300 ease-out animate-in slide-in-from-bottom-5">
+        <div className="iluma-ask-window">
           {/* Chat Header */}
           <div className="flex items-center justify-between border-b border-slate-800/60 bg-slate-900/40 px-4 py-3.5 rounded-t-2xl">
             <div className="flex items-center gap-3">
