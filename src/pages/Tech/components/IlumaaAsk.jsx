@@ -61,7 +61,7 @@ function IlumaaAsk() {
     }
   }, [messages, isTyping]);
 
-  const handleSend = (textToSend) => {
+  const handleSend = async (textToSend) => {
     const text = textToSend || inputValue.trim();
     if (!text) return;
 
@@ -76,54 +76,273 @@ function IlumaaAsk() {
       }),
     };
 
-    setMessages((prev) => [...prev, userMsg]);
+    const updatedMessages = [...messages, userMsg];
+    setMessages(updatedMessages);
     if (!textToSend) setInputValue("");
     setIsTyping(true);
 
-    // Simulate chatbot response
-    setTimeout(() => {
-      let replyText = "";
-      const lower = text.toLowerCase();
+    const SYSTEM_PROMPT = `You are ILumaa Ask, the official AI technical assistant for ILumaa and ILumaaTech.
 
-      // Simple contextual responses
+COMPREHENSIVE ILUMAA KNOWLEDGE BASE (TECH & HOME ECOSYSTEM):
+
+1. **ABOUT ILUMAA & ILUMATECH**:
+   - Tagline: "Strategic Consulting. Intelligent Solutions. Scalable Growth." | "Minds behind the digital grid."
+   - Philosophy: "Human Intelligence Meets Intelligent Technology"
+   - Integrated solutions across Strategy, Technology, Talent, Finance, AI, Legal, and Digital Marketing.
+
+2. **SOLUTIONS & SERVICE DOMAINS**:
+   - **Talent & Workforce Solutions**: Executive hiring, HR consulting, payroll & HRMS solutions, workforce planning, performance management, compliance, employer branding, talent strategy.
+   - **Technology & Digital Solutions**: Product & platform development, SaaS & marketplace solutions, Web & mobile app development, property platforms, CRM/ERP/HRMS platforms, cloud infrastructure, AI integrations, UI/UX architecture.
+   - **Market Research & Strategic Intelligence**: Market research & surveys, competitor analysis, consumer insights, feasibility studies, business intelligence, strategic data consulting.
+   - **Legal & Financial Consulting**: Business registration & structuring, contract support, legal compliance advisory, accounting & bookkeeping, tax & regulatory support, MIS financial reporting, payroll compliance.
+   - **Digital Marketing & Brand Growth**: Brand strategy & positioning, performance marketing, SEO & organic growth, social media marketing, lead generation, content & creative solutions, marketing automation.
+   - **Business Strategy & Advisory**: Operational excellence, business transformation, process optimization, change management, startup & scale-up consulting.
+
+3. **OUR FEATURED PROJECTS & URLS** (ALWAYS include markdown links):
+   - **[Flance](https://flance.in)**: Business Finance, Billing & Payroll Platform. Features order-to-cash lifecycle, GST-compliant invoicing, auto tax calculations (CGST/SGST/IGST & TDS), Razorpay integration, PDF generation, employee salary structures, payslips, expense tracking, and P&L statements. Tech Stack: React, Node.js, MongoDB, Razorpay, Puppeteer.
+   - **[TalentCIO](https://talentcio.in)**: Talent Intelligence Ecosystem & Talent Acquisition. Philosophy: "Human Intelligence + Technology = Talent Intelligence". Features candidate sourcing, AI resume screening, interview scheduling, onboarding, attendance, performance management, and role-based access control. Tech Stack: React, Node.js, MongoDB, JWT, RBAC.
+   - **[ILUMAA Socials](https://ilumaasocialmarketing.vercel.app/)**: Social Media & Networking Platform. Features community creation, post sharing, media uploads, following creators, real-time Socket.IO messaging, and live notifications. Tech Stack: React, Node.js, MongoDB, Socket.IO, Cloudinary.
+
+4. **OUR TEAM**:
+   - Powered by a team of **10+ experienced operators and engineers** specializing in system architecture, AI research, full-stack web platforms, mobile engineering, and cloud infrastructure.
+
+5. **HOW TO CONNECT & START A PROJECT**:
+   - Contact Emails: [hello@ilummtech.com](mailto:hello@ilummtech.com) | [info@ilumaa.com](mailto:info@ilumaa.com)
+   - Approach (4 Steps):
+     1. **Understand**: Analyze business challenges, people, and opportunities.
+     2. **Strategize**: Create intelligent transformation roadmaps.
+     3. **Build & Implement**: Execute scalable consulting and technology solutions in 2-week agile sprints.
+     4. **Optimize & Scale**: Improve systems, performance, and long-term growth.
+
+6. **CAREERS & HOW TO APPLY**:
+   - Send resume, portfolio/GitHub link, and intro to [hello@ilummtech.com](mailto:hello@ilummtech.com) or [info@ilumaa.com](mailto:info@ilumaa.com).
+
+STRICT RULES:
+- ONLY answer questions about ILumaa, ILumaaTech, our team, strategy/tech/finance/marketing services, or our projects ([Flance](https://flance.in), [TalentCIO](https://talentcio.in), [ILUMAA Socials](https://ilumaasocialmarketing.vercel.app/)).
+- Reject completely off-topic questions by politely directing users to ask about ILumaa services!`;
+
+    const getLocalResponse = (queryText) => {
+      const lower = queryText.toLowerCase();
+
+      // Digital Marketing & Branding
       if (
-        lower.includes("ai") ||
-        lower.includes("agent") ||
-        lower.includes("llm") ||
-        lower.includes("gpt")
+        lower.includes("marketing") ||
+        lower.includes("seo") ||
+        lower.includes("brand") ||
+        lower.includes("lead generation") ||
+        lower.includes("social media marketing")
       ) {
-        replyText = PRESETS.find((p) => p.id === "ai").reply;
-      } else if (
-        lower.includes("tech") ||
-        lower.includes("stack") ||
-        lower.includes("react") ||
-        lower.includes("node") ||
-        lower.includes("database")
+        return "At **ILumaa**, our Digital Marketing & Brand Growth solutions include:\n\n• Brand Strategy & Positioning\n• Performance Marketing & Lead Generation\n• SEO & Organic Search Growth\n• Social Media Marketing & Content Creation\n• Website & Digital Presence Management\n\nConnect with us at [info@ilumaa.com](mailto:info@ilumaa.com) to scale your brand!";
+      }
+
+      // Legal & Financial Consulting
+      if (
+        lower.includes("legal") ||
+        lower.includes("financial") ||
+        lower.includes("compliance") ||
+        lower.includes("taxation") ||
+        lower.includes("accounting") ||
+        lower.includes("bookkeeping")
       ) {
-        replyText = PRESETS.find((p) => p.id === "tech").reply;
-      } else if (
-        lower.includes("erp") ||
+        return "Our **Legal & Financial Consulting** services provide business clarity & compliance:\n\n• Business Registration & Structuring\n• Legal Compliance & Contract Support\n• Accounting, Bookkeeping & Payroll Compliance\n• Taxation, Regulatory Support & Financial Controls\n• MIS & Financial Reporting";
+      }
+
+      // Market Research & Intelligence
+      if (
+        lower.includes("market research") ||
+        lower.includes("research") ||
+        lower.includes("competitor") ||
+        lower.includes("analytics") ||
+        lower.includes("intelligence") ||
+        lower.includes("consumer insight")
+      ) {
+        return "Our **Market Research & Strategic Intelligence** team helps you make data-driven decisions:\n\n• Industry & Competitor Analysis\n• Consumer Insights & Feasibility Studies\n• Market Research Surveys & Opportunity Assessment\n• Business Intelligence & Reporting";
+      }
+
+      // Strategy & Consulting
+      if (
+        lower.includes("strategy") ||
+        lower.includes("consulting") ||
+        lower.includes("advisory") ||
+        lower.includes("growth") ||
+        lower.includes("transformation") ||
+        lower.includes("scaling")
+      ) {
+        return "ILumaa's **Strategic Consulting & Advisory** helps businesses scale efficiently:\n\n• Business Strategy & Expansion Planning\n• Operational Excellence & Process Optimization\n• Organizational Development & Change Management\n• Startup & Scale-up Consulting\n\nBook a strategy call at [info@ilumaa.com](mailto:info@ilumaa.com)!";
+      }
+
+      // Team & Operators
+      if (
+        lower.includes("team") ||
+        lower.includes("member") ||
+        lower.includes("operator") ||
+        lower.includes("who built") ||
+        lower.includes("who works")
+      ) {
+        return "ILumaa is powered by a team of **10+ experienced operators and engineers** specializing in system architecture, AI research, full-stack web platforms, mobile engineering, and cloud infrastructure.\n\nWant to collaborate with our team? Contact us at [hello@ilummtech.com](mailto:hello@ilummtech.com)!";
+      }
+
+      // Contact & Connection
+      if (
+        lower.includes("contact") ||
+        lower.includes("connect") ||
+        lower.includes("email") ||
+        lower.includes("reach") ||
+        lower.includes("hire") ||
+        lower.includes("talk") ||
+        lower.includes("call") ||
+        lower.includes("book") ||
+        lower.includes("consult")
+      ) {
+        return "You can connect with the ILumaa team directly:\n\n• **Email**: [hello@ilummtech.com](mailto:hello@ilummtech.com) | [info@ilumaa.com](mailto:info@ilumaa.com)\n• **Our 4-Step Approach**: Understand → Strategize → Build & Implement (2-week agile sprints) → Optimize & Scale!\n\nSchedule a consultation via email to kick off your project.";
+      }
+
+      // Apply / Careers / Jobs
+      if (
+        lower.includes("apply") ||
+        lower.includes("job") ||
+        lower.includes("career") ||
+        lower.includes("join") ||
+        lower.includes("work with") ||
+        lower.includes("hiring") ||
+        lower.includes("intern")
+      ) {
+        return "Interested in joining the ILumaa team?\n\nWe are always looking for driven full-stack engineers, AI architects, strategists, and UI/UX craftsmen.\n\nTo apply, send your resume, GitHub/portfolio link, and a short intro to **[hello@ilummtech.com](mailto:hello@ilummtech.com)** or **[info@ilumaa.com](mailto:info@ilumaa.com)**!";
+      }
+
+      // Process & Sprints
+      if (
+        lower.includes("process") ||
+        lower.includes("how it works") ||
+        lower.includes("sprint") ||
+        lower.includes("steps") ||
+        lower.includes("workflow") ||
+        lower.includes("approach")
+      ) {
+        return "Our 4-Step Value Delivery Approach:\n\n1. **Understand**: Analyze business challenges, people, and opportunities.\n2. **Strategize**: Create intelligent, business-focused transformation roadmaps.\n3. **Build & Implement**: Execute scalable tech & consulting solutions in 2-week agile sprints.\n4. **Optimize & Scale**: Continuously improve systems and business performance.";
+      }
+
+      // Flance
+      if (
+        lower.includes("flance") ||
         lower.includes("billing") ||
         lower.includes("invoice") ||
         lower.includes("payroll") ||
         lower.includes("finance") ||
-        lower.includes("flance") ||
-        lower.includes("talentcio")
+        lower.includes("gst")
       ) {
-        replyText = PRESETS.find((p) => p.id === "erp").reply;
-      } else if (
-        lower.includes("start") ||
-        lower.includes("hire") ||
-        lower.includes("contact") ||
-        lower.includes("price") ||
-        lower.includes("cost") ||
-        lower.includes("call")
-      ) {
-        replyText = PRESETS.find((p) => p.id === "start").reply;
-      } else {
-        replyText =
-          "Thanks for asking! I specialize in answering questions about ILumaa's technical capabilities, custom software development, and AI integrations.\n\nTo schedule a quick discussion with our engineering team, you can [Book a Discovery Call](https://ilumaa.com/contact) or type another question about our AI, Web, Mobile, or ERP experience!";
+        return "• **[Flance](https://flance.in)** is our comprehensive financial operations, GST invoicing, and payroll suite. It handles order-to-cash, automatic tax (CGST/SGST/IGST & TDS) calculations, Razorpay payments, employee salary structures, payslip generation, and P&L reporting.\n\nStack: React · Node.js · MongoDB · Razorpay · Puppeteer";
       }
+
+      // TalentCIO
+      if (
+        lower.includes("talentcio") ||
+        lower.includes("talent") ||
+        lower.includes("hiring platform") ||
+        lower.includes("recruitment") ||
+        lower.includes("hr")
+      ) {
+        return "• **[TalentCIO](https://talentcio.in)** is a modern Talent Intelligence Ecosystem unifying hiring, candidate sourcing, AI resume screening, interview scheduling, onboarding, attendance, and workforce growth.\n\nStack: React · Node.js · MongoDB · JWT Authentication · Role-Based Access Control";
+      }
+
+      // ILumaa Socials
+      if (
+        lower.includes("social") ||
+        lower.includes("ilumaasocial") ||
+        lower.includes("community")
+      ) {
+        return "• **[ILUMAA Socials](https://ilumaasocialmarketing.vercel.app/)** is a modern social networking platform built for communities, creators, and businesses. Features real-time Socket.IO messaging, post sharing, media uploads, and live notifications.\n\nStack: React · Node.js · MongoDB · Socket.IO · Cloudinary";
+      }
+
+      // AI capabilities
+      if (
+        lower.includes("ai") ||
+        lower.includes("agent") ||
+        lower.includes("llm") ||
+        lower.includes("rag") ||
+        lower.includes("nlp") ||
+        lower.includes("gpt")
+      ) {
+        return "At **ILumaa**, we engineer custom AI solutions from the ground up:\n\n• **Agentic Pipelines & LLMs**: Workflows that reason, plan, and execute multi-step operations.\n• **Retrieval-Augmented Generation (RAG)**: Connect custom datasets securely to language models.\n• **Custom Fine-Tuning**: Adapt open-weights models to your brand tone and domain.";
+      }
+
+      // Tech Stack & Services
+      if (
+        lower.includes("tech") ||
+        lower.includes("stack") ||
+        lower.includes("service") ||
+        lower.includes("react") ||
+        lower.includes("node") ||
+        lower.includes("cloud") ||
+        lower.includes("erp") ||
+        lower.includes("mobile")
+      ) {
+        return "We offer comprehensive services across Strategy, Technology & Operations:\n\n1. **AI Solutions & LLMs** (RAG, Agentic Workflows)\n2. **Technology & Platforms** (React, Next.js, Web & Mobile, Property Platforms, ERPs)\n3. **Talent & HR Solutions** (Executive Hiring, HRMS, Payroll)\n4. **Legal & Financial Advisory** (GST, Taxes, MIS Reporting)\n5. **Digital Marketing & Growth** (SEO, Brand Positioning, Lead Generation)\n6. **Market Research & Analytics**\n\nReach out at [info@ilumaa.com](mailto:info@ilumaa.com) or [hello@ilummtech.com](mailto:hello@ilummtech.com) to start building!";
+      }
+
+      return "I am **ILumaa Ask**, your assistant for ILumaa & ILumaaTech!\n\nHere is what you can ask me about:\n\n• **Featured Platforms**: [Flance](https://flance.in) | [TalentCIO](https://talentcio.in) | [ILUMAA Socials](https://ilumaasocialmarketing.vercel.app/)\n• **Services**: AI Solutions, Web & Mobile, Strategy, Talent/HR, Legal/Finance, Digital Marketing\n• **Approach & Process**: Understand → Strategize → Build → Scale\n• **Contact & Careers**: Email [hello@ilummtech.com](mailto:hello@ilummtech.com) or [info@ilumaa.com](mailto:info@ilumaa.com)\n\nHow can I help you build your business today?";
+    };
+
+    const geminiKey = import.meta.env.VITE_GEMINI_API_KEY;
+
+    if (!geminiKey) {
+      setTimeout(() => {
+        const fallbackReply = getLocalResponse(text);
+        const aiMsg = {
+          id: `ai-${Date.now()}`,
+          text: fallbackReply,
+          sender: "ai",
+          timestamp: new Date().toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          }),
+        };
+        setMessages((prev) => [...prev, aiMsg]);
+        setIsTyping(false);
+      }, 600);
+      return;
+    }
+
+    try {
+      const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiKey}`;
+
+      // Convert message history for Gemini (roles: 'user' and 'model')
+      const formattedHistory = updatedMessages
+        .filter((m) => m.id !== "welcome")
+        .map((m) => ({
+          role: m.sender === "user" ? "user" : "model",
+          parts: [{ text: m.text }],
+        }));
+
+      const payload = {
+        systemInstruction: {
+          parts: [{ text: SYSTEM_PROMPT }],
+        },
+        contents:
+          formattedHistory.length > 0
+            ? formattedHistory
+            : [{ role: "user", parts: [{ text: text }] }],
+      };
+
+      const res = await fetch(geminiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(
+          errData?.error?.message || `Gemini API status ${res.status}`,
+        );
+      }
+
+      const data = await res.json();
+      const replyText =
+        data.candidates?.[0]?.content?.parts?.[0]?.text ||
+        getLocalResponse(text);
 
       const aiMsg = {
         id: `ai-${Date.now()}`,
@@ -136,8 +355,24 @@ function IlumaaAsk() {
       };
 
       setMessages((prev) => [...prev, aiMsg]);
+    } catch (err) {
+      console.warn("Gemini API error (fallback triggered):", err.message);
+      
+      // Seamless Fallback: Provide smart local response so UI never breaks
+      const fallbackReply = getLocalResponse(text);
+      const errorMsg = {
+        id: `ai-fb-${Date.now()}`,
+        text: fallbackReply,
+        sender: "ai",
+        timestamp: new Date().toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
+      };
+      setMessages((prev) => [...prev, errorMsg]);
+    } finally {
       setIsTyping(false);
-    }, 1200);
+    }
   };
 
   const handleKeyPress = (e) => {
@@ -236,10 +471,7 @@ function IlumaaAsk() {
       {!isOpen && (
         <div className="flex flex-col items-center select-none">
           {/* Mascot Character Image */}
-          <div
-            onClick={() => setIsOpen(true)}
-            className="iluma-ask-mascot"
-          >
+          <div onClick={() => setIsOpen(true)} className="iluma-ask-mascot">
             <img
               src={mascotImg}
               alt="ILumaa Mascot"
@@ -248,10 +480,7 @@ function IlumaaAsk() {
           </div>
 
           {/* Ask Ilumaa Button */}
-          <button
-            onClick={() => setIsOpen(true)}
-            className="iluma-ask-btn"
-          >
+          <button onClick={() => setIsOpen(true)} className="iluma-ask-btn">
             <span className="text-cyan-400 font-bold text-lg leading-none animate-pulse">
               ✦
             </span>
