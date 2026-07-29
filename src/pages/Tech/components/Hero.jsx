@@ -40,6 +40,14 @@ const tabData = {
   }
 };
 
+// DUMMY CONTENT — replace before shipping
+// TODO: replace with real content
+const revealStats = [
+  { value: "50+",   label: "Systems shipped to production" },
+  { value: "99.9%", label: "Average platform uptime" },
+  { value: "3x",    label: "Faster deployment cycles" },
+];
+
 function Hero({ isLoaded }) {
   const snippetsRef = useRef([]);
   const hudTLRef = useRef(null);
@@ -348,15 +356,17 @@ function Hero({ isLoaded }) {
           <span>SCROLL</span>
           <span className="stick"></span>
         </div>
-        {/* Bridge beat — fills the ~72%–97% dead zone of the pinned scroll */}
-        <div className="hero-bridge" ref={bridgeRef}>
-          <p className="hero-bridge-label">ONE PARTNER, MANY POSSIBILITIES</p>
-          <ul className="hero-bridge-paths">
-            <li><span className="hero-bridge-num">01</span>Run your business better</li>
-            <li><span className="hero-bridge-num">02</span>Build the digital advantage</li>
-            <li><span className="hero-bridge-num">03</span>Grow your capability</li>
-          </ul>
-          <span className="hero-bridge-cue">↓ explore below</span>
+        {/* TODO: replace with real content — stat cards fill the ~72%–97% dead zone */}
+        <div className="hero-stats-beat" ref={bridgeRef}>
+          <p className="eyebrow hero-stats-eyebrow">[PLACEHOLDER EYEBROW COPY]</p>
+          <div className="hero-stats-grid">
+            {revealStats.map((s) => (
+              <div className="dashboard-card hero-stat-card" key={s.value}>
+                <span className="hero-stat-value">{s.value}</span>
+                <span className="hero-stat-label">{s.label}</span>
+              </div>
+            ))}
+          </div>
         </div>
         {codeSnippets.map((snippet, idx) => (
           <div

@@ -459,7 +459,7 @@
   .iluma-tech-page .scroll-cue {
     display: none !important;
   }
-  .iluma-tech-page .hero-bridge {
+  .iluma-tech-page .hero-stats-beat {
     display: none !important;
   }
   .iluma-tech-page .hero-inner {
@@ -621,8 +621,8 @@
 .iluma-tech-page .hud.br{bottom:16vh;right:6vw;text-align:right;}
 .iluma-tech-page .code-float{position:absolute;font-family:var(--mono);font-size:11px;color:var(--cyan-glow);opacity:0;white-space:nowrap;z-index:4;text-shadow:0 0 8px rgba(103,232,249,.6);}
 
-/* ============ HERO BRIDGE BEAT ============ */
-.iluma-tech-page .hero-bridge{
+/* ============ HERO STATS BEAT (placeholder — TODO: replace copy) ============ */
+.iluma-tech-page .hero-stats-beat{
   position:absolute;
   inset:0;
   z-index:5;
@@ -630,48 +630,51 @@
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  gap:28px;
+  gap:32px;
   opacity:0;
   pointer-events:none;
   text-align:center;
 }
-.iluma-tech-page .hero-bridge-label{
-  font-family:var(--mono);
-  font-size:11px;
-  letter-spacing:.35em;
-  text-transform:uppercase;
-  color:var(--cyan-glow);
+.iluma-tech-page .hero-stats-eyebrow{
+  justify-content:center;
+  margin-bottom:0;
 }
-.iluma-tech-page .hero-bridge-paths{
-  list-style:none;
+.iluma-tech-page .hero-stats-eyebrow::before{
+  display:none;
+}
+.iluma-tech-page .hero-stats-grid{
+  display:flex;
+  gap:20px;
+  align-items:stretch;
+}
+.iluma-tech-page .hero-stat-card{
+  min-width:160px;
   display:flex;
   flex-direction:column;
-  gap:18px;
-}
-.iluma-tech-page .hero-bridge-paths li{
-  font-family:var(--display);
-  font-size:clamp(22px,3.2vw,42px);
-  font-weight:500;
-  color:var(--text);
-  display:flex;
   align-items:center;
-  gap:18px;
-  letter-spacing:-.01em;
+  justify-content:center;
+  gap:10px;
+  padding:28px 24px;
+  min-height:auto;
 }
-.iluma-tech-page .hero-bridge-num{
-  font-family:var(--mono);
-  font-size:11px;
-  color:var(--muted-2);
-  letter-spacing:.2em;
-  min-width:24px;
-  text-align:right;
+.iluma-tech-page .hero-stat-value{
+  font-family:var(--display);
+  font-size:clamp(32px,3.8vw,52px);
+  font-weight:600;
+  letter-spacing:-.02em;
+  background:linear-gradient(100deg,var(--blue-glow),var(--purple-glow) 45%,var(--cyan-glow));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  line-height:1;
 }
-.iluma-tech-page .hero-bridge-cue{
-  font-family:var(--mono);
-  font-size:11px;
-  letter-spacing:.25em;
-  color:var(--muted-2);
-  text-transform:uppercase;
+.iluma-tech-page .hero-stat-label{
+  font-family:var(--body);
+  font-size:13px;
+  color:var(--muted);
+  font-weight:300;
+  max-width:130px;
+  line-height:1.45;
 }
 
 /* ============ SERVICES ============ */
