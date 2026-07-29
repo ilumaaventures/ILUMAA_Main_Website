@@ -459,6 +459,9 @@
   .iluma-tech-page .scroll-cue {
     display: none !important;
   }
+  .iluma-tech-page .hero-bridge {
+    display: none !important;
+  }
   .iluma-tech-page .hero-inner {
     flex-direction: column;
     text-align: center;
@@ -617,6 +620,59 @@
 .iluma-tech-page .hud.tl{top:16vh;left:6vw;}
 .iluma-tech-page .hud.br{bottom:16vh;right:6vw;text-align:right;}
 .iluma-tech-page .code-float{position:absolute;font-family:var(--mono);font-size:11px;color:var(--cyan-glow);opacity:0;white-space:nowrap;z-index:4;text-shadow:0 0 8px rgba(103,232,249,.6);}
+
+/* ============ HERO BRIDGE BEAT ============ */
+.iluma-tech-page .hero-bridge{
+  position:absolute;
+  inset:0;
+  z-index:5;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:28px;
+  opacity:0;
+  pointer-events:none;
+  text-align:center;
+}
+.iluma-tech-page .hero-bridge-label{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.35em;
+  text-transform:uppercase;
+  color:var(--cyan-glow);
+}
+.iluma-tech-page .hero-bridge-paths{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+.iluma-tech-page .hero-bridge-paths li{
+  font-family:var(--display);
+  font-size:clamp(22px,3.2vw,42px);
+  font-weight:500;
+  color:var(--text);
+  display:flex;
+  align-items:center;
+  gap:18px;
+  letter-spacing:-.01em;
+}
+.iluma-tech-page .hero-bridge-num{
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--muted-2);
+  letter-spacing:.2em;
+  min-width:24px;
+  text-align:right;
+}
+.iluma-tech-page .hero-bridge-cue{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.25em;
+  color:var(--muted-2);
+  text-transform:uppercase;
+}
 
 /* ============ SERVICES ============ */
 .iluma-tech-page #services{padding-top:8vw;}

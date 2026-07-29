@@ -46,7 +46,8 @@ function Hero({ isLoaded }) {
   const hudTRRef = useRef(null);
   const innerRef = useRef(null);
   const cueRef = useRef(null);
-  
+  const bridgeRef = useRef(null);
+
   const imageColRef = useRef(null);
   const cardRef = useRef(null);
   
@@ -85,6 +86,18 @@ function Hero({ isLoaded }) {
         [hudTLRef.current, hudTRRef.current],
         { opacity: 0, duration: 0.1 },
         0.62,
+      )
+      // Bridge beat: fades in at ~72% and out at ~97% — fills the dead zone
+      .fromTo(
+        bridgeRef.current,
+        { opacity: 0, y: 32, filter: "blur(8px)" },
+        { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.1, ease: "power2.out" },
+        0.72,
+      )
+      .to(
+        bridgeRef.current,
+        { opacity: 0, y: -20, filter: "blur(6px)", duration: 0.08, ease: "power1.in" },
+        0.92,
       );
 
     // Dynamic scroll timeline setup for each floating code snippet
@@ -334,6 +347,16 @@ function Hero({ isLoaded }) {
         <div className="scroll-cue" ref={cueRef}>
           <span>SCROLL</span>
           <span className="stick"></span>
+        </div>
+        {/* Bridge beat — fills the ~72%–97% dead zone of the pinned scroll */}
+        <div className="hero-bridge" ref={bridgeRef}>
+          <p className="hero-bridge-label">ONE PARTNER, MANY POSSIBILITIES</p>
+          <ul className="hero-bridge-paths">
+            <li><span className="hero-bridge-num">01</span>Run your business better</li>
+            <li><span className="hero-bridge-num">02</span>Build the digital advantage</li>
+            <li><span className="hero-bridge-num">03</span>Grow your capability</li>
+          </ul>
+          <span className="hero-bridge-cue">↓ explore below</span>
         </div>
         {codeSnippets.map((snippet, idx) => (
           <div
