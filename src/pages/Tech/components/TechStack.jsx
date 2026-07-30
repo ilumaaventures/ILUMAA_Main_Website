@@ -3,28 +3,44 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
-
 const techPills = [
-  "TypeScript",
+  "Artificial Intelligence",
+  "Generative AI",
+  "AI Agents",
+  "LLM Integration",
+  "RAG Systems",
+  "Prompt Engineering",
+  "LangChain",
+  "LangGraph",
+  "Vector Databases",
   "React",
+  "Next.js",
+  "TypeScript",
   "Node.js",
   "Python",
-  "Docker",
-  "AWS",
-  "Kubernetes",
-  "OpenAI API",
+  "FastAPI",
   "GraphQL",
+  "REST APIs",
+  "Microservices",
+  "Real-Time Systems",
+  "WebSockets",
+  "MongoDB",
   "PostgreSQL",
   "Redis",
+  "Docker",
+  "Kubernetes",
+  "AWS Cloud",
   "Terraform",
-  "Next.js",
-  "PyTorch",
+  "CI/CD",
+  "GitHub Actions",
+  "System Design",
+  "Cloud Architecture",
+  "DevOps",
 ];
-
 const orbits = [
   {
     dur: "26s",
-    size: "26px",
+    size: "36px",
     color: "#63a4ff",
     label: "Innovation",
     width: "180px",
@@ -32,7 +48,7 @@ const orbits = [
   },
   {
     dur: "34s",
-    size: "22px",
+    size: "32px",
     color: "#7cf1ff",
     label: "Trust",
     width: "280px",
@@ -40,7 +56,7 @@ const orbits = [
   },
   {
     dur: "20s",
-    size: "30px",
+    size: "40px",
     color: "#b18aff",
     label: "Creativity",
     width: "380px",
@@ -48,7 +64,7 @@ const orbits = [
   },
   {
     dur: "44s",
-    size: "24px",
+    size: "34px",
     color: "#63a4ff",
     label: "Quality",
     width: "470px",
@@ -56,7 +72,7 @@ const orbits = [
   },
   {
     dur: "16s",
-    size: "20px",
+    size: "30px",
     color: "#7cf1ff",
     label: "Security",
     width: "560px",
@@ -64,7 +80,7 @@ const orbits = [
   },
   {
     dur: "52s",
-    size: "28px",
+    size: "38px",
     color: "#b18aff",
     label: "Scalability",
     width: "610px",
@@ -72,7 +88,7 @@ const orbits = [
   },
   {
     dur: "38s",
-    size: "18px",
+    size: "28px",
     color: "#f97066",
     label: "Performance",
     width: "250px",

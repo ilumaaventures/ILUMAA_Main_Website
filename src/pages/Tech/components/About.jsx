@@ -137,7 +137,7 @@ function About() {
       `}</style>
 
       <div className="section-head">
-        <div className="eyebrow">About IlummTech</div>
+        <div className="eyebrow">About IlumaaTech</div>
         <h2>
           We think in
           <br />

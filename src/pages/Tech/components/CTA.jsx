@@ -27,7 +27,7 @@ function CTA() {
           start: "top 85%",
           toggleActions: "play none none none",
         },
-      }
+      },
     );
 
     return () => {
@@ -43,12 +43,12 @@ function CTA() {
       </div>
       <h2>
         Ready to give your product
-        <br />
-        a <span className="grad-text">mind of its own?</span>
+        <br />a <span className="grad-text">mind of its own?</span>
       </h2>
       <div className="magnetic" style={{ marginTop: "20px" }}>
         <a
-          href="mailto:hello@ilummtech.com"
+          href="mailto:ilumaaventures@gmail.com
+"
           className="btn btn-primary"
           data-cursor="hover"
           style={{ fontSize: "15px", padding: "18px 38px" }}

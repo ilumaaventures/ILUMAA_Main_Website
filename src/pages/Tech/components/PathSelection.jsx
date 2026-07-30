@@ -11,53 +11,79 @@ function PathSelection() {
   useEffect(() => {
     if (!containerRef.current) return;
 
-    const cards = containerRef.current.querySelectorAll(".path-card");
-    const triggers = [];
-
-    cards.forEach((el, i) => {
-      const anim = gsap.fromTo(
-        el,
-        {
-          opacity: 0,
-          y: 50,
-          scale: 0.96,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.8,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: el,
-            start: "top 88%",
-            toggleActions: "play none none none",
+    const ctx = gsap.context(() => {
+      // 1. Eyebrow animation
+      const eyebrow = containerRef.current.querySelector(".eyebrow");
+      if (eyebrow) {
+        gsap.fromTo(
+          eyebrow,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: eyebrow,
+              start: "top 88%",
+              toggleActions: "play none none none",
+            },
           },
-        },
-      );
-      if (anim.scrollTrigger) triggers.push(anim.scrollTrigger);
-    });
+        );
+      }
 
-    const head = containerRef.current.querySelector(".section-heading");
-    const headAnim = gsap.fromTo(
-      head,
-      { opacity: 0, y: 40 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.9,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: head,
-          start: "top 85%",
-        },
-      },
-    );
-    if (headAnim.scrollTrigger) triggers.push(headAnim.scrollTrigger);
+      // 2. Heading animation
+      const head = containerRef.current.querySelector(".section-heading");
+      if (head) {
+        gsap.fromTo(
+          head,
+          { opacity: 0, y: 60, rotateX: 6, transformPerspective: 800 },
+          {
+            opacity: 1,
+            y: 0,
+            rotateX: 0,
+            duration: 1,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: head,
+              start: "top 85%",
+              toggleActions: "play none none none",
+            },
+          },
+        );
+      }
 
-    return () => {
-      triggers.forEach((trigger) => trigger.kill());
-    };
+      // 3. Staggered 3D Card Entrance Animations
+      const cards = containerRef.current.querySelectorAll(".path-card");
+      cards.forEach((el, i) => {
+        gsap.fromTo(
+          el,
+          {
+            opacity: 0,
+            y: 70,
+            rotateY: i % 2 === 0 ? -12 : 12,
+            scale: 0.92,
+            transformPerspective: 1000,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            rotateY: 0,
+            scale: 1,
+            duration: 0.95,
+            delay: i * 0.15,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 88%",
+              toggleActions: "play none none none",
+            },
+          },
+        );
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
