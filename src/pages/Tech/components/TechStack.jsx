@@ -123,7 +123,7 @@ function TechStack() {
               trigger: head,
               start: "top 85%",
             },
-          }
+          },
         );
       }
 
@@ -140,7 +140,7 @@ function TechStack() {
               trigger: galaxy,
               start: "top 80%",
             },
-          }
+          },
         );
       }
     }, containerRef);
@@ -166,7 +166,7 @@ function TechStack() {
           stagger: 0.02,
           ease: "power2.out",
           clearProps: "transform",
-        }
+        },
       );
     }
   }, [activeCategory]);
@@ -186,7 +186,8 @@ function TechStack() {
             Our Technology Universe
           </span>
           <h2>
-            A Galaxy of <span className="grad-text">Battle-Tested Tools.</span>
+            Welcome to the
+            <span className="grad-text">ILumaa technology universe.</span>
           </h2>
           <p style={{ margin: "0 auto" }}>
             We choose technology for durability, performance, and scaling —
@@ -255,4 +256,3 @@ function TechStack() {
 }
 
 export default TechStack;
-

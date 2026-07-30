@@ -11,7 +11,12 @@ const serviceItems = [
     icon: <Bot className="h-6 w-6 text-cyan-400" />,
     title: "Artificial Intelligence",
     desc: "Custom models, agentic pipelines, vector search RAG systems, and LLM infrastructure built for enterprise reasoning and automation.",
-    tags: ["LLM Integration", "RAG Systems", "Model Fine-Tuning", "Agentic Pipelines"],
+    tags: [
+      "LLM Integration",
+      "RAG Systems",
+      "Model Fine-Tuning",
+      "Agentic Pipelines",
+    ],
   },
   {
     num: "02 / WEB",
@@ -25,21 +30,36 @@ const serviceItems = [
     icon: <Smartphone className="h-6 w-6 text-purple-400" />,
     title: "Mobile Products",
     desc: "Native-feel iOS and Android applications with offline-first architecture, sub-second sync, and smooth 60fps gesture interactions.",
-    tags: ["iOS & Android", "React Native", "Offline Resilience", "Real-Time Sync"],
+    tags: [
+      "iOS & Android",
+      "React Native",
+      "Offline Resilience",
+      "Real-Time Sync",
+    ],
   },
   {
     num: "04 / CLOUD",
     icon: <Cloud className="h-6 w-6 text-cyan-400" />,
     title: "Cloud Infrastructure",
     desc: "Elastic, observable, cost-optimized cloud solutions on AWS — Docker containerization, Kubernetes orchestration, and sub-10ms uptime monitoring.",
-    tags: ["AWS Cloud", "Kubernetes", "CI/CD Automation", "Sub-10ms Observability"],
+    tags: [
+      "AWS Cloud",
+      "Kubernetes",
+      "CI/CD Automation",
+      "Sub-10ms Observability",
+    ],
   },
   {
     num: "05 / ERP",
     icon: <Layers className="h-6 w-6 text-purple-400" />,
     title: "Enterprise ERP Systems",
     desc: "Unified operations backbones connecting billing, GST invoicing, payroll, HRMS, inventory, and analytics into one single source of truth.",
-    tags: ["GST Invoicing", "Payroll Engines", "HRMS Workflows", "Business Intelligence"],
+    tags: [
+      "GST Invoicing",
+      "Payroll Engines",
+      "HRMS Workflows",
+      "Business Intelligence",
+    ],
   },
 ];
 
@@ -67,7 +87,7 @@ function Services() {
             trigger: containerRef.current,
             start: "top 80%",
           },
-        }
+        },
       );
 
       // Card hover 3D tilt animation
@@ -117,8 +137,8 @@ function Services() {
             <span className="grad-text">One Ecosystem.</span>
           </h2>
           <p>
-            Every project draws on our unified team of AI researchers, software architects,
-            and interface designers working as one unit.
+            Every project draws on our unified team of AI researchers, software
+            architects, and interface designers working as one unit.
           </p>
         </div>
 
@@ -126,7 +146,7 @@ function Services() {
           {serviceItems.map((item, idx) => (
             <div key={idx} className="service-card glass" data-cursor="hover">
               <div className="service-card-top">
-                <span className="service-num">{item.num}</span>
+                {/* <span className="service-num">{item.num}</span> */}
                 <div className="service-icon-wrap">{item.icon}</div>
               </div>
               <h3 className="service-title">{item.title}</h3>
