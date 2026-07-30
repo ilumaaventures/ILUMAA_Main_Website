@@ -174,9 +174,8 @@ function Hero() {
             </span>
           </h1>
           <p className="hero-sub reveal-up" id="heroSub">
-            We help startups and enterprises build AI-powered software,
-            scalable web platforms, mobile applications, ERP systems and cloud
-            solutions.
+            We help startups and enterprises build AI-powered software, scalable
+            web platforms, mobile applications, ERP systems and cloud solutions.
           </p>
           <div className="hero-cta-row reveal-up" id="heroCtas">
             <a
@@ -193,13 +192,6 @@ function Hero() {
             >
               Explore Our Work
             </a>
-          </div>
-          <div className="trust-row reveal-up" id="heroTrust">
-            <span>Fintech</span>
-            <span>Healthcare</span>
-            <span>Logistics</span>
-            <span>Retail</span>
-            <span>SaaS</span>
           </div>
         </div>
 
@@ -239,7 +231,7 @@ function Hero() {
                 <div className="dash-grid">
                   <div className="kpi">
                     <div className="label">Revenue</div>
-                    <div className="value">$482K</div>
+                    <div className="value">482</div>
                     <div className="delta up">▲ 18.4%</div>
                   </div>
                   <div className="kpi">

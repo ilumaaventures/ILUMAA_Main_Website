@@ -1,8 +1,47 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Bot, Code2, Smartphone, Cloud, Layers } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const serviceItems = [
+  {
+    num: "01 / AI",
+    icon: <Bot className="h-6 w-6 text-cyan-400" />,
+    title: "Artificial Intelligence",
+    desc: "Custom models, agentic pipelines, vector search RAG systems, and LLM infrastructure built for enterprise reasoning and automation.",
+    tags: ["LLM Integration", "RAG Systems", "Model Fine-Tuning", "Agentic Pipelines"],
+  },
+  {
+    num: "02 / WEB",
+    icon: <Code2 className="h-6 w-6 text-blue-400" />,
+    title: "Web Platforms",
+    desc: "High-performance web applications engineered on modern stacks — fast, accessible, resilient, and built to scale from day one.",
+    tags: ["React", "Next.js", "Design Systems", "Edge Compute"],
+  },
+  {
+    num: "03 / MOBILE",
+    icon: <Smartphone className="h-6 w-6 text-purple-400" />,
+    title: "Mobile Products",
+    desc: "Native-feel iOS and Android applications with offline-first architecture, sub-second sync, and smooth 60fps gesture interactions.",
+    tags: ["iOS & Android", "React Native", "Offline Resilience", "Real-Time Sync"],
+  },
+  {
+    num: "04 / CLOUD",
+    icon: <Cloud className="h-6 w-6 text-cyan-400" />,
+    title: "Cloud Infrastructure",
+    desc: "Elastic, observable, cost-optimized cloud solutions on AWS — Docker containerization, Kubernetes orchestration, and sub-10ms uptime monitoring.",
+    tags: ["AWS Cloud", "Kubernetes", "CI/CD Automation", "Sub-10ms Observability"],
+  },
+  {
+    num: "05 / ERP",
+    icon: <Layers className="h-6 w-6 text-purple-400" />,
+    title: "Enterprise ERP Systems",
+    desc: "Unified operations backbones connecting billing, GST invoicing, payroll, HRMS, inventory, and analytics into one single source of truth.",
+    tags: ["GST Invoicing", "Payroll Engines", "HRMS Workflows", "Business Intelligence"],
+  },
+];
 
 function Services() {
   const containerRef = useRef(null);
@@ -10,192 +49,95 @@ function Services() {
   useEffect(() => {
     if (!containerRef.current) return;
 
-    // Apply scroll entrance animation to service cards
-    const cards = containerRef.current.querySelectorAll(".service-card");
-    const triggers = [];
+    const ctx = gsap.context(() => {
+      const cards = containerRef.current.querySelectorAll(".service-card");
 
-    cards.forEach((el, i) => {
-      const fromLeft = i % 2 === 0;
-
-      const anim = gsap.fromTo(
-        el,
-        {
-          opacity: 0,
-          x: fromLeft ? -90 : 90,
-          rotateY: fromLeft ? -25 : 25,
-          scale: 0.9,
-        },
+      // Scroll entrance animation
+      gsap.fromTo(
+        cards,
+        { opacity: 0, y: 50, scale: 0.95 },
         {
           opacity: 1,
-          x: 0,
-          rotateY: 0,
+          y: 0,
           scale: 1,
-          duration: 1,
+          duration: 0.8,
+          stagger: 0.12,
           ease: "power3.out",
           scrollTrigger: {
-            trigger: el,
-            start: "top 88%",
-            toggleActions: "play none none none",
+            trigger: containerRef.current,
+            start: "top 80%",
           },
-        },
+        }
       );
 
-      if (anim.scrollTrigger) triggers.push(anim.scrollTrigger);
-    });
+      // Card hover 3D tilt animation
+      const isTouch =
+        window.matchMedia("(hover:none)").matches || window.innerWidth < 820;
+      if (!isTouch) {
+        cards.forEach((card) => {
+          const handleMouseMove = (e) => {
+            const r = card.getBoundingClientRect();
+            const x = (e.clientX - r.left) / r.width - 0.5;
+            const y = (e.clientY - r.top) / r.height - 0.5;
+            gsap.to(card, {
+              rotateY: x * 10,
+              rotateX: -y * 10,
+              scale: 1.02,
+              duration: 0.4,
+              ease: "power2.out",
+            });
+          };
 
-    // Apply head trigger
-    const head = containerRef.current.querySelector(".section-head");
-    const headAnim = gsap.fromTo(
-      head,
-      { opacity: 0, y: 70, rotateX: 8, transformPerspective: 800 },
-      {
-        opacity: 1,
-        y: 0,
-        rotateX: 0,
-        duration: 1.1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: head,
-          start: "top 85%",
-        },
-      },
-    );
-    if (headAnim.scrollTrigger) triggers.push(headAnim.scrollTrigger);
+          const handleMouseLeave = () => {
+            gsap.to(card, {
+              rotateY: 0,
+              rotateX: 0,
+              scale: 1,
+              duration: 0.7,
+              ease: "power3.out",
+            });
+          };
 
-    return () => {
-      triggers.forEach((trigger) => trigger.kill());
-    };
+          card.addEventListener("mousemove", handleMouseMove);
+          card.addEventListener("mouseleave", handleMouseLeave);
+        });
+      }
+    }, containerRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
-    <section id="services" ref={containerRef}>
-      <div className="section-head">
-        <div className="eyebrow">What we build</div>
-        <h2>
-          Five disciplines.
-          <br />
-          <span className="grad-text">One ILumaa ecosystem.</span>
-        </h2>
-      </div>
-      <div className="services-grid">
-        {/* Card 1: AI */}
-        <div className="service-card" data-idx="1">
-          <div className="service-num">01 / AI</div>
-          <div className="service-stage">
-            <div className="obj-ai">
-              <div className="core"></div>
-              <div className="ring"></div>
-              <div className="ring r2"></div>
-            </div>
-          </div>
-          <h3>Artificial Intelligence</h3>
+    <section id="services" className="section services" ref={containerRef}>
+      <div className="section-inner">
+        <div className="section-head">
+          <span className="eyebrow">What We Build</span>
+          <h2>
+            Five Core Disciplines,{" "}
+            <span className="grad-text">One Ecosystem.</span>
+          </h2>
           <p>
-            Custom models, agentic pipelines, and LLM infrastructure engineered
-            to reason, retrieve, and act.
+            Every project draws on our unified team of AI researchers, software architects,
+            and interface designers working as one unit.
           </p>
         </div>
 
-        {/* Card 2: Web */}
-        <div className="service-card" data-idx="2">
-          <div className="service-num">02 / WEB</div>
-          <div className="service-stage">
-            <div className="obj-web">
-              <div className="bar">
-                <i></i>
-                <i></i>
-                <i></i>
+        <div className="services-grid">
+          {serviceItems.map((item, idx) => (
+            <div key={idx} className="service-card glass" data-cursor="hover">
+              <div className="service-card-top">
+                <span className="service-num">{item.num}</span>
+                <div className="service-icon-wrap">{item.icon}</div>
               </div>
-              <div className="lines">
-                <div style={{ width: "70%" }}></div>
-                <div style={{ width: "50%" }}></div>
-                <div style={{ width: "85%" }}></div>
+              <h3 className="service-title">{item.title}</h3>
+              <p className="service-desc">{item.desc}</p>
+              <div className="service-tags">
+                {item.tags.map((t, tIdx) => (
+                  <span key={tIdx}>{t}</span>
+                ))}
               </div>
             </div>
-          </div>
-          <h3>Web Platforms</h3>
-          <p>
-            High-performance web applications with cinematic interfaces and
-            rock-solid architecture.
-          </p>
-        </div>
-
-        {/* Card 3: Mobile */}
-        <div className="service-card" data-idx="3">
-          <div className="service-num">03 / MOBILE</div>
-          <div className="service-stage">
-            <div className="obj-mobile">
-              <div className="grid">
-                <i></i>
-                <i></i>
-                <i></i>
-                <i></i>
-                <i></i>
-                <i></i>
-                <i></i>
-                <i></i>
-                <i></i>
-              </div>
-            </div>
-          </div>
-          <h3>Mobile Products</h3>
-          <p>
-            Native-grade iOS and Android experiences, built for speed, offline
-            resilience, and delight.
-          </p>
-        </div>
-
-        {/* Card 4: Cloud */}
-        <div className="service-card" data-idx="4">
-          <div className="service-num">04 / CLOUD</div>
-          <div className="service-stage">
-            <div className="obj-cloud">
-              <svg viewBox="0 0 200 120" fill="none">
-                <path
-                  d="M55 90c-19 0-34-14-34-32 0-16 12-29 28-32 6-16 22-27 40-27 21 0 39 15 43 35 15 3 26 15 26 30 0 17-15 31-33 31H55z"
-                  stroke="url(#servicesG1)"
-                  strokeWidth="2"
-                  strokeDasharray="4 5"
-                />
-                <defs>
-                  <linearGradient
-                    id="servicesG1"
-                    x1="0"
-                    y1="0"
-                    x2="200"
-                    y2="120"
-                  >
-                    <stop stopColor="#63a4ff" />
-                    <stop offset="1" stopColor="#7cf1ff" />
-                  </linearGradient>
-                </defs>
-              </svg>
-            </div>
-          </div>
-          <h3>Cloud Infrastructure</h3>
-          <p>
-            Elastic, observable, cost-efficient infrastructure across AWS —
-            built to scale without surprises.
-          </p>
-        </div>
-
-        {/* Card 5: ERP */}
-        <div className="service-card" data-idx="5">
-          <div className="service-num">05 / ERP</div>
-          <div className="service-stage">
-            <div className="obj-erp">
-              <div className="face f1"></div>
-              <div className="face f2"></div>
-              <div className="face f3"></div>
-              <div className="face f4"></div>
-              <div className="face f5"></div>
-              <div className="face f6"></div>
-            </div>
-          </div>
-          <h3>Enterprise Systems</h3>
-          <p>
-            Unified ERP platforms that connect finance, ops, and people into one
-            glowing source of truth.
-          </p>
+          ))}
         </div>
       </div>
     </section>

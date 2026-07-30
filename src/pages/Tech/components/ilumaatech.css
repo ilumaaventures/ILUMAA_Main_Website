@@ -115,7 +115,8 @@
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background: radial-gradient(
+  background:
+    radial-gradient(
       60% 45% at 18% 8%,
       rgba(79, 125, 255, 0.16),
       transparent 60%
@@ -173,7 +174,9 @@
   width: 34px;
   height: 34px;
   border: 1px solid rgba(255, 255, 255, 0.5);
-  transition: width 0.25s var(--ease-out), height 0.25s var(--ease-out),
+  transition:
+    width 0.25s var(--ease-out),
+    height 0.25s var(--ease-out),
     border-color 0.25s;
 }
 .iluma-tech-page .cursor-glow.is-active {
@@ -284,7 +287,9 @@
   border: 1px solid transparent;
   isolation: isolate;
   overflow: hidden;
-  transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+  transition:
+    transform 0.4s var(--ease-out),
+    box-shadow 0.4s var(--ease-out);
 }
 
 .iluma-tech-page .btn-primary {
@@ -351,7 +356,9 @@
   border: 1px solid var(--glass-border);
   backdrop-filter: blur(20px) saturate(160%);
   -webkit-backdrop-filter: blur(20px) saturate(160%);
-  transition: background 0.4s, border-color 0.4s;
+  transition:
+    background 0.4s,
+    border-color 0.4s;
 }
 
 .iluma-tech-page .logo {
@@ -430,6 +437,72 @@
   grid-template-columns: 1.05fr 1fr;
   gap: 4vw;
   align-items: center;
+}
+
+@media (max-width: 992px) {
+  .iluma-tech-page .hero {
+    padding-top: 110px;
+    min-height: auto;
+  }
+
+  .iluma-tech-page .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .iluma-tech-page .hero-left {
+    order: 1;
+    position: relative;
+    z-index: 5;
+    text-align: center;
+  }
+
+  .iluma-tech-page .hero-sub {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .iluma-tech-page .hero-cta-row {
+    justify-content: center;
+  }
+
+  .iluma-tech-page .trust-row {
+    justify-content: center;
+  }
+
+  .iluma-tech-page .hero-right {
+    /* order: 2; */
+    height: auto;
+    min-height: 420px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .iluma-tech-page .dashboard-wrap {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .iluma-tech-page .dashboard {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: rotateY(-4deg) rotateX(4deg);
+    width: min(94vw, 520px);
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .iluma-tech-page .hero-right {
+    min-height: 360px;
+  }
 }
 
 .iluma-tech-page .hero-left {
@@ -521,7 +594,8 @@
   border: 1px solid var(--glass-border);
   backdrop-filter: blur(22px) saturate(160%);
   -webkit-backdrop-filter: blur(22px) saturate(160%);
-  box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.7),
+  box-shadow:
+    0 40px 100px -20px rgba(0, 0, 0, 0.7),
     0 0 90px -20px rgba(79, 125, 255, 0.35);
   transform: translateZ(0);
 }
@@ -818,10 +892,16 @@
   .iluma-tech-page .hero-right {
     height: 60vh;
     margin-top: 6vh;
-    order: -1;
   }
   .iluma-tech-page .dashboard {
     width: min(88vw, 520px);
+  }
+  .hero-left {
+    order: 1;
+  }
+
+  .hero-right {
+    order: 2;
   }
 }
 
@@ -957,172 +1037,284 @@
 }
 
 /* ============================================================
-   SERVICES (pinned stage)
+   SERVICES GRID & CARDS
    ============================================================ */
-.iluma-tech-page .services {
-  padding-bottom: 0;
+.iluma-tech-page .services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  perspective: 1000px;
 }
 
-.iluma-tech-page .services-stage {
-  position: relative;
-  height: 100vh;
+@media (max-width: 1024px) {
+  .iluma-tech-page .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .iluma-tech-page .services-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.iluma-tech-page .service-card.glass {
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transform-style: preserve-3d;
+  transition:
+    border-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out),
+    background 0.35s var(--ease-out);
+  will-change: transform;
+}
+
+.iluma-tech-page .service-card.glass:hover {
+  border-color: rgba(51, 230, 255, 0.45);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow:
+    0 20px 45px -12px rgba(51, 230, 255, 0.3),
+    inset 0 0 20px rgba(51, 230, 255, 0.05);
+}
+
+.iluma-tech-page .service-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.iluma-tech-page .service-num {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--text-dimmer);
+}
+
+.iluma-tech-page .service-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(51, 230, 255, 0.08);
+  border: 1px solid rgba(51, 230, 255, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.iluma-tech-page .service-item {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  gap: 4vw;
-  max-width: 1180px;
-  margin: 0 auto;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.iluma-tech-page .service-item[data-service="0"] {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.iluma-tech-page .service-item .obj-zone {
-  height: 100%;
-  min-height: 340px;
-}
-
-.iluma-tech-page .service-item .copy-zone {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.iluma-tech-page .service-index {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--text-dimmer);
-  letter-spacing: 0.14em;
-}
-
-.iluma-tech-page .service-item h3 {
+.iluma-tech-page .service-title {
   font-family: var(--font-display);
+  font-size: 1.4rem;
   font-weight: 600;
-  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  margin-bottom: 10px;
+  color: #fff;
 }
 
-.iluma-tech-page .service-item p {
+.iluma-tech-page .service-desc {
+  font-size: 0.92rem;
   color: var(--text-dim);
-  max-width: 44ch;
-  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  flex-grow: 1;
 }
 
 .iluma-tech-page .service-tags {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   flex-wrap: wrap;
-  margin-top: 6px;
 }
 
 .iluma-tech-page .service-tags span {
   font-family: var(--font-mono);
-  font-size: 0.66rem;
+  font-size: 0.65rem;
   letter-spacing: 0.06em;
-  padding: 6px 12px;
+  padding: 4px 10px;
   border-radius: var(--radius-pill);
   border: 1px solid var(--line);
   color: var(--text-dim);
 }
 
-.iluma-tech-page .services-progress {
-  position: absolute;
-  right: max(4vw, 20px);
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  z-index: 6;
-}
-
-.iluma-tech-page .services-progress .dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.15);
-  transition: background 0.4s, box-shadow 0.4s, transform 0.4s;
-}
-
-.iluma-tech-page .services-progress .dot.active {
-  background: var(--cyan);
-  box-shadow: 0 0 10px var(--cyan);
-  transform: scale(1.3);
-}
-
-@media (max-width: 900px) {
-  .iluma-tech-page .service-item {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-  .iluma-tech-page .service-item .copy-zone {
-    align-items: center;
-  }
-  .iluma-tech-page .services-progress {
-    display: none;
-  }
-}
-
 /* ============================================================
-   TECHNOLOGY (galaxy)
+   TECHNOLOGY GALAXY ORBIT & PILLS
    ============================================================ */
-.iluma-tech-page .technology {
-  height: 150vh;
-  padding-top: min(14vh, 140px);
+.iluma-tech-page .technology-section {
+  padding-top: min(12vh, 120px);
+  padding-bottom: min(12vh, 120px);
+  position: relative;
 }
 
-.iluma-tech-page .tech-inner {
-  position: sticky;
-  top: 0;
-  height: 100vh;
+.iluma-tech-page .galaxy-wrap {
+  position: relative;
+  width: min(650px, 90vw);
+  height: min(650px, 90vw);
+  margin: 40px auto 60px;
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  align-items: center;
-  text-align: center;
 }
 
-.iluma-tech-page .tech-inner .section-head {
-  align-items: center;
-  margin-bottom: 0;
+.iluma-tech-page .galaxy-core {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    var(--cyan),
+    var(--blue) 50%,
+    var(--purple)
+  );
+  box-shadow:
+    0 0 60px var(--cyan),
+    0 0 100px var(--purple);
+  animation: coreGlow 4s ease-in-out infinite alternate;
 }
 
-.iluma-tech-page .galaxy-labels {
+@keyframes coreGlow {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
+
+.iluma-tech-page .orbit {
   position: absolute;
-  inset: 0;
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 255, 255, 0.12);
   pointer-events: none;
 }
 
-.iluma-tech-page .tech-label {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.06em;
-  padding: 6px 12px;
-  border-radius: var(--radius-pill);
-  border: 1px solid var(--glass-border);
-  background: rgba(8, 10, 18, 0.5);
-  backdrop-filter: blur(8px);
-  color: var(--text-dim);
-  white-space: nowrap;
-  transition: opacity 0.3s, color 0.3s, border-color 0.3s;
+.iluma-tech-page .spin {
+  width: 100%;
+  height: 100%;
+  animation: spinOrbit var(--dur, 30s) linear infinite;
 }
 
-.iluma-tech-page .tech-label.near {
+@keyframes spinOrbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.iluma-tech-page .planet {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.iluma-tech-page .planet .dot {
+  width: var(--size, 32px);
+  height: var(--size, 32px);
+  border-radius: 50%;
+  background: var(--pc, var(--cyan));
+  box-shadow: 0 0 20px var(--pc, var(--cyan));
+}
+
+.iluma-tech-page .planet .label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  background: rgba(8, 10, 18, 0.8);
+  border: 1px solid var(--glass-border);
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  margin-top: 6px;
+  white-space: nowrap;
+}
+
+.iluma-tech-page .tech-filter-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.iluma-tech-page .tech-tab-btn {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+
+.iluma-tech-page .tech-tab-btn:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.iluma-tech-page .tech-tab-btn.active {
+  color: #fff;
+  border-color: var(--cyan);
+  background: linear-gradient(
+    120deg,
+    rgba(51, 230, 255, 0.15),
+    rgba(79, 125, 255, 0.15)
+  );
+  box-shadow: 0 0 15px rgba(51, 230, 255, 0.2);
+}
+
+.iluma-tech-page .tech-list-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.iluma-tech-page .tech-pill {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text);
+  backdrop-filter: blur(8px);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.iluma-tech-page .tech-pill-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 8px var(--cyan);
+}
+
+.iluma-tech-page .tech-pill:hover {
   color: #fff;
   border-color: var(--cyan-soft);
+  background: rgba(51, 230, 255, 0.08);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px -5px rgba(51, 230, 255, 0.3);
 }
 
 /* ============================================================
@@ -1132,6 +1324,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 28px;
+  perspective: 1000px;
 }
 
 @media (max-width: 900px) {
@@ -1152,14 +1345,16 @@
   padding: 32px;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  transition: transform 0.4s var(--ease-out), border-color 0.4s var(--ease-out),
+  transform-style: preserve-3d;
+  transition:
+    border-color 0.4s var(--ease-out),
     box-shadow 0.4s var(--ease-out);
   will-change: transform;
 }
 
 .iluma-tech-page .detailed-project-card:hover {
-  border-color: rgba(51, 230, 255, 0.4);
-  box-shadow: 0 20px 50px -15px rgba(51, 230, 255, 0.25);
+  border-color: rgba(51, 230, 255, 0.45);
+  box-shadow: 0 25px 60px -15px rgba(51, 230, 255, 0.3);
 }
 
 .iluma-tech-page .project-card-header {
@@ -1262,16 +1457,6 @@
   margin-bottom: 24px;
 }
 
-.iluma-tech-page .tech-pill {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--text-dim);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--line-soft);
-  padding: 4px 10px;
-  border-radius: var(--radius-pill);
-}
-
 .iluma-tech-page .project-card-footer {
   display: flex;
   align-items: center;
@@ -1316,7 +1501,8 @@
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 24px;
   padding: 36px;
-  box-shadow: 0 30px 80px -15px rgba(0, 0, 0, 0.8),
+  box-shadow:
+    0 30px 80px -15px rgba(0, 0, 0, 0.8),
     0 0 50px rgba(51, 230, 255, 0.15);
 }
 
@@ -1571,7 +1757,12 @@
   bottom: 0;
   width: 2px;
   height: 40%;
-  background: linear-gradient(180deg, transparent, var(--cyan) 40%, transparent);
+  background: linear-gradient(
+    180deg,
+    transparent,
+    var(--cyan) 40%,
+    transparent
+  );
   opacity: 0;
   animation: stream-rise 3.4s linear infinite;
 }
@@ -1839,8 +2030,8 @@
    ============================================================ */
 .iluma-ask-widget {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
+  bottom: 28px;
+  right: 28px;
   z-index: 999;
   font-family: var(--font-body);
   display: flex;
@@ -1849,16 +2040,30 @@
   justify-content: flex-end;
 }
 .iluma-ask-mascot {
-  width: 68px;
-  height: 68px;
+  width: 315px;
+  height: 315px;
   cursor: pointer;
   pointer-events: auto;
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4));
-  margin-bottom: -6px;
+  transition:
+    transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+    filter 0.35s ease;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.5));
+  margin-bottom: -10px;
 }
 .iluma-ask-mascot:hover {
-  transform: translateY(-6px) scale(1.08);
+  transform: translateY(-8px) scale(1.12);
+  filter: drop-shadow(0 16px 32px rgba(34, 211, 238, 0.4));
+}
+@media (max-width: 640px) {
+  .iluma-ask-widget {
+    bottom: 16px;
+    right: 16px;
+  }
+  .iluma-ask-mascot {
+    width: 168px;
+    height: 168px;
+    margin-bottom: -6px;
+  }
 }
 .iluma-ask-btn {
   pointer-events: auto;
@@ -1874,14 +2079,16 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5),
+  box-shadow:
+    0 10px 25px -5px rgba(0, 0, 0, 0.5),
     0 0 15px rgba(34, 211, 238, 0.25);
   backdrop-filter: blur(12px);
   transition: all 0.3s ease;
 }
 .iluma-ask-btn:hover {
   border-color: rgba(34, 211, 238, 0.8);
-  box-shadow: 0 12px 30px -5px rgba(6, 182, 212, 0.4),
+  box-shadow:
+    0 12px 30px -5px rgba(6, 182, 212, 0.4),
     0 0 25px rgba(34, 211, 238, 0.4);
   transform: translateY(-2px);
 }
@@ -1896,7 +2103,8 @@
   );
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 20px;
-  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8),
+  box-shadow:
+    0 25px 60px -15px rgba(0, 0, 0, 0.8),
     0 0 40px rgba(59, 130, 246, 0.15);
   backdrop-filter: blur(20px);
   display: flex;

@@ -104,6 +104,56 @@ function About() {
           });
         },
       });
+
+      // Stat cards scroll entrance animation
+      const statCards = document.querySelectorAll(".about-stats .stat");
+      if (statCards && statCards.length > 0) {
+        gsap.fromTo(
+          statCards,
+          { opacity: 0, y: 40, scale: 0.9 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: ".about-stats",
+              start: "top 85%",
+            },
+          }
+        );
+
+        // Hover animation for stat cards
+        statCards.forEach((card) => {
+          const handleMouseMove = (e) => {
+            const r = card.getBoundingClientRect();
+            const x = (e.clientX - r.left) / r.width - 0.5;
+            const y = (e.clientY - r.top) / r.height - 0.5;
+            gsap.to(card, {
+              rotateY: x * 10,
+              rotateX: -y * 10,
+              scale: 1.05,
+              duration: 0.3,
+              ease: "power2.out",
+            });
+          };
+
+          const handleMouseLeave = () => {
+            gsap.to(card, {
+              rotateY: 0,
+              rotateX: 0,
+              scale: 1,
+              duration: 0.6,
+              ease: "power3.out",
+            });
+          };
+
+          card.addEventListener("mousemove", handleMouseMove);
+          card.addEventListener("mouseleave", handleMouseLeave);
+        });
+      }
     });
 
     return () => {

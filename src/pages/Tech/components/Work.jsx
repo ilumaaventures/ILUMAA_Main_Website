@@ -1,43 +1,70 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ExternalLink, Sparkles, CheckCircle2, ArrowRight } from "lucide-react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 function Work({ projects, onSelectProject }) {
   const gridRef = useRef(null);
 
   useEffect(() => {
-    const isTouch =
-      window.matchMedia("(hover:none)").matches || window.innerWidth < 820;
-    if (isTouch || !gridRef.current) return;
+    if (!gridRef.current) return;
 
     const cards = gridRef.current.querySelectorAll(".project-card");
-    cards.forEach((card) => {
-      const handleMouseMove = (e) => {
-        const r = card.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width - 0.5;
-        const y = (e.clientY - r.top) / r.height - 0.5;
-        gsap.to(card, {
-          rotateY: x * 10,
-          rotateX: -y * 10,
-          scale: 1.015,
-          duration: 0.4,
-          ease: "power2.out",
-        });
-      };
 
-      const handleMouseLeave = () => {
-        gsap.to(card, {
-          rotateY: 0,
-          rotateX: 0,
+    // Scroll entrance animation
+    if (cards && cards.length > 0) {
+      gsap.fromTo(
+        cards,
+        { opacity: 0, y: 60, scale: 0.94 },
+        {
+          opacity: 1,
+          y: 0,
           scale: 1,
-          duration: 0.8,
+          duration: 0.9,
+          stagger: 0.15,
           ease: "power3.out",
-        });
-      };
+          scrollTrigger: {
+            trigger: gridRef.current,
+            start: "top 82%",
+          },
+        }
+      );
+    }
 
-      card.addEventListener("mousemove", handleMouseMove);
-      card.addEventListener("mouseleave", handleMouseLeave);
-    });
+    // Card hover 3D tilt animation
+    const isTouch =
+      window.matchMedia("(hover:none)").matches || window.innerWidth < 820;
+    if (!isTouch) {
+      cards.forEach((card) => {
+        const handleMouseMove = (e) => {
+          const r = card.getBoundingClientRect();
+          const x = (e.clientX - r.left) / r.width - 0.5;
+          const y = (e.clientY - r.top) / r.height - 0.5;
+          gsap.to(card, {
+            rotateY: x * 12,
+            rotateX: -y * 12,
+            scale: 1.02,
+            duration: 0.4,
+            ease: "power2.out",
+          });
+        };
+
+        const handleMouseLeave = () => {
+          gsap.to(card, {
+            rotateY: 0,
+            rotateX: 0,
+            scale: 1,
+            duration: 0.8,
+            ease: "power3.out",
+          });
+        };
+
+        card.addEventListener("mousemove", handleMouseMove);
+        card.addEventListener("mouseleave", handleMouseLeave);
+      });
+    }
   }, []);
 
   const cardGradients = [
