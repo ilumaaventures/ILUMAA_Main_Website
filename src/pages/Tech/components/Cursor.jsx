@@ -3,12 +3,13 @@ import gsap from "gsap";
 
 function Cursor() {
   const dotRef = useRef(null);
-  const ringRef = useRef(null);
+  const glowRef = useRef(null);
   const mouse = useRef({ x: 0, y: 0 });
-  const ringPos = useRef({ x: 0, y: 0 });
+  const glowPos = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
-    const isTouch = window.matchMedia("(hover:none)").matches || window.innerWidth < 900;
+    const isTouch =
+      window.matchMedia("(hover:none)").matches || window.innerWidth < 900;
     if (isTouch) return;
 
     const handleMouseMove = (e) => {
@@ -22,44 +23,50 @@ function Cursor() {
 
     window.addEventListener("mousemove", handleMouseMove);
 
-    // Smooth lerp rendering loop
     let animationFrameId;
-    const updateRing = () => {
+    const updateGlow = () => {
       const mx = mouse.current.x;
       const my = mouse.current.y;
-      let rx = ringPos.current.x;
-      let ry = ringPos.current.y;
+      let rx = glowPos.current.x;
+      let ry = glowPos.current.y;
 
       rx += (mx - rx) * 0.18;
       ry += (my - ry) * 0.18;
 
-      ringPos.current.x = rx;
-      ringPos.current.y = ry;
+      glowPos.current.x = rx;
+      glowPos.current.y = ry;
 
-      if (ringRef.current) {
-        ringRef.current.style.left = `${rx}px`;
-        ringRef.current.style.top = `${ry}px`;
+      if (glowRef.current) {
+        glowRef.current.style.left = `${rx}px`;
+        glowRef.current.style.top = `${ry}px`;
       }
 
-      animationFrameId = requestAnimationFrame(updateRing);
+      animationFrameId = requestAnimationFrame(updateGlow);
     };
-    animationFrameId = requestAnimationFrame(updateRing);
+    animationFrameId = requestAnimationFrame(updateGlow);
 
-    // Event delegation to capture hover triggers globally
     const handleMouseOver = (e) => {
-      const target = e.target.closest('[data-cursor="hover"], .btn, .nav-links a, .nav-cta, .planet, .proj-inner, .legend-item, .modal-close');
-      if (target && ringRef.current) {
-        ringRef.current.classList.add("hover");
+      const target = e.target.closest(
+        '[data-cursor="hover"], .btn, .nav-links a, .logo, .project-card, .station-rig, .modal-close',
+      );
+      if (target && glowRef.current) {
+        glowRef.current.classList.add("is-active");
       }
     };
 
     const handleMouseOut = (e) => {
-      const target = e.target.closest('[data-cursor="hover"], .btn, .nav-links a, .nav-cta, .planet, .proj-inner, .legend-item, .modal-close');
-      if (target && ringRef.current) {
-        // Only remove if we're leaving the hoverable element boundaries
+      const target = e.target.closest(
+        '[data-cursor="hover"], .btn, .nav-links a, .logo, .project-card, .station-rig, .modal-close',
+      );
+      if (target && glowRef.current) {
         const related = e.relatedTarget;
-        if (!related || !related.closest('[data-cursor="hover"], .btn, .nav-links a, .nav-cta, .planet, .proj-inner, .legend-item, .modal-close')) {
-          ringRef.current.classList.remove("hover");
+        if (
+          !related ||
+          !related.closest(
+            '[data-cursor="hover"], .btn, .nav-links a, .logo, .project-card, .station-rig, .modal-close',
+          )
+        ) {
+          glowRef.current.classList.remove("is-active");
         }
       }
     };
@@ -67,7 +74,6 @@ function Cursor() {
     window.addEventListener("mouseover", handleMouseOver);
     window.addEventListener("mouseout", handleMouseOut);
 
-    // Handle magnetic transformations dynamically
     const handleMagneticMove = (e) => {
       const magneticTarget = e.target.closest(".magnetic");
       if (magneticTarget) {
@@ -84,9 +90,13 @@ function Cursor() {
     };
 
     const handleMagneticLeave = (e) => {
-      // Find magnetic targets we left
-      if (e.target.classList.contains("magnetic") || e.target.closest(".magnetic")) {
-        const target = e.target.classList.contains("magnetic") ? e.target : e.target.closest(".magnetic");
+      if (
+        e.target.classList.contains("magnetic") ||
+        e.target.closest(".magnetic")
+      ) {
+        const target = e.target.classList.contains("magnetic")
+          ? e.target
+          : e.target.closest(".magnetic");
         gsap.to(target, {
           x: 0,
           y: 0,
@@ -112,7 +122,7 @@ function Cursor() {
   return (
     <>
       <div className="cursor-dot" ref={dotRef} id="cursorDot" />
-      <div className="cursor-ring" ref={ringRef} id="cursorRing" />
+      <div className="cursor-glow" ref={glowRef} id="cursorGlow" />
     </>
   );
 }

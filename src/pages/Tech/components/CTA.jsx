@@ -10,50 +10,49 @@ function CTA() {
   useEffect(() => {
     if (!containerRef.current) return;
 
-    const h2 = containerRef.current.querySelector("h2");
-    if (!h2) return;
+    const ctx = gsap.context(() => {
+      const h2 = containerRef.current.querySelector("h2");
+      if (h2) {
+        gsap.fromTo(
+          h2,
+          { opacity: 0, y: 50, rotateX: 6, transformPerspective: 800 },
+          {
+            opacity: 1,
+            y: 0,
+            rotateX: 0,
+            duration: 1.1,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: h2,
+              start: "top 85%",
+              toggleActions: "play none none none",
+            },
+          },
+        );
+      }
+    }, containerRef);
 
-    const anim = gsap.fromTo(
-      h2,
-      { opacity: 0, y: 70, rotateX: 8, transformPerspective: 800 },
-      {
-        opacity: 1,
-        y: 0,
-        rotateX: 0,
-        duration: 1.1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: h2,
-          start: "top 85%",
-          toggleActions: "play none none none",
-        },
-      },
-    );
-
-    return () => {
-      anim.scrollTrigger?.kill();
-      anim.kill();
-    };
+    return () => ctx.revert();
   }, []);
 
   return (
-    <section id="cta" ref={containerRef}>
-      <div className="eyebrow" style={{ justifyContent: "center" }}>
-        Let's build
-      </div>
+    <section id="cta" className="section cta-section" ref={containerRef}>
+      <div className="cta-glow"></div>
+      <span className="eyebrow">Let's build something intelligent</span>
       <h2>
-        Ready to give your product
-        <br />a <span className="grad-text">mind of its own?</span>
+        Ready to build what's <span className="grad-text">next?</span>
       </h2>
-      <div className="magnetic" style={{ marginTop: "20px" }}>
+      <p style={{ color: "var(--text-dim)", maxWidth: "50ch" }}>
+        Tell us what you're building. We'll tell you honestly whether AI belongs in
+        it &mdash; and how to ship it well if it does.
+      </p>
+      <div className="magnetic" style={{ marginTop: "10px" }}>
         <a
-          href="mailto:ilumaaventures@gmail.com
-"
-          className="btn btn-primary"
+          href="mailto:ilumaaventures@gmail.com"
+          className="btn btn-primary large"
           data-cursor="hover"
-          style={{ fontSize: "15px", padding: "18px 38px" }}
         >
-          Start a conversation →
+          Start Your Project →
         </a>
       </div>
     </section>
