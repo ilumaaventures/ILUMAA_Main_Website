@@ -187,7 +187,7 @@ function TechStack() {
           </span>
           <h2>
             Welcome to the
-            <span className="grad-text">ILumaa technology universe.</span>
+            <span className="grad-text"> ILUMAA technology universe.</span>
           </h2>
           <p style={{ margin: "0 auto" }}>
             We choose technology for durability, performance, and scaling —
@@ -231,9 +231,8 @@ function TechStack() {
           {skillCategories.map((cat) => (
             <button
               key={cat.id}
-              className={`tech-tab-btn ${
-                activeCategory === cat.id ? "active" : ""
-              }`}
+              className={`tech-tab-btn ${activeCategory === cat.id ? "active" : ""
+                }`}
               onClick={() => setActiveCategory(cat.id)}
             >
               {cat.label}

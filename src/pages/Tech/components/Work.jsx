@@ -29,7 +29,7 @@ function Work({ projects, onSelectProject }) {
             trigger: gridRef.current,
             start: "top 82%",
           },
-        }
+        },
       );
     }
 
@@ -80,11 +80,12 @@ function Work({ projects, onSelectProject }) {
         <div className="section-head">
           <span className="eyebrow">Featured Platforms &amp; Products</span>
           <h2>
-            Production Systems <span className="grad-text">Engineered by Us</span>
+            Production Systems{" "}
+            <span className="grad-text">Engineered by Us</span>
           </h2>
           <p>
-            Explore the architecture, key capabilities, and impact metrics of digital
-            products designed, built, and shipped for enterprise scale.
+            Explore the architecture, key capabilities, and impact metrics of
+            digital products designed, built, and shipped for enterprise scale.
           </p>
         </div>
 
@@ -95,6 +96,12 @@ function Work({ projects, onSelectProject }) {
               className="project-card detailed-project-card magnetic-card"
               style={{
                 background: cardGradients[idx % cardGradients.length],
+                cursor: proj.url ? "pointer" : "default",
+              }}
+              onClick={() => {
+                if (proj.url) {
+                  window.open(proj.url, "_blank", "noopener,noreferrer");
+                }
               }}
             >
               <div className="project-card-header">
@@ -129,7 +136,9 @@ function Work({ projects, onSelectProject }) {
                 {/* Key Features List */}
                 {proj.features && proj.features.length > 0 && (
                   <div className="project-features-box">
-                    <h4 className="features-title">KEY CAPABILITIES &amp; FEATURES:</h4>
+                    <h4 className="features-title">
+                      KEY CAPABILITIES &amp; FEATURES:
+                    </h4>
                     <ul className="features-list">
                       {proj.features.map((feat, fIdx) => (
                         <li key={fIdx} className="feature-item">
@@ -156,25 +165,16 @@ function Work({ projects, onSelectProject }) {
               {/* Card Footer Actions */}
               <div className="project-card-footer">
                 <button
-                  onClick={() => onSelectProject(idx)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onSelectProject(idx);
+                  }}
                   className="btn btn-secondary btn-sm"
                   data-cursor="hover"
                 >
                   <span>Detailed Architecture</span>
                   <ArrowRight className="h-3.5 w-3.5" />
                 </button>
-                {proj.url && (
-                  <a
-                    href={proj.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-primary btn-sm"
-                    data-cursor="hover"
-                  >
-                    <span>Live Demo</span>
-                    <ExternalLink className="h-3.5 w-3.5" />
-                  </a>
-                )}
               </div>
             </article>
           ))}

@@ -65,7 +65,7 @@ const SYSTEM_PROMPT = `You are ILumaa Ask, the official AI technical and product
 Your sole focus is to provide comprehensive, accurate, and structured details about ILumaa's platforms, software products, technology stack, engineering architecture, and services.
 
 IDENTITY & RESPONSE GUIDELINES:
-- Name: ILumaa Ask.
+- Name: ILUMAA Ask.
 - Tone: Technical, authoritative, friendly, professional, concise.
 - Format: Natural human text using Markdown formatting (bullet points, bold text, clickable links).
 - NEVER output raw JSON objects, JSON schema stringifications, or code wrappers around plain text. Always output clean, human-readable conversation text.
@@ -565,7 +565,7 @@ function IlumaaAsk() {
               </div>
               <div>
                 <h4 className="text-sm font-semibold text-slate-100 flex items-center gap-1.5 font-heading">
-                  Ask Ilumaa
+                  Ask ILUMAA
                   <Sparkles className="h-3 w-3 text-cyan-400 animate-pulse" />
                 </h4>
                 <p className="text-[10px] text-cyan-400 font-mono tracking-wider font-medium">
@@ -592,11 +592,10 @@ function IlumaaAsk() {
                 className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}
               >
                 <div
-                  className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 text-sm ${
-                    msg.sender === "user"
+                  className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 text-sm ${msg.sender === "user"
                       ? "bg-gradient-to-r from-cyan-600 to-blue-600 text-white rounded-br-none shadow-[0_4px_16px_rgba(6,182,212,0.15)]"
                       : "bg-slate-900/80 text-slate-200 border border-slate-800/80 rounded-bl-none"
-                  }`}
+                    }`}
                 >
                   {msg.sender === "user" ? (
                     <p className="leading-relaxed text-[13.5px]">{msg.text}</p>
@@ -604,11 +603,10 @@ function IlumaaAsk() {
                     <div>{formatMessageText(msg.text)}</div>
                   )}
                   <span
-                    className={`block mt-1 text-[9px] text-right font-mono ${
-                      msg.sender === "user"
+                    className={`block mt-1 text-[9px] text-right font-mono ${msg.sender === "user"
                         ? "text-cyan-200/70"
                         : "text-slate-500"
-                    }`}
+                      }`}
                   >
                     {msg.timestamp}
                   </span>

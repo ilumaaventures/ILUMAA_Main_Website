@@ -149,7 +149,7 @@ function Hero() {
       <div className="hero-grid">
         <div className="hero-left">
           <div className="eyebrow">AI · Web · Mobile · ERP · Cloud</div>
-          <h1 className="hero-title" id="heroTitle">
+          <h3 className="hero-title" id="heroTitle">
             <span className="word">
               <span>Build</span>
             </span>{" "}
@@ -172,7 +172,7 @@ function Hero() {
             <span className="word">
               <span className="grad-text">AI</span>
             </span>
-          </h1>
+          </h3>
           <p className="hero-sub reveal-up" id="heroSub">
             We help startups and enterprises build AI-powered software, scalable
             web platforms, mobile applications, ERP systems and cloud solutions.
