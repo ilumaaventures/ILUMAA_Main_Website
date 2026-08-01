@@ -18,25 +18,13 @@ function Navbar({ isTechnologyPage }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navItems = useMemo(() => {
-    if (isTechnologyPage) {
-      return [
-        { label: "Services", href: "/#services" },
-        { label: "Solutions", href: "/#solutions" },
-        { label: "Tech", href: "/tech" },
-        { label: "Connect", href: "/#connect" },
-        { label: "Opportunities", href: "/#connect" },
-      ];
-    }
-
-    return [
-      { label: "Services", href: "/#services" },
-      { label: "Solutions", href: "/#solutions" },
-      { label: "Tech", href: "/tech" },
-      { label: "Connect", href: "/#connect" },
-      { label: "Opportunities", href: "/#connect" },
-    ];
-  }, [isTechnologyPage]);
+  const navItems = useMemo(() => [
+    { label: "Services", href: "/#services" },
+    { label: "Solutions", href: "/#solutions" },
+    { label: "Tech", href: "/tech" },
+    { label: "Connect", href: "/#connect" },
+    { label: "Opportunities", href: "/#connect" },
+  ], []);
 
   const handleLogoClick = (event) => {
     if (typeof window === "undefined") {
@@ -54,13 +42,13 @@ function Navbar({ isTechnologyPage }) {
       initial={false}
       animate={{
         backgroundColor: isScrolled
-          ? "rgba(255, 255, 255, 0.9)"
-          : "rgba(255, 255, 255, 0.72)",
+          ? "rgba(255, 255, 255, 0.98)"
+          : "rgba(255, 255, 255, 1)",
         borderColor: isScrolled
           ? "rgba(148,163,184,0.18)"
           : "rgba(148,163,184,0.10)",
       }}
-      className="fixed inset-x-0 top-0 z-50 border-b backdrop-blur-xl"
+      className="fixed inset-x-0 top-0 z-50 border-b bg-white backdrop-blur-xl"
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
         <a

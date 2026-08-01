@@ -1,18 +1,17 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const codeSnippets = [
-  { text: "const core = new Intelligence();", left: "15%", top: "20%" },
-  { text: "model.route(intent) → action", left: "75%", top: "28%" },
-  { text: "⟶ deploying...", left: "12%", top: "70%" },
-  { text: "system.online = true", left: "78%", top: "68%" },
-  { text: "∑ nodes: 14208", left: "30%", top: "80%" },
-  { text: "GET /v1/infer 200 OK", left: "62%", top: "15%" },
+const aiMessagesList = [
+  "Analyzing Q3 growth signals...",
+  "Routing intent to Model Fleet v4...",
+  "System health: 99.98% nominal.",
+  "Deploying zero-downtime release...",
 ];
 
+<<<<<<< HEAD
 const tabData = {
   people: {
     metric: "98.4%",
@@ -60,18 +59,21 @@ function Hero({ isLoaded }) {
   const cardRef = useRef(null);
   
   const [activeTab, setActiveTab] = useState("people");
+=======
+function Hero() {
+  const heroRightRef = useRef(null);
+  const dashboardRef = useRef(null);
+  const [aiMsgText, setAiMsgText] = useState("");
+>>>>>>> 18e43325ddafe165c097c54e855cdc7143e75868
 
+  // AI Message typing effect loop
   useEffect(() => {
-    // Initial scroll animation setup (fades elements as you scroll down the long hero container)
-    const scrollTimeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: "#hero-wrap",
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 0.6,
-      },
-    });
+    let msgIdx = 0;
+    let charIdx = 0;
+    let isDeleting = false;
+    let timer;
 
+<<<<<<< HEAD
     scrollTimeline
       .to(
         [hudTLRef.current, hudTRRef.current],
@@ -107,251 +109,294 @@ function Hero({ isLoaded }) {
         { opacity: 0, y: -20, filter: "blur(6px)", duration: 0.08, ease: "power1.in" },
         0.92,
       );
+=======
+    const typeLoop = () => {
+      const currentFullMsg = aiMessagesList[msgIdx];
+>>>>>>> 18e43325ddafe165c097c54e855cdc7143e75868
 
-    // Dynamic scroll timeline setup for each floating code snippet
-    const snippetTimelines = [];
-    snippetsRef.current.forEach((el, i) => {
-      if (!el) return;
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: "#hero-wrap",
-          start: "top top",
-          end: "bottom bottom",
-          scrub: 0.6,
-        },
-      });
+      if (!isDeleting) {
+        setAiMsgText(currentFullMsg.substring(0, charIdx + 1));
+        charIdx++;
 
-      tl.to(el, { opacity: 0.85, duration: 0.06 }, 0.22 + i * 0.02).to(
-        el,
-        { opacity: 0, y: -20, duration: 0.1 },
-        0.4 + i * 0.02,
-      );
+        if (charIdx === currentFullMsg.length) {
+          isDeleting = true;
+          timer = setTimeout(typeLoop, 2200);
+          return;
+        }
+      } else {
+        setAiMsgText(currentFullMsg.substring(0, charIdx - 1));
+        charIdx--;
 
-      snippetTimelines.push(tl);
-    });
+        if (charIdx === 0) {
+          isDeleting = false;
+          msgIdx = (msgIdx + 1) % aiMessagesList.length;
+        }
+      }
 
-    return () => {
-      scrollTimeline.scrollTrigger?.kill();
-      scrollTimeline.kill();
-      snippetTimelines.forEach((tl) => {
-        tl.scrollTrigger?.kill();
-        tl.kill();
-      });
+      const speed = isDeleting ? 30 : 60;
+      timer = setTimeout(typeLoop, speed);
     };
+
+    timer = setTimeout(typeLoop, 600);
+
+    return () => clearTimeout(timer);
   }, []);
 
-  // Mouse tilt interaction effect
+  // GSAP Entrance & Mouse 3D Tilt Interaction
   useEffect(() => {
-    const isTouch = window.matchMedia("(hover:none)").matches || window.innerWidth < 900;
-    if (isTouch) return;
-
-    const col = imageColRef.current;
-    const card = cardRef.current;
-    if (!col || !card) return;
-
-    const handleMouseMove = (e) => {
-      const rect = col.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-
-      // Calculate tilt angles (limit rotation to +/- 10 degrees)
-      const rotateX = (centerY - y) / 10;
-      const rotateY = (x - centerX) / 10;
-
-      gsap.to(card, {
-        rotateX: rotateX,
-        rotateY: rotateY,
-        transformPerspective: 1000,
-        duration: 0.4,
-        ease: "power2.out"
-      });
-    };
-
-    const handleMouseLeave = () => {
-      gsap.to(card, {
-        rotateX: 0,
-        rotateY: 0,
-        duration: 0.8,
-        ease: "power3.out"
-      });
-    };
-
-    col.addEventListener("mousemove", handleMouseMove);
-    col.addEventListener("mouseleave", handleMouseLeave);
-
-    return () => {
-      col.removeEventListener("mousemove", handleMouseMove);
-      col.removeEventListener("mouseleave", handleMouseLeave);
-    };
-  }, []);
-
-  // Entry play-in animations trigger once loader confirms completion
-  useEffect(() => {
-    if (isLoaded) {
-      gsap.from(".hero-inner .eyebrow", {
-        opacity: 0,
-        y: 20,
-        duration: 0.8,
+    const ctx = gsap.context(() => {
+      // Title Word Reveal
+      gsap.from(".hero-title .word span", {
+        y: "100%",
+        duration: 1.1,
+        stagger: 0.08,
+        ease: "power4.out",
         delay: 0.2,
       });
-      gsap.from(".hero-title", {
-        opacity: 0,
-        y: 40,
-        filter: "blur(10px)",
-        duration: 1.1,
-        delay: 0.35,
-        ease: "power3.out",
-      });
-      gsap.from(".hero-sub", { opacity: 0, y: 20, duration: 0.9, delay: 0.6 });
-      gsap.from(".hero-ctas", {
-        opacity: 0,
-        y: 20,
-        duration: 0.9,
-        delay: 0.75,
-      });
-      gsap.from(".hero-dashboard-wrapper", {
-        opacity: 0,
-        x: 40,
-        scale: 0.96,
-        filter: "blur(10px)",
-        duration: 1.2,
-        delay: 0.5,
-        ease: "power2.out",
-      });
-      gsap.from(".scroll-cue", { opacity: 0, duration: 1, delay: 1.1 });
-    }
-  }, [isLoaded]);
 
-  const activeData = tabData[activeTab];
+      // Sub, CTAs & Trust row reveal
+      gsap.from(".hero .reveal-up", {
+        opacity: 0,
+        y: 36,
+        duration: 1,
+        stagger: 0.15,
+        ease: "power3.out",
+        delay: 0.5,
+      });
+
+      // Chart Line Draw Animation
+      const chartLine = document.getElementById("chartLine");
+      if (chartLine) {
+        gsap.to(chartLine, {
+          strokeDashoffset: 0,
+          duration: 2.2,
+          ease: "power2.out",
+          delay: 0.8,
+        });
+      }
+
+      // Initial Dashboard Floating Entrance
+      gsap.from(dashboardRef.current, {
+        opacity: 0,
+        scale: 0.88,
+        rotateY: -20,
+        rotateX: 15,
+        duration: 1.4,
+        ease: "power3.out",
+        delay: 0.4,
+      });
+    });
+
+    // 3D Perspective Tilt on Mouse Movement
+    const rightCol = heroRightRef.current;
+    const dash = dashboardRef.current;
+
+    if (rightCol && dash) {
+      const isTouch =
+        window.matchMedia("(hover:none)").matches || window.innerWidth < 980;
+
+      if (!isTouch) {
+        const handleMouseMove = (e) => {
+          const r = rightCol.getBoundingClientRect();
+          const x = (e.clientX - r.left) / r.width - 0.5;
+          const y = (e.clientY - r.top) / r.height - 0.5;
+
+          gsap.to(dash, {
+            rotateY: x * 26,
+            rotateX: -y * 22,
+            duration: 0.5,
+            ease: "power2.out",
+          });
+        };
+
+        const handleMouseLeave = () => {
+          gsap.to(dash, {
+            rotateY: -8,
+            rotateX: 6,
+            duration: 1,
+            ease: "power3.out",
+          });
+        };
+
+        rightCol.addEventListener("mousemove", handleMouseMove);
+        rightCol.addEventListener("mouseleave", handleMouseLeave);
+
+        return () => {
+          rightCol.removeEventListener("mousemove", handleMouseMove);
+          rightCol.removeEventListener("mouseleave", handleMouseLeave);
+          ctx.revert();
+        };
+      }
+    }
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <div id="hero-wrap">
-      <div id="hero-pin">
-        <div className="hud tl" ref={hudTLRef}>
-          SYS.STATUS <span>ONLINE</span>
-          <br />
-          CORE.TEMP <span>NOMINAL</span>
-        </div>
-        <div className="hud br" ref={hudTRRef}>
-          NODES <span>14,208</span>
-          <br />
-          LATENCY <span>&lt;9ms</span>
-        </div>
-        <div className="hero-inner" ref={innerRef}>
-          {/* Left */}
-          <div className="hero-text-col">
-            <div className="eyebrow">ILUMMTECH // INTELLIGENT SYSTEMS</div>
-            <h1 className="hero-title">
-              We build the intelligence
-              <br />
-              behind what's <span className="grad-text">next.</span>
-            </h1>
-            <p className="hero-sub">
-              IlummTech engineers AI, cloud, and product systems that think,
-              scale, and ship — from a single glowing idea to a living network.
-            </p>
-            <div className="hero-ctas">
-              <a
-                href="#services"
-                className="btn btn-primary magnetic"
-                data-cursor="hover"
-              >
-                Explore the core
-              </a>
-              <a
-                href="#projects"
-                className="btn btn-ghost magnetic"
-                data-cursor="hover"
-              >
-                See our work
-              </a>
-            </div>
+    <section id="hero" className="section hero">
+      <div className="hero-grid">
+        <div className="hero-left">
+          <div className="eyebrow">AI · Web · Mobile · ERP · Cloud</div>
+          <h3 className="hero-title" id="heroTitle">
+            <span className="word">
+              <span>Build</span>
+            </span>{" "}
+            <span className="word">
+              <span>Intelligent</span>
+            </span>{" "}
+            <span className="word">
+              <span>Digital</span>
+            </span>{" "}
+            <span className="word">
+              <span>Products</span>
+            </span>
+            <br />
+            <span className="word">
+              <span className="grad-text">Powered</span>
+            </span>{" "}
+            <span className="word">
+              <span className="grad-text">by</span>
+            </span>{" "}
+            <span className="word">
+              <span className="grad-text">AI</span>
+            </span>
+          </h3>
+          <p className="hero-sub reveal-up" id="heroSub">
+            We help startups and enterprises build AI-powered software, scalable
+            web platforms, mobile applications, ERP systems and cloud solutions.
+          </p>
+          <div className="hero-cta-row reveal-up" id="heroCtas">
+            <a
+              href="#cta"
+              className="btn btn-primary magnetic"
+              data-cursor="hover"
+            >
+              Start Your Project
+            </a>
+            <a
+              href="#projects"
+              className="btn btn-secondary magnetic"
+              data-cursor="hover"
+            >
+              Explore Our Work
+            </a>
           </div>
-          {/* Right */}
-          <div className="hero-image-col" ref={imageColRef}>
-            <div className="hero-dashboard-wrapper">
-              <div className="hero-dashboard-card" ref={cardRef}>
-                {/* Header Dots */}
-                <div className="dashboard-header">
-                  <span className="dot dot-red"></span>
-                  <span className="dot dot-yellow"></span>
-                  <span className="dot dot-green"></span>
-                </div>
+        </div>
 
-                {/* Dashboard Grid */}
-                <div className="dashboard-grid">
-                  {/* Left Metric Card */}
-                  <div className="dashboard-card card-metric">
-                    <div className="metric-number">{activeData.metric}</div>
-                    <div className="metric-title">{activeData.metricLabel}</div>
+        <div className="hero-right" id="heroRight" ref={heroRightRef}>
+          <div className="dashboard-wrap">
+            <div className="dashboard" id="dashboard" ref={dashboardRef}>
+              <div className="orbit-panel glass op-1">
+                <div className="label">Active Users</div>
+                <div className="value">24,981</div>
+              </div>
+              <div className="orbit-panel glass op-2">
+                <div className="label">Deploys Today</div>
+                <div className="value">312</div>
+              </div>
+              <div className="orbit-panel glass op-3">
+                <div className="label">Model Latency</div>
+                <div className="value">86ms</div>
+              </div>
+              <div className="orbit-panel glass op-4">
+                <div className="label">Uptime</div>
+                <div className="value">99.98%</div>
+              </div>
+
+              <div className="dash-main">
+                <div className="dash-topbar">
+                  <div className="dash-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                   </div>
-
-                  {/* Right Chart Card */}
-                  <div className="dashboard-card card-chart">
-                    {/* Speech Bubble */}
-                    <div className="speech-bubble">
-                      <span className="speech-text">
-                        {activeData.bubble}
-                      </span>
-                      <span className="speech-arrow"></span>
-                    </div>
-
-                    {/* Chart Bars */}
-                    <div className="bar-chart">
-                      {activeData.bars.map((barH, idx) => (
-                        <span
-                          key={idx}
-                          className={`chart-bar bar-${idx + 1}`}
-                          style={{ height: `${barH}%` }}
-                        ></span>
-                      ))}
-                    </div>
-
-                    {/* Waving Hand character peeking */}
-                    <div className="waving-hand-container">
-                      <span className="waving-emoji">👋</span>
-                    </div>
+                  <div className="dash-title">IlummTech · Command Center</div>
+                  <div className="dash-badge">
+                    <i></i>Live
                   </div>
                 </div>
 
-                {/* Bottom Row Pills */}
-                <div className="dashboard-pills">
-                  <span
-                    className={`dashboard-pill ${activeTab === "people" ? "active" : ""}`}
-                    onMouseEnter={() => setActiveTab("people")}
-                    onClick={() => setActiveTab("people")}
-                  >
-                    People
-                  </span>
-                  <span
-                    className={`dashboard-pill ${activeTab === "finance" ? "active" : ""}`}
-                    onMouseEnter={() => setActiveTab("finance")}
-                    onClick={() => setActiveTab("finance")}
-                  >
-                    Finance
-                  </span>
-                  <span
-                    className={`dashboard-pill ${activeTab === "cloud" ? "active" : ""}`}
-                    onMouseEnter={() => setActiveTab("cloud")}
-                    onClick={() => setActiveTab("cloud")}
-                  >
-                    Cloud
-                  </span>
+                <div className="dash-grid">
+                  <div className="kpi">
+                    <div className="label">Revenue</div>
+                    <div className="value">482</div>
+                    <div className="delta up">▲ 18.4%</div>
+                  </div>
+                  <div className="kpi">
+                    <div className="label">Pipeline</div>
+                    <div className="value">1,204</div>
+                    <div className="delta up">▲ 6.1%</div>
+                  </div>
+                  <div className="kpi">
+                    <div className="label">Churn</div>
+                    <div className="value">1.2%</div>
+                    <div className="delta down">▼ 0.4%</div>
+                  </div>
                 </div>
-              </div>
 
-              {/* Floating Badge (bottom left, overlapping) */}
-              <div className="dashboard-badge">
-                <span className="badge-glow"></span>
-                <span className="badge-icon">{activeData.badgeIcon}</span>
-                <span className="badge-text">{activeData.badge}</span>
+                <div className="dash-chart">
+                  <div className="chart-head">
+                    <span>Revenue Analytics</span>
+                    <span>Last 30 days</span>
+                  </div>
+                  <svg viewBox="0 0 320 90" preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
+                        <stop offset="0%" stopColor="#33e6ff" />
+                        <stop offset="50%" stopColor="#4f7dff" />
+                        <stop offset="100%" stopColor="#9b5cff" />
+                      </linearGradient>
+                    </defs>
+                    <path
+                      className="chart-fill"
+                      d="M0,70 C40,60 60,40 90,45 C120,50 140,20 170,25 C200,30 220,10 250,15 C280,20 300,5 320,10 L320,90 L0,90 Z"
+                      fill="url(#lineGrad)"
+                    ></path>
+                    <path
+                      className="chart-line"
+                      id="chartLine"
+                      d="M0,70 C40,60 60,40 90,45 C120,50 140,20 170,25 C200,30 220,10 250,15 C280,20 300,5 320,10"
+                    ></path>
+                  </svg>
+                </div>
+
+                <div className="dash-bottom">
+                  <div className="dash-ai">
+                    <div className="label">AI Assistant</div>
+                    <div className="msg" id="aiTypeMsg">
+                      {aiMsgText}
+                      <span className="animate-pulse">|</span>
+                    </div>
+                  </div>
+                  <div className="dash-list">
+                    <div className="row">
+                      <span
+                        className="dot"
+                        style={{ background: "#5ee6a8" }}
+                      ></span>{" "}
+                      New deployment succeeded
+                    </div>
+                    <div className="row">
+                      <span
+                        className="dot"
+                        style={{ background: "var(--cyan)" }}
+                      ></span>{" "}
+                      Model retrained · 2m ago
+                    </div>
+                    <div className="row">
+                      <span
+                        className="dot"
+                        style={{ background: "var(--purple-soft)" }}
+                      ></span>{" "}
+                      3 new enterprise leads
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
+<<<<<<< HEAD
         <div className="scroll-cue" ref={cueRef}>
           <span>SCROLL</span>
           <span className="stick"></span>
@@ -378,8 +423,14 @@ function Hero({ isLoaded }) {
             {snippet.text}
           </div>
         ))}
+=======
+>>>>>>> 18e43325ddafe165c097c54e855cdc7143e75868
       </div>
-    </div>
+
+      <div className="scroll-cue">
+        <span></span>Scroll
+      </div>
+    </section>
   );
 }
 

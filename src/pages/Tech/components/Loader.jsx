@@ -25,7 +25,7 @@ function Loader({ onComplete }) {
 
   return (
     <div id="loader" className={isHidden ? "hidden" : ""}>
-      <div className="loader-mark">ILUMMTECH</div>
+      <div className="loader-mark">ILUMAAtech</div>
       <div className="loader-bar">
         <i style={{ width: `${percent}%` }} id="loaderFill" />
       </div>

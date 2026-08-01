@@ -1,239 +1,222 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
 function About() {
-  const containerRef = useRef(null);
-  const [cityData, setCityData] = useState({ buildings: [], roads: [], beacons: [] });
+  const cityRef = useRef(null);
+  const backLayerRef = useRef(null);
+  const midLayerRef = useRef(null);
+  const frontLayerRef = useRef(null);
 
-  // Generate deterministic city elements on mount
+  const [stats, setStats] = useState({
+    projects: 0,
+    uptime: 0,
+    countries: 0,
+    engineers: 0,
+  });
+
   useEffect(() => {
-    const totalWidth = 1200;
-    const groundY = 460;
-    let currentX = 10;
-    const tempBuildings = [];
-    const tempBeacons = [];
-    const tempRoads = [];
+    // Generate Procedural City Buildings
+    const generateLayer = (layerEl, count, minH, maxH, winsMin, winsMax) => {
+      if (!layerEl) return;
+      layerEl.innerHTML = "";
+      for (let i = 0; i < count; i++) {
+        const b = document.createElement("div");
+        b.className = "building";
+        const h = minH + Math.floor(Math.random() * (maxH - minH));
+        b.style.height = `${h}px`;
+        b.style.width = `${18 + Math.floor(Math.random() * 16)}px`;
 
-    // Construct random skyscrapers
-    while (currentX < totalWidth - 65) {
-      const bWidth = Math.floor(Math.random() * 35) + 50; // 50px to 85px wide
-      const bHeight = Math.floor(Math.random() * 260) + 120; // 120px to 380px tall
-      const bX = currentX;
-      const bY = groundY - bHeight;
-
-      // Window grid layout
-      const cols = Math.floor(bWidth / 12);
-      const rows = Math.floor(bHeight / 16);
-      const windows = [];
-
-      for (let r = 0; r < rows; r++) {
-        for (let c = 0; c < cols; c++) {
-          // 40% probability window is active
-          if (Math.random() < 0.45) {
-            windows.push({
-              cx: bX + 6 + c * 10,
-              cy: bY + 8 + r * 13,
-              r: 1.5,
-              opacity: Math.random() * 0.75 + 0.25,
-              blinkDelay: `${(Math.random() * 4).toFixed(2)}s`,
-              blinkDuration: `${(Math.random() * 3 + 2).toFixed(2)}s`,
-            });
-          }
+        const wins = winsMin + Math.floor(Math.random() * (winsMax - winsMin));
+        for (let w = 0; w < wins; w++) {
+          const win = document.createElement("div");
+          win.className = "win";
+          win.style.left = `${4 + Math.floor(Math.random() * 10)}px`;
+          win.style.top = `${8 + Math.floor(Math.random() * (h - 16))}px`;
+          win.style.animationDelay = `${(Math.random() * 4).toFixed(2)}s`;
+          b.appendChild(win);
         }
+        layerEl.appendChild(b);
       }
+    };
 
-      // Add caution beacon light at center roof
-      if (bHeight > 240) {
-        tempBeacons.push({
-          cx: bX + bWidth / 2,
-          cy: bY - 2,
-          r: 2.2,
-          color: Math.random() > 0.4 ? "var(--cyan-glow)" : "var(--purple-glow)",
-        });
-      }
+    generateLayer(backLayerRef.current, 18, 120, 240, 3, 6);
+    generateLayer(midLayerRef.current, 14, 160, 340, 5, 10);
+    generateLayer(frontLayerRef.current, 10, 200, 420, 8, 16);
 
-      tempBuildings.push({
-        x: bX,
-        y: bY,
-        width: bWidth,
-        height: bHeight,
-        windows,
+    // Data Stream Particle Spawner Interval
+    const streamInterval = setInterval(() => {
+      if (!cityRef.current) return;
+      const s = document.createElement("div");
+      s.className = "data-stream";
+      s.style.left = `${10 + Math.random() * 80}%`;
+      s.style.animationDuration = `${(2.4 + Math.random() * 1.8).toFixed(2)}s`;
+      cityRef.current.appendChild(s);
+      setTimeout(() => s.remove(), 4000);
+    }, 800);
+
+    // Parallax mouse movement over AI City
+    const cityEl = cityRef.current;
+    if (cityEl) {
+      const handleMouseMove = (e) => {
+        const rect = cityEl.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        if (backLayerRef.current)
+          backLayerRef.current.style.transform = `translateX(${x * -12}px)`;
+        if (midLayerRef.current)
+          midLayerRef.current.style.transform = `translateX(${x * -24}px)`;
+        if (frontLayerRef.current)
+          frontLayerRef.current.style.transform = `translateX(${x * -42}px)`;
+      };
+      cityEl.addEventListener("mousemove", handleMouseMove);
+    }
+
+    // ScrollTrigger Animated Stat Counters
+    const ctx = gsap.context(() => {
+      const targetStats = {
+        projects: 50,
+        uptime: 99.98,
+        countries: 24,
+        engineers: 14,
+      };
+
+      const current = { projects: 0, uptime: 0, countries: 0, engineers: 0 };
+
+      gsap.to(current, {
+        projects: targetStats.projects,
+        uptime: targetStats.uptime,
+        countries: targetStats.countries,
+        engineers: targetStats.engineers,
+        duration: 2.2,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: "#about",
+          start: "top 80%",
+        },
+        onUpdate: () => {
+          setStats({
+            projects: Math.floor(current.projects),
+            uptime: current.uptime.toFixed(2),
+            countries: Math.floor(current.countries),
+            engineers: Math.floor(current.engineers),
+          });
+        },
       });
 
-      currentX += bWidth + (Math.floor(Math.random() * 12) + 4); // dynamic gaps
-    }
+      // Stat cards scroll entrance animation
+      const statCards = document.querySelectorAll(".about-stats .stat");
+      if (statCards && statCards.length > 0) {
+        gsap.fromTo(
+          statCards,
+          { opacity: 0, y: 40, scale: 0.9 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: ".about-stats",
+              start: "top 85%",
+            },
+          }
+        );
 
-    // Setup network highways (roads)
-    tempRoads.push(`M 0 ${groundY} L 1200 ${groundY}`);
-    tempRoads.push(`M 0 ${groundY + 20} L 1200 ${groundY + 20}`);
-    tempRoads.push(`M 0 ${groundY + 40} L 1200 ${groundY + 40}`);
+        // Hover animation for stat cards
+        statCards.forEach((card) => {
+          const handleMouseMove = (e) => {
+            const r = card.getBoundingClientRect();
+            const x = (e.clientX - r.left) / r.width - 0.5;
+            const y = (e.clientY - r.top) / r.height - 0.5;
+            gsap.to(card, {
+              rotateY: x * 10,
+              rotateX: -y * 10,
+              scale: 1.05,
+              duration: 0.3,
+              ease: "power2.out",
+            });
+          };
 
-    // Converging perspective data links
-    for (let i = 0; i < 9; i++) {
-      const startX = 80 + i * 130;
-      const endX = startX - 70;
-      tempRoads.push(`M ${startX} ${groundY} L ${endX} 520`);
-    }
+          const handleMouseLeave = () => {
+            gsap.to(card, {
+              rotateY: 0,
+              rotateX: 0,
+              scale: 1,
+              duration: 0.6,
+              ease: "power3.out",
+            });
+          };
 
-    setCityData({ buildings: tempBuildings, roads: tempRoads, beacons: tempBeacons });
-  }, []);
-
-  // GSAP scroll triggers for page entrances
-  useEffect(() => {
-    if (!containerRef.current) return;
-
-    const head = containerRef.current.querySelector(".section-head");
-    const city = containerRef.current.querySelector(".city");
-    const legend = containerRef.current.querySelector(".about-legend");
-    const triggers = [];
-
-    [head, city, legend].forEach((el) => {
-      if (!el) return;
-      const anim = gsap.fromTo(
-        el,
-        { opacity: 0, y: 70, rotateX: 8, transformPerspective: 800 },
-        {
-          opacity: 1,
-          y: 0,
-          rotateX: 0,
-          duration: 1.1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: el,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-      if (anim.scrollTrigger) triggers.push(anim.scrollTrigger);
+          card.addEventListener("mousemove", handleMouseMove);
+          card.addEventListener("mouseleave", handleMouseLeave);
+        });
+      }
     });
 
     return () => {
-      triggers.forEach((trigger) => trigger.kill());
+      clearInterval(streamInterval);
+      ctx.revert();
     };
   }, []);
 
   return (
-    <section id="about" ref={containerRef}>
-      <style>{`
-        @keyframes blinkWin {
-          0%, 100% { opacity: 0.15; }
-          50% { opacity: 0.95; }
-        }
-        .blink-win {
-          animation: blinkWin var(--bdur, 3s) infinite ease-in-out;
-          animation-delay: var(--bdel, 0s);
-        }
-        @keyframes pulseBeacon {
-          0%, 100% { opacity: 0.4; }
-          50% { opacity: 1; }
-        }
-        .pulse-beacon {
-          animation: pulseBeacon 1.8s infinite ease-in-out;
-        }
-      `}</style>
-
-      <div className="section-head">
-        <div className="eyebrow">About IlummTech</div>
-        <h2>
-          We think in
-          <br />
-          <span className="grad-text">city-scale systems.</span>
+    <section id="about" className="section about">
+      <div className="about-copy">
+        <span className="eyebrow">About IlummTech</span>
+        <h2
+          style={{
+            fontFamily: "var(--font-display)",
+            fontWeight: 600,
+            fontSize: "clamp(2rem,3.6vw,3rem)",
+            lineHeight: 1.1,
+            margin: "18px 0 22px",
+          }}
+        >
+          We build the <span className="grad-text">infrastructure</span> behind
+          intelligent products.
         </h2>
+        <p>
+          Founded by engineers who shipped platforms at scale before AI made it
+          fashionable, IlummTech partners with teams who need software that
+          actually works under real load, real data and real users.
+        </p>
+        <p>
+          Every building in our city below is a live product. Every road, an
+          API connecting it to the rest of the system. Every light, a person
+          using it right now.
+        </p>
+        <div className="about-stats">
+          <div className="stat">
+            <b>{stats.projects}+</b>
+            <span>Products Shipped</span>
+          </div>
+          <div className="stat">
+            <b>{stats.uptime}%</b>
+            <span>Average Uptime</span>
+          </div>
+          <div className="stat">
+            <b>{stats.countries}+</b>
+            <span>Countries Served</span>
+          </div>
+          <div className="stat">
+            <b>{stats.engineers}+</b>
+            <span>Engineers &amp; Researchers</span>
+          </div>
+        </div>
       </div>
 
-      <div className="city" id="city">
-        <div className="city-caption">
-          <p>
-            Every product we ship is a building. Every API is a road that connects them. Every user is a light left on
-            at night.
-          </p>
-        </div>
-
-        <svg viewBox="0 0 1200 520" preserveAspectRatio="none" id="citySvg">
-          <defs>
-            <linearGradient id="bgrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stopColor="#1a1440" />
-              <stop offset="1" stopColor="#0a0a18" />
-            </linearGradient>
-            <linearGradient id="road" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0" stopColor="#22d3ee" stopOpacity="0" />
-              <stop offset="0.5" stopColor="#22d3ee" stopOpacity="0.9" />
-              <stop offset="1" stopColor="#22d3ee" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-
-          {/* Render Buildings */}
-          <g id="buildings">
-            {cityData.buildings.map((b, bIdx) => (
-              <g key={bIdx}>
-                <rect
-                  x={b.x}
-                  y={b.y}
-                  width={b.width}
-                  height={b.height}
-                  fill="url(#bgrad)"
-                  stroke="var(--line)"
-                  strokeWidth="1"
-                />
-                {/* Lit Windows */}
-                {b.windows.map((w, wIdx) => (
-                  <circle
-                    key={wIdx}
-                    cx={w.cx}
-                    cy={w.cy}
-                    r={w.r}
-                    fill="var(--cyan-glow)"
-                    className="blink-win"
-                    style={{
-                      "--bdel": w.blinkDelay,
-                      "--bdur": w.blinkDuration,
-                    }}
-                  />
-                ))}
-              </g>
-            ))}
-          </g>
-
-          {/* Render Roads */}
-          <g id="roads">
-            {cityData.roads.map((path, idx) => (
-              <path key={idx} d={path} stroke="url(#road)" strokeWidth="1.5" fill="none" />
-            ))}
-          </g>
-
-          {/* Render warning Beacons */}
-          <g id="lights">
-            {cityData.beacons.map((beacon, idx) => (
-              <circle
-                key={idx}
-                cx={beacon.cx}
-                cy={beacon.cy}
-                r={beacon.r}
-                fill={beacon.color}
-                className="pulse-beacon"
-              />
-            ))}
-          </g>
-        </svg>
-      </div>
-
-      <div className="about-legend">
-        <div className="legend-item" data-cursor="hover">
-          <b>Buildings — Products</b>
-          <p>Fifty-plus platforms shipped since 2016, each engineered to stand on its own.</p>
-        </div>
-        <div className="legend-item" data-cursor="hover">
-          <b>Roads — APIs</b>
-          <p>Every system we build talks to every other one, over infrastructure we own end-to-end.</p>
-        </div>
-        <div className="legend-item" data-cursor="hover">
-          <b>Lights — Users</b>
-          <p>Millions of active sessions a month, across products most people never see the seams of.</p>
-        </div>
+      <div className="city" id="cityScene" ref={cityRef}>
+        <div className="city-road"></div>
+        <div className="city-layer back" id="cityBack" ref={backLayerRef}></div>
+        <div className="city-layer mid" id="cityMid" ref={midLayerRef}></div>
+        <div
+          className="city-layer front"
+          id="cityFront"
+          ref={frontLayerRef}
+        ></div>
       </div>
     </section>
   );

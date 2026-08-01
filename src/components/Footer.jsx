@@ -10,18 +10,12 @@ import {
 function Footer({ isTechnologyPage }) {
   const logoSrc = `${import.meta.env.BASE_URL}ilumaa_logo.png`;
 
-  const quickLinks = isTechnologyPage
-    ? [
-        { label: "Home", href: "/" },
-        { label: "Tech", href: "/tech" },
-        { label: "Connect", href: "/#connect" },
-      ]
-    : [
-        { label: "Services", href: "/#services" },
-        { label: "Solutions", href: "/#solutions" },
-        { label: "Tech", href: "/tech" },
-        { label: "Connect", href: "/#connect" },
-      ];
+  const quickLinks = [
+    { label: "Services", href: "/#services" },
+    { label: "Solutions", href: "/#solutions" },
+    { label: "Tech", href: "/tech" },
+    { label: "Connect", href: "/#connect" },
+  ];
 
   const chips = [
     "Human Intelligence",
@@ -33,7 +27,7 @@ function Footer({ isTechnologyPage }) {
   ];
 
   return (
-    <footer className="border-t border-slate-200 bg-white">
+    <footer className="relative z-10 border-t border-slate-200 bg-white text-slate-950">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-[1.15fr_0.8fr_0.8fr_0.72fr]">
           <div>
