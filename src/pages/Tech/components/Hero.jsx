@@ -170,7 +170,7 @@ function Hero() {
               <span className="grad-text">by</span>
             </span>{" "}
             <span className="word">
-              <span className="grad-text">AI</span>
+              <span className="grad-text">ILUMAA</span>
             </span>
           </h3>
           <p className="hero-sub reveal-up" id="heroSub">
@@ -222,7 +222,7 @@ function Hero() {
                     <span></span>
                     <span></span>
                   </div>
-                  <div className="dash-title">IlummTech · Command Center</div>
+                  <div className="dash-title">IlumaaTech · Command Center</div>
                   <div className="dash-badge">
                     <i></i>Live
                   </div>
@@ -231,7 +231,7 @@ function Hero() {
                 <div className="dash-grid">
                   <div className="kpi">
                     <div className="label">Revenue</div>
-                    <div className="value">482</div>
+                    <div className="value">₹482K</div>
                     <div className="delta up">▲ 18.4%</div>
                   </div>
                   <div className="kpi">
