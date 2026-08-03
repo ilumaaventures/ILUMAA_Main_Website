@@ -1322,14 +1322,22 @@
    ============================================================ */
 .iluma-tech-page .projects-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 28px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
   perspective: 1000px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1200px) {
+  .iluma-tech-page .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
   .iluma-tech-page .projects-grid {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
 }
 
@@ -1338,11 +1346,11 @@
   border-radius: var(--radius-lg);
   overflow: hidden;
   border: 1px solid var(--glass-border);
-  min-height: 480px;
+  min-height: 260px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 32px;
+  padding: 20px;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   transform-style: preserve-3d;
@@ -1354,14 +1362,14 @@
 
 .iluma-tech-page .detailed-project-card:hover {
   border-color: rgba(51, 230, 255, 0.45);
-  box-shadow: 0 25px 60px -15px rgba(51, 230, 255, 0.3);
+  box-shadow: 0 16px 40px -10px rgba(51, 230, 255, 0.25);
 }
 
 .iluma-tech-page .project-card-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
+  margin-bottom: 14px;
 }
 
 .iluma-tech-page .tag-badge {
@@ -1383,26 +1391,32 @@
   font-family: var(--font-mono);
   font-size: 0.7rem;
   color: var(--text-dim);
-  transition: color 0.2s;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.2s ease;
 }
 
 .iluma-tech-page .live-demo-chip:hover {
   color: var(--cyan-soft);
+  background: rgba(51, 230, 255, 0.1);
+  border-color: rgba(51, 230, 255, 0.3);
 }
 
 .iluma-tech-page .project-card-title {
   font-family: var(--font-display);
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   font-weight: 600;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   color: #fff;
 }
 
 .iluma-tech-page .project-card-desc {
-  font-size: 0.94rem;
+  font-size: 0.88rem;
   color: var(--text-dim);
-  line-height: 1.5;
-  margin-bottom: 18px;
+  line-height: 1.45;
+  margin-bottom: 14px;
 }
 
 .iluma-tech-page .project-impact-badge {
@@ -1413,10 +1427,10 @@
   border: 1px solid rgba(155, 92, 255, 0.3);
   color: var(--purple-soft);
   font-family: var(--font-mono);
-  font-size: 0.72rem;
-  padding: 6px 14px;
+  font-size: 0.7rem;
+  padding: 5px 12px;
   border-radius: var(--radius-pill);
-  margin-bottom: 20px;
+  margin-bottom: 14px;
 }
 
 .iluma-tech-page .project-features-box {
@@ -1450,19 +1464,48 @@
   line-height: 1.4;
 }
 
+.iluma-tech-page .card-features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+}
+
+.iluma-tech-page .card-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  line-height: 1.35;
+}
+
 .iluma-tech-page .project-stack-pills {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-bottom: 24px;
+  margin-bottom: 14px;
 }
 
 .iluma-tech-page .project-card-footer {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 12px;
-  padding-top: 18px;
+  padding-top: 14px;
   border-top: 1px solid var(--line-soft);
+}
+
+.iluma-tech-page .modal-footer-action {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: flex-end;
 }
 
 /* ============================================================
@@ -1493,6 +1536,8 @@
   width: min(840px, 92vw);
   max-height: 85vh;
   overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
   background: linear-gradient(
     165deg,
     rgba(15, 23, 42, 0.96) 0%,
@@ -1504,6 +1549,12 @@
   box-shadow:
     0 30px 80px -15px rgba(0, 0, 0, 0.8),
     0 0 50px rgba(51, 230, 255, 0.15);
+}
+
+.iluma-tech-page .modal-card.detailed-modal-card::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 .iluma-tech-page .modal-close {

@@ -93,19 +93,15 @@ function Work({ projects, onSelectProject }) {
           {projects.map((proj, idx) => (
             <article
               key={proj.id || idx}
-              className="project-card detailed-project-card magnetic-card"
+              className="project-card detailed-project-card compact-project-card magnetic-card"
               style={{
                 background: cardGradients[idx % cardGradients.length],
-                cursor: proj.url ? "pointer" : "default",
+                cursor: "pointer",
               }}
-              onClick={() => {
-                if (proj.url) {
-                  window.open(proj.url, "_blank", "noopener,noreferrer");
-                }
-              }}
+              onClick={() => onSelectProject(idx)}
             >
-              <div className="project-card-header">
-                <span className="tag-badge">{proj.tag}</span>
+              {/* <div className="project-card-header">
+                <span className="tag-badge">.</span>
                 {proj.url && (
                   <a
                     href={proj.url}
@@ -114,12 +110,13 @@ function Work({ projects, onSelectProject }) {
                     className="live-demo-chip"
                     onClick={(e) => e.stopPropagation()}
                     data-cursor="hover"
+                    title={`Visit ${proj.title}`}
                   >
                     <span>Visit Live</span>
                     <ExternalLink className="h-3 w-3" />
                   </a>
                 )}
-              </div>
+              </div> */}
 
               <div className="project-card-body">
                 <h3 className="project-card-title">{proj.title}</h3>
@@ -133,30 +130,14 @@ function Work({ projects, onSelectProject }) {
                   </div>
                 )}
 
-                {/* Key Features List */}
+                {/* Key Features Highlights (Replacing Tech Skills) */}
                 {proj.features && proj.features.length > 0 && (
-                  <div className="project-features-box">
-                    <h4 className="features-title">
-                      KEY CAPABILITIES &amp; FEATURES:
-                    </h4>
-                    <ul className="features-list">
-                      {proj.features.map((feat, fIdx) => (
-                        <li key={fIdx} className="feature-item">
-                          <CheckCircle2 className="h-3.5 w-3.5 text-cyan-400 shrink-0 mt-0.5" />
-                          <span>{feat}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-                {/* Tech Stack Pills */}
-                {proj.stackPills && (
-                  <div className="project-stack-pills">
-                    {proj.stackPills.map((tech, tIdx) => (
-                      <span key={tIdx} className="tech-pill">
-                        {tech}
-                      </span>
+                  <div className="card-features-list">
+                    {proj.features.slice(0, 2).map((feat, fIdx) => (
+                      <div key={fIdx} className="card-feature-item">
+                        <CheckCircle2 className="h-3.5 w-3.5 text-cyan-400 shrink-0 mt-0.5" />
+                        <span>{feat}</span>
+                      </div>
                     ))}
                   </div>
                 )}
@@ -165,6 +146,7 @@ function Work({ projects, onSelectProject }) {
               {/* Card Footer Actions */}
               <div className="project-card-footer">
                 <button
+                  type="button"
                   onClick={(e) => {
                     e.stopPropagation();
                     onSelectProject(idx);
@@ -172,7 +154,7 @@ function Work({ projects, onSelectProject }) {
                   className="btn btn-secondary btn-sm"
                   data-cursor="hover"
                 >
-                  <span>Detailed Architecture</span>
+                  <span>View Details</span>
                   <ArrowRight className="h-3.5 w-3.5" />
                 </button>
               </div>

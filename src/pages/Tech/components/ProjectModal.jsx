@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { ExternalLink, Sparkles, CheckCircle2, X } from "lucide-react";
+import { ExternalLink, Sparkles, CheckCircle2, X, Globe } from "lucide-react";
 
 function ProjectModal({ project, onClose }) {
   useEffect(() => {
@@ -32,6 +32,7 @@ function ProjectModal({ project, onClose }) {
           id="modalClose"
           data-cursor="hover"
           onClick={onClose}
+          aria-label="Close modal"
         >
           <X className="h-4 w-4" />
         </button>
@@ -95,6 +96,22 @@ function ProjectModal({ project, onClose }) {
           <h4 className="modal-section-title">PLATFORM ARCHITECTURE &amp; OVERVIEW:</h4>
           <p id="mBody">{project.body}</p>
         </div>
+
+        {project.url && (
+          <div className="modal-footer-action">
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary modal-bottom-visit-btn"
+              data-cursor="hover"
+            >
+              <Globe className="h-4 w-4" />
+              <span>Visit {project.title} Live</span>
+              <ExternalLink className="h-4 w-4 ms-1" />
+            </a>
+          </div>
+        )}
       </div>
     </div>
   );
