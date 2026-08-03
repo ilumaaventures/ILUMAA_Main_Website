@@ -122,7 +122,7 @@ function About() {
               trigger: ".about-stats",
               start: "top 85%",
             },
-          }
+          },
         );
 
         // Hover animation for stat cards
@@ -165,7 +165,7 @@ function About() {
   return (
     <section id="about" className="section about">
       <div className="about-copy">
-        <span className="eyebrow">About IlummTech</span>
+        <span className="eyebrow">About IlumaaTech</span>
         <h2
           style={{
             fontFamily: "var(--font-display)",
@@ -180,13 +180,13 @@ function About() {
         </h2>
         <p>
           Founded by engineers who shipped platforms at scale before AI made it
-          fashionable, IlummTech partners with teams who need software that
+          fashionable, IlumaaTech partners with teams who need software that
           actually works under real load, real data and real users.
         </p>
         <p>
-          Every building in our city below is a live product. Every road, an
-          API connecting it to the rest of the system. Every light, a person
-          using it right now.
+          Every building in our city below is a live product. Every road, an API
+          connecting it to the rest of the system. Every light, a person using
+          it right now.
         </p>
         <div className="about-stats">
           <div className="stat">
