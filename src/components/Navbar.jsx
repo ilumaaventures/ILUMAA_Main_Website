@@ -26,7 +26,7 @@ function Navbar({ isTechnologyPage }) {
       { label: "Connect", href: "/#connect" },
       { label: "Opportunities", href: "/#connect" },
     ],
-    []
+    [],
   );
 
   const handleLogoClick = (event) => {
@@ -45,14 +45,14 @@ function Navbar({ isTechnologyPage }) {
       ? "rgba(203, 206, 211, 0.95)"
       : "rgba(203, 206, 211, 0.98)"
     : isScrolled
-    ? "rgba(255, 255, 255, 0.98)"
-    : "rgba(255, 255, 255, 1)";
+      ? "rgba(255, 255, 255, 0.98)"
+      : "rgba(255, 255, 255, 1)";
 
   const borderColor = isTechnologyPage
     ? "rgba(14, 17, 22, 0.12)"
     : isScrolled
-    ? "rgba(148,163,184,0.18)"
-    : "rgba(148,163,184,0.10)";
+      ? "rgba(148,163,184,0.18)"
+      : "rgba(148,163,184,0.10)";
 
   return (
     <motion.header
@@ -65,16 +65,20 @@ function Navbar({ isTechnologyPage }) {
         isTechnologyPage ? "bg-[#CBCED3]" : "bg-white"
       }`}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2.5 sm:px-6 lg:px-8">
         <a
           href="/"
           onClick={handleLogoClick}
           className="group flex items-center gap-3"
         >
-          <img src={logoSrc} alt="ILUMAA" className="h-14 w-auto sm:h-16" />
+          <img
+            src={logoSrc}
+            alt="ILUMAA"
+            className="h-9 w-auto sm:h-11 object-contain transition-all"
+          />
         </a>
 
-        <nav className="hidden items-center gap-2 lg:flex">
+        <nav className="hidden items-center gap-1.5 lg:flex">
           {navItems.map((item) => {
             const active = isTechnologyPage
               ? item.href === "/tech" &&
@@ -86,14 +90,14 @@ function Navbar({ isTechnologyPage }) {
               <a
                 key={item.label}
                 href={item.href}
-                className={`px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.16em] transition ${
+                className={`px-3.5 py-1.5 text-[12px] font-semibold uppercase tracking-[0.14em] transition ${
                   isTechnologyPage
                     ? active
                       ? "text-slate-950 font-bold"
                       : "text-slate-700 hover:text-slate-950"
                     : active
-                    ? "text-slate-950"
-                    : "text-slate-500 hover:text-slate-950"
+                      ? "text-slate-950"
+                      : "text-slate-500 hover:text-slate-950"
                 }`}
               >
                 {item.label}
@@ -103,7 +107,10 @@ function Navbar({ isTechnologyPage }) {
         </nav>
 
         <div className="hidden lg:flex">
-          <a href="/#connect" className="btn-primary">
+          <a
+            href="/#connect"
+            className=" bg-blue-500 rounded-2xl text-xs px-3.5 py-2 text-[12px] font-semibold uppercase tracking-[0.14em] transition text-white"
+          >
             Contact Us
           </a>
         </div>
