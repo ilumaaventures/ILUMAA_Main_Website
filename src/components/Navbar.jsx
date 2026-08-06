@@ -18,13 +18,16 @@ function Navbar({ isTechnologyPage }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navItems = useMemo(() => [
-    { label: "Services", href: "/#services" },
-    { label: "Solutions", href: "/#solutions" },
-    { label: "Tech", href: "/tech" },
-    { label: "Connect", href: "/#connect" },
-    { label: "Opportunities", href: "/#connect" },
-  ], []);
+  const navItems = useMemo(
+    () => [
+      { label: "Services", href: "/#services" },
+      { label: "Solutions", href: "/#solutions" },
+      { label: "Tech", href: "/tech" },
+      { label: "Connect", href: "/#connect" },
+      { label: "Opportunities", href: "/#connect" },
+    ],
+    []
+  );
 
   const handleLogoClick = (event) => {
     if (typeof window === "undefined") {
@@ -37,18 +40,30 @@ function Navbar({ isTechnologyPage }) {
     }
   };
 
+  const navBg = isTechnologyPage
+    ? isScrolled
+      ? "rgba(203, 206, 211, 0.95)"
+      : "rgba(203, 206, 211, 0.98)"
+    : isScrolled
+    ? "rgba(255, 255, 255, 0.98)"
+    : "rgba(255, 255, 255, 1)";
+
+  const borderColor = isTechnologyPage
+    ? "rgba(14, 17, 22, 0.12)"
+    : isScrolled
+    ? "rgba(148,163,184,0.18)"
+    : "rgba(148,163,184,0.10)";
+
   return (
     <motion.header
       initial={false}
       animate={{
-        backgroundColor: isScrolled
-          ? "rgba(255, 255, 255, 0.98)"
-          : "rgba(255, 255, 255, 1)",
-        borderColor: isScrolled
-          ? "rgba(148,163,184,0.18)"
-          : "rgba(148,163,184,0.10)",
+        backgroundColor: navBg,
+        borderColor: borderColor,
       }}
-      className="fixed inset-x-0 top-0 z-50 border-b bg-white backdrop-blur-xl"
+      className={`fixed inset-x-0 top-0 z-50 border-b backdrop-blur-xl ${
+        isTechnologyPage ? "bg-[#CBCED3]" : "bg-white"
+      }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
         <a
@@ -56,14 +71,7 @@ function Navbar({ isTechnologyPage }) {
           onClick={handleLogoClick}
           className="group flex items-center gap-3"
         >
-          <img
-            src={logoSrc}
-            alt="ILUMAA"
-            className="h-14 w-auto sm:h-16"
-          />
-          {/* <div className="font-heading text-lg font-bold tracking-[0.16em] text-slate-950 sm:text-xl">
-            ILUMAA
-          </div> */}
+          <img src={logoSrc} alt="ILUMAA" className="h-14 w-auto sm:h-16" />
         </a>
 
         <nav className="hidden items-center gap-2 lg:flex">
@@ -72,16 +80,18 @@ function Navbar({ isTechnologyPage }) {
               ? item.href === "/tech" &&
                 (window.location.pathname.startsWith("/technology-solutions") ||
                   window.location.pathname.startsWith("/tech"))
-              : item.href.includes("#connect")
-                ? false
-                : false;
+              : false;
 
             return (
               <a
                 key={item.label}
                 href={item.href}
                 className={`px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.16em] transition ${
-                  active
+                  isTechnologyPage
+                    ? active
+                      ? "text-slate-950 font-bold"
+                      : "text-slate-700 hover:text-slate-950"
+                    : active
                     ? "text-slate-950"
                     : "text-slate-500 hover:text-slate-950"
                 }`}
@@ -101,7 +111,11 @@ function Navbar({ isTechnologyPage }) {
         <button
           type="button"
           onClick={() => setIsOpen((value) => !value)}
-          className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white p-3 text-slate-950 shadow-sm lg:hidden"
+          className={`inline-flex items-center justify-center rounded-full border p-3 shadow-sm lg:hidden ${
+            isTechnologyPage
+              ? "border-slate-400/40 bg-[#CBCED3] text-slate-950"
+              : "border-slate-200 bg-white text-slate-950"
+          }`}
           aria-label="Toggle menu"
         >
           {isOpen ? <X size={20} /> : <Menu size={20} />}
@@ -114,7 +128,11 @@ function Navbar({ isTechnologyPage }) {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="overflow-hidden border-t border-slate-200 bg-white/95 lg:hidden"
+            className={`overflow-hidden border-t lg:hidden ${
+              isTechnologyPage
+                ? "border-slate-400/30 bg-[#CBCED3]"
+                : "border-slate-200 bg-white/95"
+            }`}
           >
             <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-4 sm:px-6">
               {navItems.map((item) => (
@@ -122,7 +140,11 @@ function Navbar({ isTechnologyPage }) {
                   key={item.label}
                   href={item.href}
                   onClick={() => setIsOpen(false)}
-                  className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-slate-600 transition hover:border-accent-blue/30 hover:text-slate-950"
+                  className={`rounded-2xl border px-4 py-3 text-sm font-semibold uppercase tracking-[0.14em] transition ${
+                    isTechnologyPage
+                      ? "border-slate-400/30 bg-slate-300/50 text-slate-900 hover:text-slate-950"
+                      : "border-slate-200 bg-slate-50 text-slate-600 hover:text-slate-950"
+                  }`}
                 >
                   {item.label}
                 </a>

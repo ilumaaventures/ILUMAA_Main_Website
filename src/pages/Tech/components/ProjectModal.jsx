@@ -5,6 +5,8 @@ function ProjectModal({ project, onClose }) {
   useEffect(() => {
     if (!project) return;
 
+    document.body.style.overflow = "hidden";
+
     const handleKeyDown = (e) => {
       if (e.key === "Escape") {
         onClose();
@@ -12,6 +14,7 @@ function ProjectModal({ project, onClose }) {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => {
+      document.body.style.overflow = "";
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [project, onClose]);
@@ -26,7 +29,7 @@ function ProjectModal({ project, onClose }) {
 
   return (
     <div id="proj-modal" className="open" onClick={handleBackdropClick}>
-      <div className="modal-card detailed-modal-card">
+      <div className="modal-card detailed-modal-card no-scrollbar">
         <button
           className="modal-close"
           id="modalClose"

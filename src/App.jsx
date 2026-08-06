@@ -8,7 +8,8 @@ function App() {
   const pathname =
     typeof window !== "undefined" ? window.location.pathname : "/";
   const isTechnologyPage =
-    pathname.startsWith("/technology-solutions") || pathname.startsWith("/tech");
+    pathname.startsWith("/technology-solutions") ||
+    pathname.startsWith("/tech");
 
   useEffect(() => {
     if (typeof window === "undefined") {
