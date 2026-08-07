@@ -1,4 +1,8 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const services = [
   {
@@ -137,8 +141,33 @@ const services = [
 ];
 
 const ServicesSection = () => {
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    if (!sectionRef.current) return;
+    const blocks = sectionRef.current.querySelectorAll(".service-block");
+    if (blocks && blocks.length > 0) {
+      gsap.fromTo(
+        blocks,
+        { opacity: 0, y: 50, scale: 0.95 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.8,
+          stagger: 0.12,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+          },
+        }
+      );
+    }
+  }, []);
+
   return (
-    <section id="services" className="services-section">
+    <section id="services" className="services-section" ref={sectionRef}>
       <div className="section-inner">
         <div className="section-header-left">
           <p className="eyebrow-accent">Technology &amp; Digital Solutions</p>

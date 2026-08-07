@@ -1,4 +1,8 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const capabilities = [
   {
@@ -79,8 +83,33 @@ const capabilities = [
 ];
 
 const AboutSection = () => {
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    if (!sectionRef.current) return;
+    const cards = sectionRef.current.querySelectorAll(".capability-card");
+    if (cards && cards.length > 0) {
+      gsap.fromTo(
+        cards,
+        { opacity: 0, y: 40, scale: 0.96 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.7,
+          stagger: 0.1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+          },
+        }
+      );
+    }
+  }, []);
+
   return (
-    <section id="about" className="about-section">
+    <section id="about" className="about-section" ref={sectionRef}>
       <div className="section-inner">
         <div className="about-header">
           <p className="eyebrow-dark">
@@ -92,7 +121,6 @@ const AboutSection = () => {
             transformation &mdash; people do.
           </h2>
         </div>
-        <div className="about-body"></div>
         <div className="capabilities-grid">
           {capabilities.map((item, index) => (
             <div key={index} className="capability-card">

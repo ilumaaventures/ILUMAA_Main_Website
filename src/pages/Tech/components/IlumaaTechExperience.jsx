@@ -73,26 +73,6 @@ const projects = [
     ],
     body: "ILUMAA Socials enables users to create communities, share posts, upload media, follow creators, exchange real-time messages, receive live notifications, and discover trending content. The platform emphasizes performance, scalability, and a seamless social experience with modern UI and secure authentication.",
   },
-  {
-    id: "acquisition",
-    tag: "TALENT ACQUISITION",
-    title: "Talent Acquisition",
-    desc: "An intelligent recruitment platform that simplifies hiring, candidate management, and workforce planning.",
-    role: "Product Design · Full Stack Development · Workflow Automation",
-    stack:
-      "React · Node.js · MongoDB · JWT Authentication · Role-Based Access Control",
-    stackPills: ["React", "Node.js", "MongoDB", "Workflow Automation", "RBAC"],
-    result: "Accelerated hiring with streamlined recruitment workflows",
-    impactMetric: "50% Reduction in Time-to-Hire",
-    url: "https://talentcio.in",
-    features: [
-      "Job Requisitions & Intelligent AI Candidate Matching",
-      "Automated Candidate Evaluation & Offer Letter Workflows",
-      "HR Manager & Interviewer Collaborative Assessment Portals",
-      "Recruitment Funnel Analytics & Hiring Speed Insights",
-    ],
-    body: "Talent Acquisition is TalentCIO's intelligent hiring solution designed to help organizations attract, evaluate, and hire exceptional talent. The platform centralizes job requisitions, candidate sourcing, AI-assisted resume screening, interview scheduling, hiring pipelines, offer management, onboarding readiness, and recruitment analytics into a unified workflow.",
-  },
 ];
 
 function IlumaaTechExperience() {
