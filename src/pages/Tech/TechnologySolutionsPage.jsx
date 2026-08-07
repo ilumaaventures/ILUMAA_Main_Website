@@ -94,7 +94,7 @@ function TechnologySolutionsPage() {
 
   return (
     <div className="tech-page-wrapper">
-      {/* <Preloader progress={progress} isLoading={isLoading} /> */}
+      <Preloader progress={progress} isLoading={isLoading} />
       <ScrollHero
         onProgressUpdate={handleProgressUpdate}
         onPreloadComplete={handlePreloadComplete}
