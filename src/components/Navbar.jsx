@@ -24,18 +24,60 @@ function Navbar({ isTechnologyPage }) {
       { label: "Solutions", href: "/#solutions" },
       { label: "Tech", href: "/technology-solutions" },
       { label: "Connect", href: "/#connect" },
-      { label: "Opportunities", href: "/#connect" },
     ];
   }, []);
+
+  const getTargetY = (targetId) => {
+    if (targetId === "connect") {
+      const solutionsEl = document.getElementById("solutions");
+      if (solutionsEl) {
+        const testimonialsEl = document.getElementById("testimonials");
+        const testimonialsHeight = testimonialsEl ? testimonialsEl.offsetHeight : 550;
+        return solutionsEl.offsetTop + solutionsEl.offsetHeight + testimonialsHeight + 40;
+      }
+    }
+    if (targetId === "solutions") {
+      const solutionsEl = document.getElementById("solutions");
+      if (solutionsEl) {
+        return solutionsEl.offsetTop;
+      }
+    }
+    const el = document.getElementById(targetId);
+    return el ? el.offsetTop - 65 : 0;
+  };
 
   const handleLinkClick = (event, href) => {
     if (typeof window === "undefined") {
       return;
     }
 
-    if (href === "/" && window.location.pathname === "/") {
-      event.preventDefault();
-      window.scrollTo({ top: 0, behavior: "smooth" });
+    // 1. HOME BUTTON - Direct instant navigation
+    if (href === "/") {
+      if (window.location.pathname === "/" || window.location.pathname === "") {
+        event.preventDefault();
+        window.history.pushState(null, "", "/");
+        window.scrollTo(0, 0);
+      }
+      return;
+    }
+
+    // 2. CONNECT / SOLUTIONS - Direct instant navigation
+    if (href.startsWith("/#") || href.startsWith("#")) {
+      const targetId = href.replace(/^\/?#/, "");
+
+      const el = document.getElementById(targetId);
+      if (el) {
+        event.preventDefault();
+        const targetY = getTargetY(targetId);
+        window.history.pushState(null, "", `#${targetId}`);
+        window.scrollTo(0, Math.max(0, targetY));
+        return;
+      }
+
+      if (window.location.pathname !== "/") {
+        event.preventDefault();
+        window.location.href = href;
+      }
     }
   };
 
@@ -44,9 +86,10 @@ function Navbar({ isTechnologyPage }) {
       return;
     }
 
-    if (window.location.pathname === "/") {
+    if (window.location.pathname === "/" || window.location.pathname === "") {
       event.preventDefault();
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.history.pushState(null, "", "/");
+      window.scrollTo(0, 0);
     }
   };
 
@@ -106,6 +149,7 @@ function Navbar({ isTechnologyPage }) {
         <div className="hidden lg:flex">
           <a
             href="/#connect"
+            onClick={(e) => handleLinkClick(e, "/#connect")}
             className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-accent-blue to-accent-cyan px-4 py-1.5 text-[10.5px] font-bold uppercase tracking-[0.16em] text-white shadow-[0_3px_10px_rgba(77,124,255,0.25)] transition hover:brightness-105"
           >
             Contact Us
@@ -146,7 +190,10 @@ function Navbar({ isTechnologyPage }) {
               ))}
               <a
                 href="/#connect"
-                onClick={() => setIsOpen(false)}
+                onClick={(e) => {
+                  handleLinkClick(e, "/#connect");
+                  setIsOpen(false);
+                }}
                 className="btn-primary mt-1 w-full"
               >
                 Contact Us

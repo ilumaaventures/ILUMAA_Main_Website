@@ -9,10 +9,10 @@ export default function RoadmapSolutionsSection({ solutionSections }) {
   const containerRef = useRef(null);
   const pathRef = useRef(null);
   const roadAreaRef = useRef(null);
+  const carRef = useRef(null);
+  const scrollTimeoutRef = useRef(null);
   const [activeId, setActiveId] = useState(null);
   const [hoveredId, setHoveredId] = useState(null);
-  const [carPos, setCarPos] = useState({ x: -40, y: 600, angle: 0 });
-  const scrollTimeoutRef = useRef(null);
 
   // Dynamic milestone coordinates sampled from SVG path (fallback defaults)
   const [milestoneCoords, setMilestoneCoords] = useState([
@@ -205,16 +205,24 @@ export default function RoadmapSolutionsSection({ solutionSections }) {
           Math.atan2(nextPoint.y - prevPoint.y, nextPoint.x - prevPoint.x) *
           (180 / Math.PI);
 
-        setCarPos({ x: point.x, y: point.y, angle });
+        if (carRef.current) {
+          carRef.current.setAttribute(
+            "transform",
+            `translate(${point.x}, ${point.y}) rotate(${angle})`
+          );
+        }
 
-        // Auto-activate milestone while scrolling
+        // Auto-activate milestone while scrolling - only update when id actually changes
         if (!hoveredId) {
-          if (clamped < 0.17)      setActiveId("marketing");
-          else if (clamped < 0.33) setActiveId("talent");
-          else if (clamped < 0.50) setActiveId("technology");
-          else if (clamped < 0.66) setActiveId("research");
-          else if (clamped < 0.83) setActiveId("legal-finance");
-          else                     setActiveId("solutions");
+          let nextId = null;
+          if (clamped < 0.17)      nextId = "marketing";
+          else if (clamped < 0.33) nextId = "talent";
+          else if (clamped < 0.50) nextId = "technology";
+          else if (clamped < 0.66) nextId = "research";
+          else if (clamped < 0.83) nextId = "legal-finance";
+          else                     nextId = "solutions";
+
+          setActiveId((prev) => (prev === nextId ? prev : nextId));
         }
 
         // Close cards 1.5s after scrolling stops (unless user is hovering)
@@ -230,14 +238,14 @@ export default function RoadmapSolutionsSection({ solutionSections }) {
 
   // Initial car position
   useEffect(() => {
-    if (pathRef.current) {
+    if (pathRef.current && carRef.current) {
       const p = pathRef.current.getPointAtLength(0);
       const pN = pathRef.current.getPointAtLength(4);
-      setCarPos({
-        x: p.x,
-        y: p.y,
-        angle: Math.atan2(pN.y - p.y, pN.x - p.x) * (180 / Math.PI),
-      });
+      const angle = Math.atan2(pN.y - p.y, pN.x - p.x) * (180 / Math.PI);
+      carRef.current.setAttribute(
+        "transform",
+        `translate(${p.x}, ${p.y}) rotate(${angle})`
+      );
     }
     return () => {
       if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
@@ -349,7 +357,8 @@ export default function RoadmapSolutionsSection({ solutionSections }) {
 
               {/* Scroll-Driven Car */}
               <g
-                transform={`translate(${carPos.x}, ${carPos.y}) rotate(${carPos.angle})`}
+                ref={carRef}
+                transform="translate(-40, 600) rotate(0)"
                 className="pointer-events-none"
                 style={{ transformOrigin: "0 0" }}
               >

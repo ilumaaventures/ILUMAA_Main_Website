@@ -2,7 +2,7 @@ import React from "react";
 
 const CTASection = () => {
   return (
-    <section id="contact" className="cta">
+    <section id="connect" className="cta">
       <div className="cta-inner">
         <p className="eyebrow-accent" style={{ marginBottom: "16px" }}>
           Let's Build What's Next
