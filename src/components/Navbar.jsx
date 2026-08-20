@@ -19,22 +19,25 @@ function Navbar({ isTechnologyPage }) {
   }, []);
 
   const navItems = useMemo(() => {
-    if (isTechnologyPage) {
-      return [
-        { label: "Solutions", href: "/#solutions" },
-        { label: "Tech", href: "/technology-solutions" },
-        { label: "Connect", href: "/#connect" },
-        { label: "Opportunities", href: "/#connect" },
-      ];
-    }
-
     return [
+      { label: "Home", href: "/" },
       { label: "Solutions", href: "/#solutions" },
       { label: "Tech", href: "/technology-solutions" },
       { label: "Connect", href: "/#connect" },
       { label: "Opportunities", href: "/#connect" },
     ];
-  }, [isTechnologyPage]);
+  }, []);
+
+  const handleLinkClick = (event, href) => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    if (href === "/" && window.location.pathname === "/") {
+      event.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
 
   const handleLogoClick = (event) => {
     if (typeof window === "undefined") {
@@ -81,12 +84,13 @@ function Navbar({ isTechnologyPage }) {
             const active = isTechnologyPage
               ? item.href === "/technology-solutions" &&
                 window.location.pathname.startsWith("/technology-solutions")
-              : false;
+              : item.href === "/" && window.location.pathname === "/" && !window.location.hash;
 
             return (
               <a
                 key={item.label}
                 href={item.href}
+                onClick={(e) => handleLinkClick(e, item.href)}
                 className={`rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] transition ${
                   active
                     ? "bg-slate-100 text-slate-950 font-bold"
@@ -131,7 +135,10 @@ function Navbar({ isTechnologyPage }) {
                 <a
                   key={item.label}
                   href={item.href}
-                  onClick={() => setIsOpen(false)}
+                  onClick={(e) => {
+                    handleLinkClick(e, item.href);
+                    setIsOpen(false);
+                  }}
                   className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-slate-600 transition hover:border-accent-blue/30 hover:text-slate-950"
                 >
                   {item.label}
