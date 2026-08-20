@@ -1,10 +1,34 @@
 import { motion, useInView } from "framer-motion";
 import { ChevronRight, Cpu } from "lucide-react";
 import { useRef } from "react";
+import TechTabFolder from "../tech/components/TechTabFolder";
 
 function Tech({ sections }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, amount: 0.15 });
+
+  if (!sections || sections.length === 0) {
+    return (
+      <section id="tech" className="section-shell">
+        <div className="mx-auto max-w-[1520px] px-4 sm:px-6 lg:px-8">
+          <div className="section-intro text-center">
+            <p className="section-kicker">Tech</p>
+            <h2 className="section-title">
+              Technology Focus Areas & Specialized Capability Tracks
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-600">
+              Explore our specialized technology tracks across digital platforms, data analytics,
+              applied AI, cloud engineering, and automated enterprise operations.
+            </p>
+          </div>
+
+          <div className="mt-12">
+            <TechTabFolder />
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="tech" className="section-shell">
@@ -42,13 +66,13 @@ function Tech({ sections }) {
                       <Cpu size={22} />
                     </span>
                     <div>
-                    <p className="font-mono text-xs uppercase tracking-[0.24em] text-accent-blue">
-                      {section.title}
-                    </p>
-                    <h3 className="mt-2 font-heading text-2xl font-extrabold text-slate-950">
-                      {section.heading}
-                    </h3>
-                  </div>
+                      <p className="font-mono text-xs uppercase tracking-[0.24em] text-accent-blue">
+                        {section.title}
+                      </p>
+                      <h3 className="mt-2 font-heading text-2xl font-extrabold text-slate-950">
+                        {section.heading}
+                      </h3>
+                    </div>
                   </div>
                   <span className="font-heading text-5xl font-extrabold text-slate-100">
                     0{index + 1}
