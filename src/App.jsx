@@ -42,12 +42,36 @@ function App() {
         return;
       }
 
-      const target = document.querySelector(hash);
+      const tryScroll = () => {
+        const targetId = hash.replace(/^#/, "");
+        const target = document.getElementById(targetId);
+        if (target) {
+          if (targetId === "connect") {
+            const solutionsEl = document.getElementById("solutions");
+            if (solutionsEl) {
+              const testimonialsEl = document.getElementById("testimonials");
+              const testimonialsHeight = testimonialsEl ? testimonialsEl.offsetHeight : 550;
+              const targetY = solutionsEl.offsetTop + solutionsEl.offsetHeight + testimonialsHeight + 40;
+              window.scrollTo(0, targetY);
+              return true;
+            }
+          }
+          if (targetId === "solutions") {
+            const solutionsEl = document.getElementById("solutions");
+            if (solutionsEl) {
+              window.scrollTo(0, solutionsEl.offsetTop);
+              return true;
+            }
+          }
+          window.scrollTo(0, Math.max(0, target.offsetTop - 65));
+          return true;
+        }
+        return false;
+      };
 
-      if (target) {
-        requestAnimationFrame(() => {
-          target.scrollIntoView({ behavior: "smooth", block: "start" });
-        });
+      if (!tryScroll()) {
+        setTimeout(tryScroll, 120);
+        setTimeout(tryScroll, 450);
       }
     };
 

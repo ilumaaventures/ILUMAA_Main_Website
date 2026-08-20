@@ -140,20 +140,26 @@
   pointer-events: auto;
 }
 .tech-page-wrapper .beat .eyebrow {
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: #0284c7;
 }
 .tech-page-wrapper .beat h1 {
-  font-size: clamp(40px, 7vw, 88px);
-  color: var(--ink);
+  font-size: clamp(38px, 6.5vw, 84px);
+  color: #0f172a;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  text-shadow: 0 2px 20px rgba(255, 255, 255, 0.95);
 }
-.tech-page-wrapper .beat h2 {
-  font-size: clamp(26px, 4vw, 46px);
-  color: var(--ink);
-  max-width: 900px;
+.tech-page-wrapper .beat h2,
+.tech-page-wrapper .beat .hero-subtitle {
+  font-size: clamp(17px, 2.2vw, 22px);
+  color: #334155;
+  max-width: 800px;
+  font-weight: 600;
+  text-shadow: 0 1px 12px rgba(255, 255, 255, 0.9);
 }
 .tech-page-wrapper .btn-primary {
   pointer-events: auto;

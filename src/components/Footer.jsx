@@ -17,7 +17,6 @@ function Footer({ isTechnologyPage }) {
         { label: "Connect", href: "/#connect" },
       ]
     : [
-        { label: "Services", href: "/#services" },
         { label: "Solutions", href: "/#solutions" },
         { label: "Tech", href: "/technology-solutions" },
         { label: "Connect", href: "/#connect" },
