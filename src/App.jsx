@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
-import TechnologySolutionsPage from "./pages/TechnologySolutionsPage";
+import { TechnologySolutionsPage } from "./tech";
 
 function App() {
   const pathname =

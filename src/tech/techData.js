@@ -1,0 +1,216 @@
+import {
+  BarChart3,
+  BrainCircuit,
+  Building2,
+  Cloud,
+  Cpu,
+  LineChart,
+  Code2,
+  Database,
+  Bot,
+  Layers,
+  Sparkles,
+  Zap,
+} from "lucide-react";
+
+export const techTracks = [
+  {
+    id: "products-platforms",
+    tabLabel: "Products & Platforms",
+    shortTag: "01 / Digital Engineering",
+    title: "PRODUCTS & PLATFORM DEVELOPMENT",
+    subtitle: "Building Scalable Digital Platforms with Human-Centered Innovation",
+    summary:
+      "We collaborate with businesses, entrepreneurs and institutions to conceptualize, develop and scale technology-driven platforms tailored to modern market needs.",
+    detail:
+      "Our approach combines strategic consulting, human intelligence and advanced technology to build scalable, future-ready digital ecosystems.",
+    label: "Specialized Areas:",
+    icon: Building2,
+    badgeColor: "from-blue-600 to-cyan-500",
+    themeBg: "bg-blue-50/70 border-blue-200/80 text-blue-700",
+    gradient: "from-blue-500/10 via-cyan-500/5 to-transparent",
+    deliverables: [
+      "End-to-End Product Architecture",
+      "Full-Stack Web & Mobile Apps",
+      "Enterprise Grade Security & Compliance",
+      "High-Availability Infrastructure",
+    ],
+    items: [
+      "Web & Mobile Application Development",
+      "Property & Real Estate Platforms",
+      "Business Management Platforms",
+      "Marketplace Solutions",
+      "Enterprise Portals",
+      "SaaS Products",
+      "AI-Powered Applications",
+      "Workflow & Automation Platforms",
+      "Custom Digital Ecosystems",
+    ],
+  },
+  {
+    id: "tech-digital-solutions",
+    tabLabel: "Technology & Digital",
+    shortTag: "02 / Ecosystems",
+    title: "Technology & Digital Solutions",
+    subtitle:
+      "Designing and developing scalable technology ecosystems for modern businesses.",
+    summary:
+      "From core enterprise infrastructure and CRM/ERP integrations to performance marketing and organic growth systems, we build connected digital foundations.",
+    detail:
+      "Unified systems that bridge enterprise operations with modern growth channels for accelerated time-to-market.",
+    label: "Core Capabilities:",
+    icon: Cpu,
+    badgeColor: "from-cyan-600 to-teal-500",
+    themeBg: "bg-cyan-50/70 border-cyan-200/80 text-cyan-700",
+    gradient: "from-cyan-500/10 via-teal-500/5 to-transparent",
+    deliverables: [
+      "Integrated Business Systems",
+      "Modern Cloud Deployments",
+      "Omnichannel Digital Presence",
+      "Lifecycle Automation",
+    ],
+    items: [
+      "CRM / ERP / HRMS Platforms",
+      "Cloud & Infrastructure Solutions",
+      "Brand Strategy & Positioning",
+      "Performance Marketing",
+      "SEO & Organic Growth",
+      "Social Media Marketing",
+      "Lead Generation Campaigns",
+      "Content & Creative Solutions",
+      "Website & Digital Presence Management",
+      "Marketing Automation",
+    ],
+  },
+  {
+    id: "bi-data-analytics",
+    tabLabel: "Data & BI Analytics",
+    shortTag: "03 / Intelligence",
+    title: "Business Intelligence & Data Analytics",
+    subtitle:
+      "Transforming data into actionable business intelligence and growth insights.",
+    summary:
+      "Empowering leadership teams with real-time visualization dashboards, predictive insights, and governed analytics pipelines.",
+    detail:
+      "Convert fragmented operational data into structured, strategic intelligence that drives confident executive decisions.",
+    label: "Analytics Capabilities:",
+    icon: BarChart3,
+    badgeColor: "from-indigo-600 to-blue-500",
+    themeBg: "bg-indigo-50/70 border-indigo-200/80 text-indigo-700",
+    gradient: "from-indigo-500/10 via-blue-500/5 to-transparent",
+    deliverables: [
+      "Executive Power BI & Tableau Dashboards",
+      "Predictive Trend Forecasting",
+      "Operational Bottleneck Detection",
+      "Data Strategy & Governance Frameworks",
+    ],
+    items: [
+      "Data Visualization & Dashboard Development (Power BI, Tableau, Looker, etc.)",
+      "Predictive & Prescriptive Analytics",
+      "Customer & Market Analytics",
+      "Operational Efficiency Analytics",
+      "KPI & Performance Reporting",
+      "Data Strategy & Governance",
+      "Business Performance Analytics",
+    ],
+  },
+  {
+    id: "ai-machine-learning",
+    tabLabel: "AI & Machine Learning",
+    shortTag: "04 / Applied AI",
+    title: "AI & Machine Learning Consulting",
+    subtitle:
+      "Enabling intelligent automation and AI-driven business transformation.",
+    summary:
+      "Custom machine learning models, natural language intelligence, recommendation engines, and proprietary AI systems tailored to your domain.",
+    detail:
+      "We design responsible, high-accuracy AI models that integrate seamlessly into existing production workflows.",
+    label: "AI Specializations:",
+    icon: BrainCircuit,
+    badgeColor: "from-purple-600 to-indigo-500",
+    themeBg: "bg-purple-50/70 border-purple-200/80 text-purple-700",
+    gradient: "from-purple-500/10 via-indigo-500/5 to-transparent",
+    deliverables: [
+      "Domain-Specific LLM & NLP Pipelines",
+      "Custom Model Training & Tuning",
+      "Computer Vision & Pattern Recognition",
+      "Automated Decision & Recommendation Engines",
+    ],
+    items: [
+      "AI Strategy & Consulting",
+      "Machine Learning Model Development",
+      "AI Model Deployment & Optimization",
+      "Natural Language Processing (NLP) Solutions",
+      "Computer Vision Solutions",
+      "Recommendation Engines",
+      "AI-Powered Decision Systems",
+      "AI Process Optimization",
+    ],
+  },
+  {
+    id: "big-data-cloud",
+    tabLabel: "Big Data & Cloud",
+    shortTag: "05 / Cloud & Pipelines",
+    title: "Big Data & Cloud Consulting",
+    subtitle:
+      "Building scalable data ecosystems and modern cloud-based infrastructures.",
+    summary:
+      "Architecting enterprise-scale data lakehouses, high-throughput ETL/ELT pipelines, and cloud environments across AWS, Azure, and Google Cloud.",
+    detail:
+      "Future-proof infrastructure engineered for massive volume, high velocity, and bulletproof security.",
+    label: "Engineering Capabilities:",
+    icon: Cloud,
+    badgeColor: "from-sky-600 to-blue-600",
+    themeBg: "bg-sky-50/70 border-sky-200/80 text-sky-700",
+    gradient: "from-sky-500/10 via-blue-500/5 to-transparent",
+    deliverables: [
+      "Scalable Lakehouse & Warehouse Architectures",
+      "Resilient ETL/ELT Streaming Pipelines",
+      "Multi-Cloud Governance & Security",
+      "Legacy Database & Cloud Migration",
+    ],
+    items: [
+      "Big Data Architecture Design",
+      "Data Warehousing & Lakehouse Solutions",
+      "ETL / ELT Pipeline Development",
+      "Cloud-Based Data Solutions (AWS, Azure, Google Cloud)",
+      "Scalable Data Engineering",
+      "Enterprise Data Platforms",
+      "Data Migration & Modernization",
+    ],
+  },
+  {
+    id: "ai-automation",
+    tabLabel: "AI Automation & RPA",
+    shortTag: "06 / Autonomous Workflows",
+    title: "AI-Powered Automation Solutions",
+    subtitle:
+      "Automating business processes to improve speed, efficiency and scalability.",
+    summary:
+      "Intelligent bots, automated document processing, workflow orchestrations, and RPA systems that minimize manual friction and eliminate errors.",
+    detail:
+      "Free your workforce to focus on high-value strategic growth while routine operations run autonomously.",
+    label: "Automation Tracks:",
+    icon: LineChart,
+    badgeColor: "from-emerald-600 to-teal-500",
+    themeBg: "bg-emerald-50/70 border-emerald-200/80 text-emerald-700",
+    gradient: "from-emerald-500/10 via-teal-500/5 to-transparent",
+    deliverables: [
+      "Intelligent Document Processing (IDP)",
+      "AI Virtual Assistants & Support Bots",
+      "End-to-End RPA Workflows",
+      "Self-Healing Operations Pipelines",
+    ],
+    items: [
+      "Workflow Automation",
+      "AI-Driven Chatbots & Virtual Assistants",
+      "Intelligent Document Processing",
+      "Process Automation Systems",
+      "Smart Business Operations",
+      "AI-Based Customer Support Automation",
+      "Robotic Process Automation (RPA)",
+    ],
+  },
+];
+
+export const technologySections = techTracks;
