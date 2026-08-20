@@ -54,47 +54,45 @@ function Navbar({ isTechnologyPage }) {
       initial={false}
       animate={{
         backgroundColor: isScrolled
-          ? "rgba(255, 255, 255, 0.9)"
-          : "rgba(255, 255, 255, 0.72)",
+          ? "rgba(255, 255, 255, 0.96)"
+          : "rgba(255, 255, 255, 0.90)",
         borderColor: isScrolled
-          ? "rgba(148,163,184,0.18)"
-          : "rgba(148,163,184,0.10)",
+          ? "rgba(226, 232, 240, 0.9)"
+          : "rgba(241, 245, 249, 0.8)",
+        boxShadow: isScrolled
+          ? "0 4px 20px -2px rgba(15, 23, 42, 0.06)"
+          : "0 1px 4px rgba(15, 23, 42, 0.03)",
       }}
-      className="fixed inset-x-0 top-0 z-50 border-b backdrop-blur-xl"
+      className="fixed inset-x-0 top-0 z-50 border-b backdrop-blur-xl transition-all"
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex max-w-[1520px] items-center justify-between gap-4 px-4 py-2 sm:px-6 sm:py-2.5 lg:px-8">
         <a
           href="/"
           onClick={handleLogoClick}
-          className="group flex items-center gap-3"
+          className="group flex items-center gap-2 transition hover:opacity-90"
         >
           <img
             src={logoSrc}
             alt="ILUMAA"
-            className="h-14 w-auto sm:h-16"
+            className="h-9 w-auto sm:h-10 object-contain"
           />
-          {/* <div className="font-heading text-lg font-bold tracking-[0.16em] text-slate-950 sm:text-xl">
-            ILUMAA
-          </div> */}
         </a>
 
-        <nav className="hidden items-center gap-2 lg:flex">
+        <nav className="hidden items-center gap-1 lg:flex">
           {navItems.map((item) => {
             const active = isTechnologyPage
               ? item.href === "/technology-solutions" &&
                 window.location.pathname.startsWith("/technology-solutions")
-              : item.href.includes("#connect")
-                ? false
-                : false;
+              : false;
 
             return (
               <a
                 key={item.label}
                 href={item.href}
-                className={`px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.16em] transition ${
+                className={`rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] transition ${
                   active
-                    ? "text-slate-950"
-                    : "text-slate-500 hover:text-slate-950"
+                    ? "bg-slate-100 text-slate-950 font-bold"
+                    : "text-slate-600 hover:bg-slate-50 hover:text-slate-950"
                 }`}
               >
                 {item.label}
@@ -104,7 +102,10 @@ function Navbar({ isTechnologyPage }) {
         </nav>
 
         <div className="hidden lg:flex">
-          <a href="/#connect" className="btn-primary">
+          <a
+            href="/#connect"
+            className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-accent-blue to-accent-cyan px-4 py-1.5 text-[10.5px] font-bold uppercase tracking-[0.16em] text-white shadow-[0_3px_10px_rgba(77,124,255,0.25)] transition hover:brightness-105"
+          >
             Contact Us
           </a>
         </div>
@@ -112,10 +113,10 @@ function Navbar({ isTechnologyPage }) {
         <button
           type="button"
           onClick={() => setIsOpen((value) => !value)}
-          className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white p-3 text-slate-950 shadow-sm lg:hidden"
+          className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white p-1.5 text-slate-800 shadow-sm transition hover:bg-slate-50 lg:hidden"
           aria-label="Toggle menu"
         >
-          {isOpen ? <X size={20} /> : <Menu size={20} />}
+          {isOpen ? <X size={16} /> : <Menu size={16} />}
         </button>
       </div>
 

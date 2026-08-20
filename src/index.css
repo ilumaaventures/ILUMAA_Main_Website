@@ -80,43 +80,35 @@
 
 .section-intro {
   position: relative;
-  max-width: 44rem;
-  padding-left: 1rem;
-}
-
-.section-intro::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.25rem;
-  height: 3.25rem;
-  width: 0.2rem;
-  border-radius: 9999px;
-  background: linear-gradient(180deg, #38bdf8 0%, #8b5cf6 55%, #f59e0b 100%);
+  max-width: 52rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .section-kicker {
+  display: inline-block;
   font-family: "Inter", sans-serif;
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   text-transform: uppercase;
-  letter-spacing: 0.28em;
-  color: #7dd3fc;
-  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: #0284c7;
+  font-weight: 800;
 }
 
 .section-title {
-  margin-top: 0.9rem;
+  margin-top: 0.75rem;
   font-family: "Outfit", sans-serif;
   font-size: 1.95rem;
   font-weight: 700;
-  line-height: 1.08;
+  line-height: 1.14;
   color: #0f172a;
+  letter-spacing: -0.02em;
 }
 
 .section-copy {
   margin-top: 1rem;
-  font-size: 0.95rem;
-  line-height: 1.9;
+  font-size: 0.94rem;
+  line-height: 1.75;
   color: #475569;
 }
 
@@ -235,11 +227,11 @@
   }
 
   .section-title {
-    font-size: 2.35rem;
+    font-size: 2.15rem;
   }
 
   .section-copy {
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
 }
 
@@ -250,7 +242,7 @@
   }
 
   .section-title {
-    font-size: 2.7rem;
+    font-size: 2.45rem;
   }
 }
 

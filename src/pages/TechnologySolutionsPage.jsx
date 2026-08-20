@@ -116,7 +116,7 @@ function TechnologySolutionsPage() {
   return (
     <>
       <section className="section-shell pt-28 lg:pt-32">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1520px] px-4 sm:px-6 lg:px-8">
           <div className="section-intro">
             <p className="section-kicker">Tech</p>
             <h2 className="section-title">Technology solutions</h2>
