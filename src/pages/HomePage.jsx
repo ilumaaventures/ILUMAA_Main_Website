@@ -28,7 +28,7 @@ import {
   Users,
   Zap,
 } from "lucide-react";
-import SolutionsHorizontalSection from "../components/SolutionsHorizontalSection";
+import RoadmapSolutionsSection from "../components/RoadmapSolutionsSection";
 import WhyChooseUsCarousel from "../components/WhyChooseUsCarousel";
 
 const whyChooseUs = [
@@ -111,19 +111,6 @@ const approachSteps = [
     accent: "text-teal-600 bg-teal-50 border-teal-200",
     gradient: "from-teal-500/20 to-emerald-500/20",
   },
-];
-
-const serviceItems = [
-  { title: "Business Strategy & Advisory", icon: BriefcaseBusiness, category: "Advisory" },
-  { title: "Business Registration & Structuring", icon: Scale, category: "Governance" },
-  { title: "Workforce Strategy and Planning", icon: Users, category: "Human Capital" },
-  { title: "Growth & Expansion Strategy", icon: Rocket, category: "Scale" },
-  { title: "Operational Excellence", icon: CheckCircle2, category: "Operations" },
-  { title: "Business Transformation", icon: BrainCircuit, category: "Transformation" },
-  { title: "Organizational Development", icon: Building2, category: "Organization" },
-  { title: "Process Optimization", icon: BarChart3, category: "Efficiency" },
-  { title: "Change Management", icon: Layers, category: "Agility" },
-  { title: "Startup & Scale-up Consulting", icon: Sparkles, category: "Ventures" },
 ];
 
 const solutionSections = [
@@ -227,6 +214,27 @@ const solutionSections = [
     gradient: "from-slate-800 via-blue-900 to-indigo-900",
     badgeBg: "bg-slate-100 text-slate-800 border-slate-300",
   },
+  {
+    id: "solutions",
+    title: "Solutions",
+    tagline: "End-to-End Delivery",
+    description:
+      "Bringing it all together — integrated, end-to-end solutions tailored to your business objectives.",
+    items: [
+      "Business Registration & Structuring",
+      "Workforce Strategy and Planning",
+      "Growth & Expansion Strategy",
+      "Operational Excellence",
+      "Business Transformation",
+      "Organizational Development",
+      "Process Optimization",
+      "Change Management",
+      "Startup & Scale-up Consulting",
+    ],
+    icon: Handshake,
+    gradient: "from-emerald-600 via-teal-600 to-cyan-600",
+    badgeBg: "bg-emerald-50 text-emerald-700 border-emerald-200",
+  },
 ];
 
 const testimonials = [
@@ -309,10 +317,10 @@ function HomePage() {
               Book a Consultation
             </a>
             <a
-              href="/#services"
+              href="/#solutions"
               className="inline-flex items-center justify-center rounded-full border border-white/30 bg-black/40 px-6 py-4 text-[12px] font-semibold uppercase tracking-[0.16em] text-white shadow-lg backdrop-blur-md transition duration-300 hover:scale-[1.03] hover:border-white/50 hover:bg-white/20"
             >
-              Explore Services
+              Explore Solutions
             </a>
           </motion.div>
         </motion.div>
@@ -430,75 +438,8 @@ function HomePage() {
         </div>
       </section>
 
-      {/* 4. SERVICES */}
-      <section id="services" className="section-shell">
-        <div className="mx-auto max-w-[1720px] px-4 sm:px-8 lg:px-12 xl:px-16">
-          <div className="section-intro text-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.85, y: 12 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.15 }}
-              transition={{ duration: 0.45 }}
-              className="inline-flex items-center gap-2 rounded-full border border-sky-500/20 bg-sky-50/80 px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.2em] text-sky-600 shadow-sm"
-            >
-              <span className="h-1.5 w-1.5 rounded-full bg-sky-500" />
-              <span>Services</span>
-            </motion.div>
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.15 }}
-              transition={{ duration: 0.55, delay: 0.08 }}
-              className="section-title text-center"
-            >
-              Services we provide
-            </motion.h2>
-          </div>
-
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-            {serviceItems.map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <motion.article
-                  key={item.title}
-                  initial={{ opacity: 0, y: 35, scale: 0.95 }}
-                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                  viewport={{ once: false, amount: 0.15 }}
-                  transition={{
-                    duration: 0.45,
-                    delay: index * 0.05,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  whileHover={{ y: -6, scale: 1.02 }}
-                  className="group relative flex flex-col justify-between rounded-[1.55rem] border border-slate-200/90 bg-white p-6 shadow-[0_6px_20px_rgba(15,23,42,0.03)] transition-all duration-300 hover:border-blue-400/40 hover:shadow-[0_16px_36px_rgba(56,189,248,0.12)]"
-                >
-                  <div>
-                    <div className="flex items-center justify-between">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-all duration-300 group-hover:bg-blue-600 group-hover:text-white">
-                        <Icon size={19} />
-                      </div>
-                      <span className="text-[9.5px] font-bold uppercase tracking-wider text-slate-400">
-                        {item.category}
-                      </span>
-                    </div>
-
-                    <h3 className="mt-4 font-heading text-[1.05rem] font-semibold leading-snug text-slate-950 transition-colors group-hover:text-blue-600">
-                      {item.title}
-                    </h3>
-                  </div>
-
-                  <div className="mt-3.5 flex items-center justify-end text-slate-300 transition-colors group-hover:text-blue-500">
-                    <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
-                  </div>
-                </motion.article>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* 5. SOLUTIONS - STICKY HORIZONTAL SCROLL WITH VERTICAL CARDS */}
-      <SolutionsHorizontalSection solutionSections={solutionSections} />
+      {/* 4. SOLUTIONS - INTERACTIVE WINDING ROADMAP JOURNEY */}
+      <RoadmapSolutionsSection solutionSections={solutionSections} />
 
       {/* 6. TESTIMONIALS */}
       <section id="testimonials" className="section-shell">

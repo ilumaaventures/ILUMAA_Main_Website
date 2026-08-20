@@ -21,7 +21,6 @@ function Navbar({ isTechnologyPage }) {
   const navItems = useMemo(() => {
     if (isTechnologyPage) {
       return [
-        { label: "Services", href: "/#services" },
         { label: "Solutions", href: "/#solutions" },
         { label: "Tech", href: "/technology-solutions" },
         { label: "Connect", href: "/#connect" },
@@ -30,7 +29,6 @@ function Navbar({ isTechnologyPage }) {
     }
 
     return [
-      { label: "Services", href: "/#services" },
       { label: "Solutions", href: "/#solutions" },
       { label: "Tech", href: "/technology-solutions" },
       { label: "Connect", href: "/#connect" },
