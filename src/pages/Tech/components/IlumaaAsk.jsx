@@ -19,7 +19,7 @@ const PRESETS = [
     id: "socials",
     question: "Tell me about ILUMAA Socials",
     reply:
-      "• **[ILUMAA Socials](https://ilumaasocialmarketing.vercel.app/)** is a modern social networking platform built for creators, businesses, and communities.\n\nKey Capabilities:\n• **Community Engagement**: Content feeds, media uploads, creator discovery, & post interactions.\n• **Realtime Chat**: Sub-second socket messaging powered by Socket.IO.\n• **Notifications & Media**: Cloudinary media optimization & instant notifications.\n\nStack: React · Node.js · MongoDB · Socket.IO · Cloudinary",
+      "• **[ILUMAA Socials](https://social.ilumaa.com)** is a modern social networking platform built for creators, businesses, and communities.\n\nKey Capabilities:\n• **Community Engagement**: Content feeds, media uploads, creator discovery, & post interactions.\n• **Realtime Chat**: Sub-second socket messaging powered by Socket.IO.\n• **Notifications & Media**: Cloudinary media optimization & instant notifications.\n\nStack: React · Node.js · MongoDB · Socket.IO · Cloudinary",
   },
   {
     id: "ai",

@@ -65,7 +65,7 @@ const projects = [
     stackPills: ["React", "Node.js", "MongoDB", "Socket.IO", "Cloudinary"],
     result: "Supports real-time engagement with thousands of concurrent users",
     impactMetric: "Sub-Second Real-Time Message Latency",
-    url: "https://ilumaasocialmarketing.vercel.app/",
+    url: "https://social.ilumaa.com",
     features: [
       "Sub-Second Real-Time Messaging Powered by Socket.IO",
       "Community Creation, Feeds & High-Res Media Uploads (Cloudinary)",
