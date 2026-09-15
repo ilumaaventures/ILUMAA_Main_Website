@@ -6,7 +6,6 @@ import TrustedBar from "./components/TrustedBar";
 import AboutSection from "./components/AboutSection";
 import ProductsSolutions from "./components/ProductsSolutions";
 import Work from "./components/Work";
-import ServicesSection from "./components/ServicesSection";
 import WhyChooseSection from "./components/WhyChooseSection";
 import ProcessSection from "./components/ProcessSection";
 import ClosingSection from "./components/ClosingSection";
@@ -102,12 +101,13 @@ function TechnologySolutionsPage() {
       />
       <TrustedBar />
       <AboutSection />
-      <div className="mx-auto max-w-[1520px] px-4 py-16 sm:px-6 lg:px-8">
-        <TechTabFolder />
-      </div>
+      <section className="tech-folder-section w-full bg-white pb-16 pt-4 sm:pb-24 sm:pt-6 lg:pb-28 lg:pt-8">
+        <div className="mx-auto max-w-[1520px] px-4 sm:px-6 lg:px-8">
+          <TechTabFolder />
+        </div>
+      </section>
       {/* <ProductsSolutions /> */}
       <Work projects={projects} onSelectProject={setSelectedProjectIndex} />
-      <ServicesSection />
       <WhyChooseSection />
       <ProcessSection />
       {/* <ClosingSection /> */}

@@ -29,7 +29,7 @@ import {
   Zap,
 } from "lucide-react";
 import RoadmapSolutionsSection from "../components/RoadmapSolutionsSection";
-import WhyChooseUsCarousel from "../components/WhyChooseUsCarousel";
+import WhyChooseUsSection from "../components/WhyChooseUsSection";
 
 const whyChooseUs = [
   {
@@ -130,7 +130,7 @@ const solutionSections = [
       "Website & Digital Presence Management",
       "Marketing Automation",
     ],
-    icon: ArrowRight,
+    icon: TrendingUp,
     gradient: "from-teal-600 via-cyan-600 to-blue-600",
     badgeBg: "bg-teal-50 text-teal-700 border-teal-200",
   },
@@ -142,13 +142,19 @@ const solutionSections = [
       "Building high-performing teams and modern workforce ecosystems.",
     items: [
       "Staffing & Executive Hiring",
-      "HR Consulting",
       "Payroll & HRMS Solutions",
-      "Workforce Planning",
+      "Workforce Strategy and Planning",
       "Performance Management",
       "HR Operations & Compliance",
       "Employer Branding",
       "Talent Strategy",
+      "Growth & Expansion Strategy",
+      // "Process Optimization",
+      // "HR consulting",
+      // "Business transformation",
+      // "Organization development",
+      "Startup & Scale-up Consulting",
+      "Business Registration & Structuring",
     ],
     icon: Users,
     gradient: "from-blue-600 via-indigo-600 to-cyan-500",
@@ -213,27 +219,6 @@ const solutionSections = [
     icon: Scale,
     gradient: "from-slate-800 via-blue-900 to-indigo-900",
     badgeBg: "bg-slate-100 text-slate-800 border-slate-300",
-  },
-  {
-    id: "solutions",
-    title: "Solutions",
-    tagline: "End-to-End Delivery",
-    description:
-      "Bringing it all together — integrated, end-to-end solutions tailored to your business objectives.",
-    items: [
-      "Business Registration & Structuring",
-      "Workforce Strategy and Planning",
-      "Growth & Expansion Strategy",
-      "Operational Excellence",
-      "Business Transformation",
-      "Organizational Development",
-      "Process Optimization",
-      "Change Management",
-      "Startup & Scale-up Consulting",
-    ],
-    icon: Handshake,
-    gradient: "from-emerald-600 via-teal-600 to-cyan-600",
-    badgeBg: "bg-emerald-50 text-emerald-700 border-emerald-200",
   },
 ];
 
@@ -329,112 +314,81 @@ function HomePage() {
         <div className="absolute -bottom-24 left-1/2 z-10 h-44 w-[122%] -translate-x-1/2 rounded-[100%] bg-bg-primary" />
       </section>
 
-      {/* 2. WHY CHOOSE US */}
-      <section
-        id="why-choose-us"
-        className="relative z-10 mx-auto max-w-[1720px] px-4 pt-10 sm:px-8 lg:px-12 xl:px-16"
-      >
+      {/* 2. WHY CHOOSE US (Bidirectional Scroll Emerge & Merge Behind Center Pillar) */}
+      <WhyChooseUsSection items={whyChooseUs} />
+
+      {/* 3. OUR APPROACH */}
+      <section id="approach" className="relative z-10 mx-auto max-w-[1720px] px-4 pt-16 sm:px-8 lg:px-12 xl:px-16">
         <div className="section-intro text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.85, y: 12 }}
             whileInView={{ opacity: 1, scale: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.15 }}
+            viewport={{ once: true, amount: 0.15 }}
             transition={{ duration: 0.45 }}
             className="inline-flex items-center gap-2 rounded-full border border-sky-500/20 bg-sky-50/80 px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.2em] text-sky-600 shadow-sm"
           >
             <span className="h-1.5 w-1.5 rounded-full bg-sky-500" />
-            <span>Why Choose Us</span>
+            <span>Our Approach</span>
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.15 }}
+            viewport={{ once: true, amount: 0.15 }}
             transition={{ duration: 0.55, delay: 0.08 }}
             className="section-title text-center"
           >
-            Human Intelligence Meets Intelligent Technology
+            How We Deliver Value
           </motion.h2>
         </div>
 
-        {/* Auto-scrolling + interactive horizontal scrollable cards */}
-        <WhyChooseUsCarousel items={whyChooseUs} />
+        <div className="relative mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {approachSteps.map((step, index) => {
+            const Icon = step.icon;
+            return (
+              <motion.article
+                key={step.title}
+                initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{
+                  duration: 0.55,
+                  delay: index * 0.12,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                whileHover={{
+                  y: -8,
+                  scale: 1.025,
+                  transition: { duration: 0.25, ease: "easeOut" },
+                }}
+                className="group relative flex flex-col justify-between overflow-hidden rounded-[1.8rem] border border-slate-200/80 bg-white p-7 shadow-[0_8px_24px_rgba(15,23,42,0.03)] transition-all duration-300 hover:border-blue-400/50 hover:shadow-[0_24px_50px_rgba(56,189,248,0.16)]"
+              >
+                <div
+                  className={`pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-gradient-to-br ${step.gradient} opacity-0 blur-2xl transition duration-500 group-hover:scale-125 group-hover:opacity-100`}
+                />
 
-        {/* 3. OUR APPROACH */}
-        <div id="approach" className="mt-20">
-          <div className="section-intro text-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.85, y: 12 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.15 }}
-              transition={{ duration: 0.45 }}
-              className="inline-flex items-center gap-2 rounded-full border border-sky-500/20 bg-sky-50/80 px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.2em] text-sky-600 shadow-sm"
-            >
-              <span className="h-1.5 w-1.5 rounded-full bg-sky-500" />
-              <span>Our Approach</span>
-            </motion.div>
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.15 }}
-              transition={{ duration: 0.55, delay: 0.08 }}
-              className="section-title text-center"
-            >
-              How We Deliver Value
-            </motion.h2>
-          </div>
-
-          <div className="relative mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {approachSteps.map((step, index) => {
-              const Icon = step.icon;
-              return (
-                <motion.article
-                  key={step.title}
-                  initial={{ opacity: 0, y: 40, scale: 0.95 }}
-                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                  viewport={{ once: false, amount: 0.15 }}
-                  transition={{
-                    duration: 0.55,
-                    delay: index * 0.12,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  whileHover={{
-                    y: -8,
-                    scale: 1.025,
-                    transition: { duration: 0.25, ease: "easeOut" },
-                  }}
-                  className="group relative flex flex-col justify-between overflow-hidden rounded-[1.8rem] border border-slate-200/80 bg-white p-7 shadow-[0_8px_24px_rgba(15,23,42,0.03)] transition-all duration-300 hover:border-blue-400/50 hover:shadow-[0_24px_50px_rgba(56,189,248,0.16)]"
-                >
-                  <div
-                    className={`pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-gradient-to-br ${step.gradient} opacity-0 blur-2xl transition duration-500 group-hover:scale-125 group-hover:opacity-100`}
-                  />
-
-                  <div>
-                    <div className="flex items-center justify-between">
-                      <motion.div
-                        initial={{ scale: 0.8, opacity: 0 }}
-                        whileInView={{ scale: 1, opacity: 1 }}
-                        viewport={{ once: false, amount: 0.15 }}
-                        transition={{ duration: 0.4, delay: index * 0.12 + 0.15 }}
-                        className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-50 to-cyan-50 text-blue-600 shadow-sm transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-cyan-500 group-hover:text-white group-hover:shadow-[0_8px_20px_rgba(56,189,248,0.35)]"
-                      >
-                        <Icon size={22} className="transition-transform duration-300 group-hover:scale-105" />
-                      </motion.div>
-                      <div className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-50 text-slate-300 opacity-0 transition-all duration-300 group-hover:scale-110 group-hover:bg-blue-50 group-hover:text-blue-600 group-hover:opacity-100">
-                        <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-0.5" />
-                      </div>
-                    </div>
-
-                    <h3 className="mt-5 font-heading text-[1.18rem] font-semibold text-slate-950 transition-colors duration-200 group-hover:text-blue-600">
-                      {step.title}
-                    </h3>
-                    <p className="mt-2.5 text-[13px] leading-6 text-slate-600 transition-colors duration-200 group-hover:text-slate-700">
-                      {step.description}
-                    </p>
+                <div>
+                  <div className="flex items-center justify-between">
+                    <motion.div
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      whileInView={{ scale: 1, opacity: 1 }}
+                      viewport={{ once: true, amount: 0.15 }}
+                      transition={{ duration: 0.4, delay: index * 0.12 + 0.15 }}
+                      className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-50 to-cyan-50 text-blue-600 shadow-sm transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-cyan-500 group-hover:text-white group-hover:shadow-[0_8px_20px_rgba(56,189,248,0.35)]"
+                    >
+                      <Icon size={22} className="transition-transform duration-300 group-hover:scale-105" />
+                    </motion.div>
                   </div>
-                </motion.article>
-              );
-            })}
-          </div>
+
+                  <h3 className="mt-5 font-heading text-[1.18rem] font-semibold text-slate-950 transition-colors duration-200 group-hover:text-blue-600">
+                    {step.title}
+                  </h3>
+                  <p className="mt-2.5 text-[13px] leading-6 text-slate-600 transition-colors duration-200 group-hover:text-slate-700">
+                    {step.description}
+                  </p>
+                </div>
+              </motion.article>
+            );
+          })}
         </div>
       </section>
 
@@ -448,7 +402,7 @@ function HomePage() {
             <motion.div
               initial={{ opacity: 0, scale: 0.85, y: 12 }}
               whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.15 }}
+              viewport={{ once: true, amount: 0.15 }}
               transition={{ duration: 0.45 }}
               className="inline-flex items-center gap-2 rounded-full border border-sky-500/20 bg-sky-50/80 px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.2em] text-sky-600 shadow-sm"
             >
@@ -458,7 +412,7 @@ function HomePage() {
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.15 }}
+              viewport={{ once: true, amount: 0.15 }}
               transition={{ duration: 0.55, delay: 0.08 }}
               className="section-title text-center"
             >
@@ -472,7 +426,7 @@ function HomePage() {
                 key={item.quote}
                 initial={{ opacity: 0, y: 40, scale: 0.96 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: false, amount: 0.15 }}
+                viewport={{ once: true, amount: 0.15 }}
                 transition={{
                   duration: 0.55,
                   delay: index * 0.12,
@@ -519,7 +473,7 @@ function HomePage() {
           <motion.div
             initial={{ opacity: 0, y: 50, scale: 0.95 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: false, amount: 0.15 }}
+            viewport={{ once: true, amount: 0.15 }}
             transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
             className="relative overflow-hidden rounded-[2.8rem] bg-gradient-to-br from-slate-950 via-[#070e1b] to-[#0d1d36] px-8 py-14 text-white shadow-[0_30px_90px_rgba(7,14,27,0.4)] sm:px-12 sm:py-18 lg:px-16"
           >

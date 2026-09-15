@@ -45,7 +45,7 @@ function Work({ projects, onSelectProject }) {
           gsap.to(card, {
             rotateY: x * 12,
             rotateX: -y * 12,
-            scale: 1.02,
+            scale: 1,
             duration: 0.4,
             ease: "power2.out",
           });
