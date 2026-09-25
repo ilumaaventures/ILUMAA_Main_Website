@@ -6,21 +6,80 @@ import {
   MapPin,
   Phone,
 } from "lucide-react";
+import { getMainUrl, getTechUrl } from "../utils/domains";
 
 function Footer({ isTechnologyPage }) {
   const logoSrc = `${import.meta.env.BASE_URL}ilumaa_logo.png`;
+  const techUrl = getTechUrl();
+  const mainUrl = getMainUrl();
 
   const quickLinks = isTechnologyPage
     ? [
-        { label: "Home", href: "/" },
-        { label: "Tech", href: "/technology-solutions" },
-        { label: "Connect", href: "/#connect" },
+        { label: "Home", href: mainUrl },
+        { label: "Learning", href: `${mainUrl}/learning` },
+        { label: "Tech", href: techUrl },
+        { label: "Connect", href: `${mainUrl}#connect` },
       ]
     : [
+        { label: "Home", href: "/" },
+        { label: "Learning", href: "/learning" },
         { label: "Solutions", href: "/#solutions" },
-        { label: "Tech", href: "/technology-solutions" },
+        { label: "Tech", href: techUrl },
         { label: "Connect", href: "/#connect" },
       ];
+
+  const handleFooterNav = (event, href) => {
+    if (typeof window === "undefined") return;
+
+    if (href.startsWith("http://") || href.startsWith("https://")) {
+      return;
+    }
+
+    if (href === "/learning") {
+      event.preventDefault();
+      if (window.location.pathname !== "/learning") {
+        window.history.pushState(null, "", "/learning");
+        window.dispatchEvent(new Event("popstate"));
+      }
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    if (href === "/") {
+      event.preventDefault();
+      if (window.location.pathname !== "/" && window.location.pathname !== "") {
+        window.history.pushState(null, "", "/");
+        window.dispatchEvent(new Event("popstate"));
+      }
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    if (href.startsWith("/#") || href.startsWith("#")) {
+      const targetId = href.replace(/^\/?#/, "");
+      if (window.location.pathname === "/" || window.location.pathname === "") {
+        event.preventDefault();
+        const el = document.getElementById(targetId);
+        if (el) {
+          window.history.pushState(null, "", `#${targetId}`);
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+          return;
+        }
+      }
+      if (window.location.pathname !== "/") {
+        event.preventDefault();
+        window.history.pushState(null, "", `/#${targetId}`);
+        window.dispatchEvent(new Event("popstate"));
+        setTimeout(() => {
+          const el = document.getElementById(targetId);
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, 120);
+        return;
+      }
+    }
+  };
 
   const chips = [
     "Human Intelligence",
@@ -32,11 +91,15 @@ function Footer({ isTechnologyPage }) {
   ];
 
   return (
-    <footer className="border-t border-slate-200/80 bg-white">
+    <footer className="border-t border-slate-200/80 bg-white w-full max-w-full overflow-hidden">
       <div className="mx-auto max-w-[1520px] px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-[1.2fr_0.75fr_0.85fr_0.7fr]">
           <div>
-            <a href="/" className="inline-block">
+            <a
+              href={isTechnologyPage ? mainUrl : "/"}
+              onClick={(e) => handleFooterNav(e, isTechnologyPage ? mainUrl : "/")}
+              className="inline-block"
+            >
               <img
                 src={logoSrc}
                 alt="ILUMAA"
@@ -68,6 +131,7 @@ function Footer({ isTechnologyPage }) {
                 <a
                   key={item.label}
                   href={item.href}
+                  onClick={(e) => handleFooterNav(e, item.href)}
                   className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-600 transition hover:translate-x-1 hover:text-blue-600"
                 >
                   {item.label}

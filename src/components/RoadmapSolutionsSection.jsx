@@ -248,11 +248,11 @@ export default function RoadmapSolutionsSection({ solutionSections }) {
   return (
     <section
       id="solutions"
-      className="relative z-10 mx-auto max-w-[1720px] px-4 py-20 sm:px-8 lg:px-12 xl:px-16"
+      className="relative z-10 mx-auto max-w-[1720px] px-4 pt-16 sm:pt-20 pb-4 sm:pb-6 sm:px-8 lg:px-12 xl:px-16 w-full overflow-hidden"
     >
       {/* Background Ambient Glows */}
-      <div className="pointer-events-none absolute left-1/4 top-1/3 h-[450px] w-[450px] -translate-x-1/2 rounded-full bg-cyan-500/5 blur-[120px]" />
-      <div className="pointer-events-none absolute right-1/4 bottom-1/3 h-[450px] w-[450px] translate-x-1/2 rounded-full bg-blue-600/5 blur-[120px]" />
+      <div className="pointer-events-none absolute left-1/4 top-1/3 h-[280px] w-[280px] sm:h-[450px] sm:w-[450px] -translate-x-1/2 rounded-full bg-cyan-500/5 blur-[100px]" />
+      <div className="pointer-events-none absolute right-0 bottom-1/3 h-[280px] w-[280px] sm:h-[450px] sm:w-[450px] rounded-full bg-blue-600/5 blur-[100px]" />
 
       {/* Section Header with Navigation Controls */}
       <div className="flex flex-col items-center justify-between gap-6 text-center sm:flex-row sm:text-left">
@@ -273,35 +273,35 @@ export default function RoadmapSolutionsSection({ solutionSections }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.55, delay: 0.08 }}
-            className="section-title mt-3 text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl lg:text-5xl"
+            className="section-title mt-3 text-slate-950"
           >
             Comprehensive Solutions Across Every Dimension
           </motion.h2>
         </div>
 
-        {/* Manual Left / Right Navigation Buttons */}
+        {/* Manual Left / Right Navigation Controls */}
         <div className="flex items-center gap-2">
           <button
             type="button"
             onClick={() => scrollByAmount("prev")}
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition-all duration-200 hover:border-blue-400 hover:bg-blue-50 hover:text-blue-600 hover:scale-105 active:scale-95"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition-all duration-200 hover:border-blue-400 hover:bg-blue-50 hover:text-blue-600 hover:scale-105 active:scale-95"
             aria-label="Previous solution card"
           >
-            <ArrowLeft size={18} />
+            <ArrowLeft size={16} />
           </button>
           <button
             type="button"
             onClick={() => scrollByAmount("next")}
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition-all duration-200 hover:border-blue-400 hover:bg-blue-50 hover:text-blue-600 hover:scale-105 active:scale-95"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition-all duration-200 hover:border-blue-400 hover:bg-blue-50 hover:text-blue-600 hover:scale-105 active:scale-95"
             aria-label="Next solution card"
           >
-            <ArrowRight size={18} />
+            <ArrowRight size={16} />
           </button>
         </div>
       </div>
 
       {/* SINGLE HORIZONTAL ROW MOVING CARDS */}
-      <div className="relative mt-12 -mx-4 sm:-mx-8 lg:-mx-12 xl:-mx-16 py-4 select-none">
+      <div className="relative mt-12 -mx-4 sm:-mx-8 lg:-mx-12 xl:-mx-16 py-2 select-none overflow-hidden">
         {/* Left & Right Gradient Edge Masks for Seamless Blending */}
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 sm:w-24 bg-gradient-to-r from-bg-primary via-bg-primary/80 to-transparent" />
         <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 sm:w-24 bg-gradient-to-l from-bg-primary via-bg-primary/80 to-transparent" />
@@ -317,7 +317,7 @@ export default function RoadmapSolutionsSection({ solutionSections }) {
           onWheel={handleWheel}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
-          className={`flex gap-6 overflow-x-auto no-scrollbar px-6 sm:px-12 py-3 ${
+          className={`flex gap-4 sm:gap-5 overflow-x-auto no-scrollbar px-6 sm:px-12 py-2.5 ${
             isDragging ? "cursor-grabbing" : "cursor-grab"
           }`}
           style={{ WebkitOverflowScrolling: "touch" }}
@@ -329,7 +329,7 @@ export default function RoadmapSolutionsSection({ solutionSections }) {
             return (
               <article
                 key={`${solution.id || solution.title}-${index}`}
-                className={`group relative flex w-[320px] sm:w-[380px] md:w-[420px] shrink-0 flex-col justify-between overflow-hidden rounded-[2rem] border border-slate-200/90 bg-white p-7 shadow-[0_10px_30px_rgba(15,23,42,0.04)] transition-all duration-300 hover:-translate-y-1.5 sm:p-8 ${theme.borderGlow} ${theme.shadowGlow}`}
+                className={`group relative flex w-[290px] sm:w-[330px] md:w-[360px] shrink-0 flex-col justify-between overflow-hidden rounded-[1.4rem] border border-slate-200/90 bg-white p-5 sm:p-6 shadow-[0_8px_24px_rgba(15,23,42,0.04)] transition-all duration-300 hover:-translate-y-1.5 ${theme.borderGlow} ${theme.shadowGlow}`}
               >
                 {/* Top Accent Gradient Bar */}
                 <div
@@ -347,7 +347,7 @@ export default function RoadmapSolutionsSection({ solutionSections }) {
                   {/* Header Row: Tagline Pill & Icon */}
                   <div className="flex items-start justify-between gap-3">
                     <span
-                      className={`inline-flex w-fit items-center gap-1.5 rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] shadow-sm ${theme.tagBg}`}
+                      className={`inline-flex w-fit items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-[9.5px] font-bold uppercase tracking-[0.14em] shadow-sm ${theme.tagBg}`}
                     >
                       <span
                         className={`h-1.5 w-1.5 rounded-full ${theme.dotColor}`}
@@ -356,35 +356,35 @@ export default function RoadmapSolutionsSection({ solutionSections }) {
                     </span>
 
                     <div
-                      className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl ${theme.iconBg} shadow-md transition-all duration-300 group-hover:scale-110 group-hover:rotate-3`}
+                      className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${theme.iconBg} shadow-sm transition-all duration-300 group-hover:scale-110 group-hover:rotate-3`}
                     >
-                      <Icon size={20} />
+                      <Icon size={17} />
                     </div>
                   </div>
 
                   {/* Title & Description */}
-                  <h3 className="mt-5 font-heading text-xl font-bold tracking-tight text-slate-950 transition-colors duration-200 group-hover:text-blue-600 sm:text-[1.3rem]">
+                  <h3 className="mt-3.5 font-heading text-[1.02rem] sm:text-[1.08rem] font-bold tracking-tight text-slate-950 transition-colors duration-200 group-hover:text-blue-600">
                     {solution.title}
                   </h3>
 
-                  <p className="mt-2.5 text-[13.5px] leading-relaxed text-slate-600">
+                  <p className="mt-1.5 text-[12px] sm:text-[12.5px] leading-relaxed text-slate-600">
                     {solution.description}
                   </p>
 
                   {/* Key Capabilities / Offerings */}
-                  <div className="mt-6 border-t border-slate-100 pt-5">
-                    <h4 className="text-[11px] font-bold uppercase tracking-[0.16em] text-slate-400">
+                  <div className="mt-4 border-t border-slate-100 pt-3.5">
+                    <h4 className="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-400">
                       Capabilities &amp; Deliverables
                     </h4>
 
-                    <div className="mt-3 flex flex-wrap gap-1.5">
+                    <div className="mt-2.5 flex flex-wrap gap-1.5">
                       {solution.items.map((item, idx) => (
                         <span
                           key={idx}
-                          className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200/80 bg-slate-50/80 px-2.5 py-1 text-[12px] font-medium text-slate-700 transition-all duration-150 hover:border-slate-300 hover:bg-white hover:text-slate-900"
+                          className="inline-flex items-center gap-1 rounded-md border border-slate-200/80 bg-slate-50/80 px-2 py-0.5 text-[11px] font-medium text-slate-700 transition-all duration-150 hover:border-slate-300 hover:bg-white hover:text-slate-900"
                         >
                           <CheckCircle2
-                            size={12}
+                            size={11}
                             className="shrink-0 text-sky-500 transition-transform duration-200 group-hover:scale-110"
                           />
                           <span>{item}</span>

@@ -5,12 +5,17 @@
 
 @layer base {
   html {
-    scroll-behavior: auto;
+    scroll-behavior: smooth;
+    overflow-x: clip;
+    width: 100%;
+    max-width: 100vw;
   }
 
   body {
     margin: 0;
     min-width: 320px;
+    width: 100%;
+    max-width: 100vw;
     font-family: "Inter", sans-serif;
     background-color: #EEF4FB;
     background-image:
@@ -22,7 +27,8 @@
       linear-gradient(180deg, #EEF4FB 0%, #E7EFF9 20%, #DFEAF7 45%, #E2ECF8 70%, #D6E4F5 100%);
     background-attachment: scroll;
     color: #0f172a;
-    overflow-x: hidden;
+    overflow-x: clip;
+    position: relative;
   }
 
   * {
@@ -47,8 +53,18 @@
   }
 }
 
+#why-choose-us,
+#solutions,
+#approach,
+#testimonials,
+#connect {
+  scroll-margin-top: 80px;
+}
+
 .site-shell {
   position: relative;
+  width: 100%;
+  max-width: 100vw;
 }
 
 .site-shell::before {
@@ -103,9 +119,9 @@
 .section-title {
   margin-top: 0.75rem;
   font-family: "Outfit", sans-serif;
-  font-size: 1.95rem;
+  font-size: 1.65rem;
   font-weight: 700;
-  line-height: 1.14;
+  line-height: 1.2;
   color: #0f172a;
   letter-spacing: -0.02em;
 }
@@ -232,7 +248,7 @@
   }
 
   .section-title {
-    font-size: 2.15rem;
+    font-size: 1.85rem;
   }
 
   .section-copy {
@@ -247,7 +263,7 @@
   }
 
   .section-title {
-    font-size: 2.45rem;
+    font-size: 2.1rem;
   }
 }
 
@@ -270,6 +286,27 @@
   scrollbar-width: none;
 }
 
+@keyframes marqueeContinuous {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-marquee-continuous {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  animation: marqueeContinuous 36s linear infinite;
+  will-change: transform;
+}
+
+.marquee-pause-hover:hover .animate-marquee-continuous {
+  animation-play-state: paused !important;
+}
+
 @keyframes marqueeScroll {
   0% {
     transform: translate3d(0, 0, 0);
@@ -289,5 +326,41 @@
 .animate-marquee-track:hover {
   animation-play-state: paused !important;
 }
+
+@keyframes shimmerSweep {
+  0% { transform: translateX(-150%) skewX(-20deg); }
+  100% { transform: translateX(250%) skewX(-20deg); }
+}
+
+.shimmer-btn-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-btn-effect::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transform: translateX(-150%) skewX(-20deg);
+  pointer-events: none;
+}
+
+.shimmer-btn-effect:hover::after {
+  animation: shimmerSweep 1.1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 15px rgba(56, 189, 248, 0.2); }
+  50% { box-shadow: 0 0 28px rgba(77, 124, 255, 0.38); }
+}
+
+.pulse-glow {
+  animation: pulseGlow 3.5s ease-in-out infinite;
+}
+
 
 

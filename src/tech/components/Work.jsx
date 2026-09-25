@@ -125,7 +125,6 @@ function Work({ projects, onSelectProject }) {
                 {/* Impact Metric Badge */}
                 {proj.impactMetric && (
                   <div className="project-impact-badge">
-                    <Sparkles className="h-3.5 w-3.5 text-cyan-400 shrink-0" />
                     <span>{proj.impactMetric}</span>
                   </div>
                 )}

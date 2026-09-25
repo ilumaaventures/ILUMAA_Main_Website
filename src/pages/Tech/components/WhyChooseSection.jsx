@@ -5,7 +5,7 @@ import {
   Users,
   Cog,
   Zap,
-  Sparkles,
+  Bot,
   ListChecks,
   Handshake,
 } from "lucide-react";
@@ -51,7 +51,7 @@ const reasons = [
     title: "AI-Driven Intelligence",
     titleLines: ["AI-Driven", "Intelligence"],
     desc: "Practical AI solutions that improve efficiency and unlock new business opportunities.",
-    icon: Sparkles,
+    icon: Bot,
     rotY: -9,
     tz: 0,
     ty: 0,
