@@ -45,7 +45,7 @@ function Work({ projects, onSelectProject }) {
           gsap.to(card, {
             rotateY: x * 12,
             rotateX: -y * 12,
-            scale: 1.02,
+            scale: 1,
             duration: 0.4,
             ease: "power2.out",
           });
@@ -125,7 +125,6 @@ function Work({ projects, onSelectProject }) {
                 {/* Impact Metric Badge */}
                 {proj.impactMetric && (
                   <div className="project-impact-badge">
-                    <Sparkles className="h-3.5 w-3.5 text-cyan-400 shrink-0" />
                     <span>{proj.impactMetric}</span>
                   </div>
                 )}

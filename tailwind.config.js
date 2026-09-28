@@ -4,8 +4,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        "bg-primary": "#F6FAFF",
-        "bg-secondary": "#EAF2FF",
+        "bg-primary": "#EEF4FB",
+        "bg-secondary": "#E2EDF8",
         "bg-card": "#101D38",
         "accent-blue": "#4D7CFF",
         "accent-cyan": "#38BDF8",
