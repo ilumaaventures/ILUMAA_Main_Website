@@ -265,11 +265,13 @@ Destination: ${ACCELERATOR_TARGET_EMAIL}
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[9999] pointer-events-none flex flex-col justify-end items-end p-2 sm:p-4 md:p-6">
+    <div className="fixed inset-0 z-[9999] pointer-events-none flex flex-col justify-end items-center sm:items-end p-2 sm:p-4 md:p-6">
       {/* Background backdrop on full mobile or maximized view */}
-      {(isMaximized || (!isMinimized && window.innerWidth < 640)) && (
+      {!isMinimized && (
         <div
-          className="fixed inset-0 bg-slate-950/40 backdrop-blur-sm pointer-events-auto transition-opacity"
+          className={`fixed inset-0 bg-slate-950/50 backdrop-blur-sm pointer-events-auto transition-opacity z-0 ${
+            isMaximized ? "block" : "block sm:hidden"
+          }`}
           onClick={() => !isMinimized && onClose()}
         />
       )}
@@ -280,7 +282,7 @@ Destination: ${ACCELERATOR_TARGET_EMAIL}
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 20, opacity: 0 }}
-          className="pointer-events-auto w-full max-w-[320px] sm:max-w-[360px] bg-slate-900 text-white rounded-t-xl shadow-2xl border border-slate-700 overflow-hidden cursor-pointer"
+          className="relative z-10 pointer-events-auto w-full max-w-[320px] sm:max-w-[360px] bg-slate-900 text-white rounded-t-xl shadow-2xl border border-slate-700 overflow-hidden cursor-pointer"
           onClick={() => setIsMinimized(false)}
         >
           <div className="flex items-center justify-between px-4 py-2.5 bg-gradient-to-r from-slate-900 to-slate-800">
@@ -323,10 +325,11 @@ Destination: ${ACCELERATOR_TARGET_EMAIL}
           animate={{ y: 0, opacity: 1, scale: 1 }}
           exit={{ y: 40, opacity: 0, scale: 0.95 }}
           transition={{ duration: 0.22, ease: "easeOut" }}
-          className={`pointer-events-auto flex flex-col bg-white rounded-xl shadow-[0_20px_60px_rgba(15,23,42,0.35)] border border-slate-200/90 overflow-hidden w-full transition-all duration-200 ${isMaximized
-            ? "fixed inset-2 sm:inset-6 md:inset-10 max-w-4xl mx-auto h-[calc(100vh-2rem)] sm:h-[calc(100vh-3rem)] md:h-[calc(100vh-5rem)] z-[10000]"
-            : "max-w-[620px] h-[580px] sm:h-[620px] max-h-[90vh]"
-            }`}
+          className={`relative z-10 pointer-events-auto flex flex-col bg-white rounded-xl shadow-[0_20px_60px_rgba(15,23,42,0.35)] border border-slate-200/90 overflow-hidden w-full transition-all duration-200 ${
+            isMaximized
+              ? "!fixed inset-2 sm:inset-6 md:inset-10 max-w-4xl mx-auto h-[calc(100vh-2rem)] sm:h-[calc(100vh-3rem)] md:h-[calc(100vh-5rem)] !z-30"
+              : "max-w-[620px] h-[580px] sm:h-[620px] max-h-[90vh]"
+          }`}
         >
           {/* 1. Gmail Window Header */}
           <div className="flex items-center justify-between px-4 py-2.5 bg-slate-900 text-white select-none shrink-0 border-b border-slate-800">

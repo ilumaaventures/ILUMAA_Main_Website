@@ -367,6 +367,7 @@ export default function LearningPage() {
 
   const openApplyModal = (programmeTitle = "") => {
     setSelectedProgramme(programmeTitle);
+    setSelectedDetailProgramme(null);
     setIsApplyOpen(true);
   };
 
@@ -1142,7 +1143,7 @@ export default function LearningPage() {
           9. FLOATING BOTTOM QUICK ACTION BAR (Visible on scroll)
          ========================================================================= */}
       <AnimatePresence>
-        {showStickyBar && (
+        {showStickyBar && !isApplyOpen && !selectedDetailProgramme && (
           <motion.div
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
