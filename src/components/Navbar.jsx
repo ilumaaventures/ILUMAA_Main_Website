@@ -28,42 +28,38 @@ function Navbar({ isTechnologyPage, pathname = "" }) {
   const desktopNavItems = useMemo(() => {
     if (isTechnologyPage) {
       return [
-        { label: "Home", href: mainUrl },
-        { label: "Learning", href: learningUrl },
-        { label: "Solutions", href: `${mainUrl}#solutions` },
         { label: "Tech", href: techUrl },
-        { label: "Connect", href: `${mainUrl}#connect` },
+        { label: "Learning", href: learningUrl },
+        { label: "Solutions", href: "#projects" },
+        { label: "Connect", href: "#connect" },
       ];
     }
     return [
-      { label: "Home", href: "/" },
-      { label: "Learning", href: learningUrl },
-      { label: "Solutions", href: "/#solutions" },
       { label: "Tech", href: techUrl },
-      { label: "Connect", href: "/#connect" },
+      { label: "Learning", href: learningUrl },
+      { label: "Solutions", href: `${techUrl}#projects` },
+      { label: "Connect", href: `${techUrl}#connect` },
     ];
-  }, [isTechnologyPage, mainUrl, techUrl, learningUrl]);
+  }, [isTechnologyPage, techUrl, learningUrl]);
 
   const mobileNavItems = useMemo(() => {
     if (isTechnologyPage) {
       return [
-        { label: "Home", href: mainUrl },
-        { label: "Learning", href: learningUrl },
-        { label: "Solutions", href: `${mainUrl}#solutions` },
         { label: "Tech", href: techUrl },
-        { label: "Connect", href: `${mainUrl}#connect` },
+        { label: "Learning", href: learningUrl },
+        { label: "About", href: "#about" },
+        { label: "Solutions", href: "#projects" },
+        { label: "Why Choose Us", href: "#why-choose" },
+        { label: "Connect", href: "#connect" },
       ];
     }
     return [
-      { label: "Home", href: "/" },
-      { label: "Learning", href: learningUrl },
-      { label: "Why Choose Us", href: "/#why-choose-us" },
-      { label: "Our Solutions", href: "/#solutions" },
-      { label: "Our Approach", href: "/#approach" },
       { label: "Tech", href: techUrl },
-      { label: "Connect", href: "/#connect" },
+      { label: "Learning", href: learningUrl },
+      { label: "Solutions", href: `${techUrl}#projects` },
+      { label: "Connect", href: `${techUrl}#connect` },
     ];
-  }, [isTechnologyPage, mainUrl, techUrl, learningUrl]);
+  }, [isTechnologyPage, techUrl, learningUrl]);
 
   const handleNav = (event, href, isMobile = false) => {
     if (typeof window === "undefined") {
@@ -74,8 +70,14 @@ function Navbar({ isTechnologyPage, pathname = "" }) {
       setIsOpen(false);
     }
 
-    // External link redirect (e.g. https://tech.ilumaa.com)
+    // External link redirect (e.g. https://tech.ilumaa.com or https://learning.ilumaa.com)
     if (href.startsWith("http://") || href.startsWith("https://")) {
+      // If clicking Tech while already on the Tech page, smooth scroll to top
+      if (isTechnologyPage && (href === techUrl || href === `${techUrl}/`)) {
+        event.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
       return;
     }
 
@@ -96,7 +98,8 @@ function Navbar({ isTechnologyPage, pathname = "" }) {
       return;
     }
 
-    // 1. HOME BUTTON - Direct smooth navigation
+    /*
+    // 1. HOME BUTTON - Temporarily commented out: Home is bypassed in favor of Tech
     if (href === "/") {
       event.preventDefault();
       if (window.location.pathname !== "/" && window.location.pathname !== "") {
@@ -112,37 +115,23 @@ function Navbar({ isTechnologyPage, pathname = "" }) {
       }
       return;
     }
+    */
 
     // 2. CONNECT / SOLUTIONS / SECTIONS - Direct smooth navigation
     if (href.startsWith("/#") || href.startsWith("#")) {
       const targetId = href.replace(/^\/?#/, "");
 
-      if (window.location.pathname === "/" || window.location.pathname === "") {
+      const el = document.getElementById(targetId);
+      if (el) {
         event.preventDefault();
-        const el = document.getElementById(targetId);
-        if (el) {
-          window.history.pushState(null, "", `#${targetId}`);
-          if (isMobile) {
-            setTimeout(() => {
-              el.scrollIntoView({ behavior: "smooth", block: "start" });
-            }, 80);
-          } else {
+        window.history.pushState(null, "", `#${targetId}`);
+        if (isMobile) {
+          setTimeout(() => {
             el.scrollIntoView({ behavior: "smooth", block: "start" });
-          }
-          return;
+          }, 80);
+        } else {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
         }
-      }
-
-      if (window.location.pathname !== "/") {
-        event.preventDefault();
-        window.history.pushState(null, "", `/#${targetId}`);
-        window.dispatchEvent(new Event("popstate"));
-        setTimeout(() => {
-          const el = document.getElementById(targetId);
-          if (el) {
-            el.scrollIntoView({ behavior: "smooth", block: "start" });
-          }
-        }, 120);
         return;
       }
     }
@@ -153,18 +142,14 @@ function Navbar({ isTechnologyPage, pathname = "" }) {
       return;
     }
 
+    event.preventDefault();
+    // When someone clicks on the logo, redirect to the Tech homepage (tech.ilumaa.com)
     if (isTechnologyPage) {
-      event.preventDefault();
-      window.location.href = mainUrl;
+      window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
 
-    event.preventDefault();
-    if (window.location.pathname !== "/" && window.location.pathname !== "") {
-      window.history.pushState(null, "", "/");
-      window.dispatchEvent(new Event("popstate"));
-    }
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.location.href = techUrl;
   };
 
   return (
@@ -185,7 +170,7 @@ function Navbar({ isTechnologyPage, pathname = "" }) {
     >
       <div className="mx-auto flex w-full max-w-[1520px] items-center justify-between gap-3 px-4 py-2 sm:px-6 sm:py-2.5 lg:px-8">
         <a
-          href={isTechnologyPage ? mainUrl : "/"}
+          href={techUrl}
           onClick={handleLogoClick}
           className="group flex items-center gap-2 transition hover:opacity-90"
         >
@@ -201,13 +186,10 @@ function Navbar({ isTechnologyPage, pathname = "" }) {
           {desktopNavItems.map((item) => {
             const isLearningActive = currentPath.startsWith("/learning");
             const active = isTechnologyPage
-              ? item.label === "Tech"
+              ? item.label === "Tech" && !isLearningActive && (typeof window === "undefined" || !window.location.hash)
               : item.href === "/learning"
               ? isLearningActive
-              : !isLearningActive &&
-                item.href === "/" &&
-                (currentPath === "/" || currentPath === "") &&
-                (typeof window === "undefined" || !window.location.hash);
+              : item.label === "Tech";
 
             return (
               <a
@@ -229,8 +211,8 @@ function Navbar({ isTechnologyPage, pathname = "" }) {
         {/* Desktop CTA */}
         <div className="hidden lg:flex">
           <a
-            href={isTechnologyPage ? `${mainUrl}#connect` : "/#connect"}
-            onClick={(e) => handleNav(e, isTechnologyPage ? `${mainUrl}#connect` : "/#connect", false)}
+            href={isTechnologyPage ? "#connect" : `${techUrl}#connect`}
+            onClick={(e) => handleNav(e, isTechnologyPage ? "#connect" : `${techUrl}#connect`, false)}
             className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-accent-blue to-accent-cyan px-4 py-1.5 text-[10.5px] font-bold uppercase tracking-[0.16em] text-white shadow-[0_3px_10px_rgba(77,124,255,0.25)] transition hover:brightness-105"
           >
             Contact Us
@@ -270,8 +252,8 @@ function Navbar({ isTechnologyPage, pathname = "" }) {
                 </a>
               ))}
               <a
-                href={isTechnologyPage ? `${mainUrl}#connect` : "/#connect"}
-                onClick={(e) => handleNav(e, isTechnologyPage ? `${mainUrl}#connect` : "/#connect", true)}
+                href={isTechnologyPage ? "#connect" : `${techUrl}#connect`}
+                onClick={(e) => handleNav(e, isTechnologyPage ? "#connect" : `${techUrl}#connect`, true)}
                 className="btn-primary mt-1 w-full justify-center py-2.5 text-xs"
               >
                 Contact Us

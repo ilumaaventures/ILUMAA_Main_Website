@@ -147,19 +147,19 @@
   color: #0284c7;
 }
 .tech-page-wrapper .beat h1 {
-  font-size: clamp(38px, 6.5vw, 84px);
-  color: #0f172a;
+  font-size: clamp(34px, 5.8vw, 76px);
+  color: #ffffff;
   font-weight: 800;
   letter-spacing: -0.03em;
-  text-shadow: 0 2px 20px rgba(255, 255, 255, 0.95);
+  text-shadow: 0 4px 28px rgba(0, 0, 0, 0.75);
 }
 .tech-page-wrapper .beat h2,
 .tech-page-wrapper .beat .hero-subtitle {
-  font-size: clamp(17px, 2.2vw, 22px);
-  color: #334155;
+  font-size: clamp(16px, 2vw, 21px);
+  color: #e2e8f0;
   max-width: 800px;
-  font-weight: 600;
-  text-shadow: 0 1px 12px rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.65);
 }
 .tech-page-wrapper .btn-primary {
   pointer-events: auto;
@@ -251,15 +251,19 @@
 
 /* ---------- Trusted Bar ---------- */
 .tech-page-wrapper .trusted-bar {
-  background: var(--ink);
-  padding: 20px 24px;
+  background: #070e1b;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 18px 24px;
   text-align: center;
+  position: relative;
+  z-index: 10;
 }
 .tech-page-wrapper .trusted-bar p {
   font-size: 14px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.65);
-  letter-spacing: 0.01em;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 0.02em;
 }
 
 /* ---------- Section Shared Utilities ---------- */
@@ -836,18 +840,16 @@
   height: 1.5px;
   background: linear-gradient(
     90deg,
-    transparent 0%,
-    rgba(37, 99, 235, 0.3) 35%,
-    rgba(96, 165, 250, 0.6) 50%,
-    rgba(37, 99, 235, 0.3) 65%,
-    transparent 100%
+    transparent,
+    rgba(59, 130, 246, 0.4),
+    transparent
   );
   opacity: 0.6;
+  transition: opacity 0.35s ease;
 }
 
-/* Icon Container */
-.tech-page-wrapper .why-icon-pill,
-.tech-page-wrapper .why-card-icon-wrap {
+/* Icon Circular Pill */
+.tech-page-wrapper .why-icon-pill {
   width: 46px;
   height: 46px;
   border-radius: 50%;
@@ -1231,7 +1233,7 @@
 }
 .tech-page-wrapper .projects .eyebrow {
   display: block;
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 600;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -1250,7 +1252,7 @@
   -webkit-text-fill-color: transparent;
 }
 .tech-page-wrapper .projects p {
-  font-size: clamp(14px, 1.5vw, 16px);
+  font-size: clamp(14px, 1.5vw, 16.5px);
   color: rgba(255, 255, 255, 0.6);
   line-height: 1.6;
 }

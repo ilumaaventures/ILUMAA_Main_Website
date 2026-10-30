@@ -6,32 +6,38 @@ import {
   MapPin,
   Phone,
 } from "lucide-react";
-import { getMainUrl, getTechUrl } from "../utils/domains";
+import { getMainUrl, getTechUrl, getLearningUrl } from "../utils/domains";
 
 function Footer({ isTechnologyPage }) {
   const logoSrc = `${import.meta.env.BASE_URL}ilumaa_logo.png`;
   const techUrl = getTechUrl();
   const mainUrl = getMainUrl();
+  const learningUrl = getLearningUrl();
 
   const quickLinks = isTechnologyPage
     ? [
-        { label: "Home", href: mainUrl },
-        { label: "Learning", href: `${mainUrl}/learning` },
         { label: "Tech", href: techUrl },
-        { label: "Connect", href: `${mainUrl}#connect` },
+        { label: "Learning", href: learningUrl },
+        { label: "Solutions", href: "#projects" },
+        { label: "Connect", href: "#connect" },
       ]
     : [
-        { label: "Home", href: "/" },
-        { label: "Learning", href: "/learning" },
-        { label: "Solutions", href: "/#solutions" },
         { label: "Tech", href: techUrl },
-        { label: "Connect", href: "/#connect" },
+        { label: "Learning", href: "/learning" },
+        { label: "Solutions", href: `${techUrl}#projects` },
+        { label: "Connect", href: `${techUrl}#connect` },
       ];
 
   const handleFooterNav = (event, href) => {
     if (typeof window === "undefined") return;
 
     if (href.startsWith("http://") || href.startsWith("https://")) {
+      // If clicking Tech while already on the Tech page, smooth scroll to top
+      if (isTechnologyPage && (href === techUrl || href === `${techUrl}/`)) {
+        event.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
       return;
     }
 
@@ -45,6 +51,8 @@ function Footer({ isTechnologyPage }) {
       return;
     }
 
+    /*
+    // Temporarily commented out Home navigation
     if (href === "/") {
       event.preventDefault();
       if (window.location.pathname !== "/" && window.location.pathname !== "") {
@@ -54,28 +62,15 @@ function Footer({ isTechnologyPage }) {
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
+    */
 
     if (href.startsWith("/#") || href.startsWith("#")) {
       const targetId = href.replace(/^\/?#/, "");
-      if (window.location.pathname === "/" || window.location.pathname === "") {
+      const el = document.getElementById(targetId);
+      if (el) {
         event.preventDefault();
-        const el = document.getElementById(targetId);
-        if (el) {
-          window.history.pushState(null, "", `#${targetId}`);
-          el.scrollIntoView({ behavior: "smooth", block: "start" });
-          return;
-        }
-      }
-      if (window.location.pathname !== "/") {
-        event.preventDefault();
-        window.history.pushState(null, "", `/#${targetId}`);
-        window.dispatchEvent(new Event("popstate"));
-        setTimeout(() => {
-          const el = document.getElementById(targetId);
-          if (el) {
-            el.scrollIntoView({ behavior: "smooth", block: "start" });
-          }
-        }, 120);
+        window.history.pushState(null, "", `#${targetId}`);
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
         return;
       }
     }
@@ -96,8 +91,13 @@ function Footer({ isTechnologyPage }) {
         <div className="grid gap-10 lg:grid-cols-[1.2fr_0.75fr_0.85fr_0.7fr]">
           <div>
             <a
-              href={isTechnologyPage ? mainUrl : "/"}
-              onClick={(e) => handleFooterNav(e, isTechnologyPage ? mainUrl : "/")}
+              href={techUrl}
+              onClick={(e) => {
+                if (isTechnologyPage) {
+                  e.preventDefault();
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }
+              }}
               className="inline-block"
             >
               <img

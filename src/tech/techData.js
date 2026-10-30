@@ -15,42 +15,9 @@ import {
 
 export const techTracks = [
   {
-    id: "products-platforms",
-    tabLabel: "Products & Platforms",
-    shortTag: "01 / Digital Engineering",
-    title: "PRODUCTS & PLATFORM DEVELOPMENT",
-    subtitle: "Building Scalable Digital Platforms with Human-Centered Innovation",
-    summary:
-      "We collaborate with businesses, entrepreneurs and institutions to conceptualize, develop and scale technology-driven platforms tailored to modern market needs.",
-    detail:
-      "Our approach combines strategic consulting, human intelligence and advanced technology to build scalable, future-ready digital ecosystems.",
-    label: "Specialized Areas:",
-    icon: Building2,
-    badgeColor: "from-blue-600 to-cyan-500",
-    themeBg: "bg-blue-50/70 border-blue-200/80 text-blue-700",
-    gradient: "from-blue-500/10 via-cyan-500/5 to-transparent",
-    deliverables: [
-      "End-to-End Product Architecture",
-      "Full-Stack Web & Mobile Apps",
-      "Enterprise Grade Security & Compliance",
-      "High-Availability Infrastructure",
-    ],
-    items: [
-      "Web & Mobile Application Development",
-      "Property & Real Estate Platforms",
-      "Business Management Platforms",
-      "Marketplace Solutions",
-      "Enterprise Portals",
-      "SaaS Products",
-      "AI-Powered Applications",
-      "Workflow & Automation Platforms",
-      "Custom Digital Ecosystems",
-    ],
-  },
-  {
     id: "tech-digital-solutions",
     tabLabel: "Technology & Digital",
-    shortTag: "02 / Ecosystems",
+    shortTag: "01 / Ecosystems",
     title: "Technology & Digital Solutions",
     subtitle:
       "Designing and developing scalable technology ecosystems for modern businesses.",
@@ -80,6 +47,39 @@ export const techTracks = [
       "Content & Creative Solutions",
       "Website & Digital Presence Management",
       "Marketing Automation",
+    ],
+  },
+  {
+    id: "products-platforms",
+    tabLabel: "Products & Platforms",
+    shortTag: "02 / Digital Engineering",
+    title: "Products & Platform Development",
+    subtitle: "Building Scalable Digital Platforms with Human-Centered Innovation",
+    summary:
+      "We collaborate with businesses, entrepreneurs and institutions to conceptualize, develop and scale technology-driven platforms tailored to modern market needs.",
+    detail:
+      "Our approach combines strategic consulting, human intelligence and advanced technology to build scalable, future-ready digital ecosystems.",
+    label: "Specialized Areas:",
+    icon: Building2,
+    badgeColor: "from-blue-600 to-cyan-500",
+    themeBg: "bg-blue-50/70 border-blue-200/80 text-blue-700",
+    gradient: "from-blue-500/10 via-cyan-500/5 to-transparent",
+    deliverables: [
+      "End-to-End Product Architecture",
+      "Full-Stack Web & Mobile Apps",
+      "Enterprise Grade Security & Compliance",
+      "High-Availability Infrastructure",
+    ],
+    items: [
+      "Web & Mobile Application Development",
+      "Property & Real Estate Platforms",
+      "Business Management Platforms",
+      "Marketplace Solutions",
+      "Enterprise Portals",
+      "SaaS Products",
+      "AI-Powered Applications",
+      "Workflow & Automation Platforms",
+      "Custom Digital Ecosystems",
     ],
   },
   {

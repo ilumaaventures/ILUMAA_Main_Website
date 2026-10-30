@@ -248,7 +248,7 @@ const domainBadges = [
 ];
 
 function HomePage() {
-  const heroVideoSrc = `${import.meta.env.BASE_URL}hero-video.mp4`;
+  const heroVideoSrc = `${import.meta.env.BASE_URL}tech-hero-energy.mp4`;
 
   return (
     <>
@@ -264,9 +264,8 @@ function HomePage() {
           className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center"
         />
 
-        {/* Ambient Lightened Overlay for Video Visibility */}
-        <div className="absolute inset-0 bg-[#070e1b]/35 bg-gradient-to-b from-[#070e1b]/50 via-transparent to-[#070e1b]/70" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#070e1b]/40 via-transparent to-[#070e1b]/40" />
+        {/* Ambient Dark Overlay for Typography Readability */}
+        <div className="pointer-events-none absolute inset-0 z-[2] bg-black/25 bg-gradient-to-b from-black/40 via-transparent to-black/55" />
         <div className="absolute left-1/2 top-0 h-px w-[82%] -translate-x-1/2 bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent" />
 
         {/* Centered Hero Content */}
@@ -328,8 +327,11 @@ function HomePage() {
           </motion.div>
         </motion.div>
 
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-20 bg-gradient-to-t from-[#070e1b] to-transparent" />
-        <div className="pointer-events-none absolute -bottom-24 left-1/2 z-10 h-44 w-[122%] -translate-x-1/2 rounded-[100%] bg-bg-primary" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-20 bg-gradient-to-t from-black/50 to-transparent" />
+        <div
+          className="pointer-events-none absolute -bottom-20 sm:-bottom-24 md:-bottom-28 left-1/2 z-20 h-36 sm:h-44 md:h-52 w-[130%] sm:w-[122%] -translate-x-1/2 rounded-[100%] bg-white shadow-[0_-6px_20px_rgba(0,0,0,0.12)]"
+          style={{ backgroundColor: "#ffffff" }}
+        />
       </section>
 
       {/* 2. WHY CHOOSE US (Bidirectional Scroll Emerge & Merge Behind Center Pillar) */}
