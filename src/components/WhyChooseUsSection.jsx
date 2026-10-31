@@ -70,7 +70,7 @@ export default function WhyChooseUsSection({ items }) {
     <section
       ref={sectionRef}
       id="why-choose-us"
-      className="relative z-10 mx-auto max-w-[1240px] px-4 pt-4 sm:pt-6 sm:px-6 lg:px-8 overflow-hidden w-full"
+      className="relative z-10 mx-auto max-w-[1240px] px-4 pt-10 sm:pt-14 sm:px-6 lg:px-8 overflow-hidden w-full"
     >
       {/* 3-COLUMN PILLAR LAYOUT WITH BIDIRECTIONAL SCROLL EMERGE/MERGE */}
       <div className="grid gap-3.5 lg:gap-4 lg:grid-cols-[1.05fr_1fr_1.05fr] lg:items-stretch items-center relative">

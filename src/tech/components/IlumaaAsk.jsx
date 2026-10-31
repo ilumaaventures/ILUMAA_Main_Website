@@ -19,7 +19,7 @@ const PRESETS = [
     id: "socials",
     question: "Tell me about ILUMAA Socials",
     reply:
-      "• **[ILUMAA Socials](https://ilumaasocialmarketing.vercel.app/)** is a modern social networking platform built for creators, businesses, and communities.\n\nKey Capabilities:\n• **Community Engagement**: Content feeds, media uploads, creator discovery, & post interactions.\n• **Realtime Chat**: Sub-second socket messaging powered by Socket.IO.\n• **Notifications & Media**: Cloudinary media optimization & instant notifications.\n\nStack: React · Node.js · MongoDB · Socket.IO · Cloudinary",
+      "• **[ILUMAA Socials](https://studio.ilumaa.com/)** is a modern social networking platform built for creators, businesses, and communities.\n\nKey Capabilities:\n• **Community Engagement**: Content feeds, media uploads, creator discovery, & post interactions.\n• **Realtime Chat**: Sub-second socket messaging powered by Socket.IO.\n• **Notifications & Media**: Cloudinary media optimization & instant notifications.\n\nStack: React · Node.js · MongoDB · Socket.IO · Cloudinary",
   },
   {
     id: "ai",
@@ -49,7 +49,7 @@ const PRESETS = [
     id: "contact",
     question: "How do we request a project quote?",
     reply:
-      "Getting started is simple:\n\n• **Email Technical Teams**: [ilumaaventures@gmail.com](mailto:ilumaaventures@gmail.com)\n• **Email Advisory Teams**: [info@ilumaa.com](mailto:info@ilumaa.com)\n• **Discovery Session**: We analyze your requirements, outline the architecture, and provide a clear milestone quote.",
+      "Getting started is simple:\n\n• **Email Technical Teams**: [connect@ilumaa.com](https://mail.google.com/mail/?view=cm&fs=1&to=connect@ilumaa.com)\n• **Email Advisory Teams**: [connect@ilumaa.com](https://mail.google.com/mail/?view=cm&fs=1&to=connect@ilumaa.com)\n• **Discovery Session**: We analyze your requirements, outline the architecture, and provide a clear milestone quote.",
   },
 ];
 
@@ -130,7 +130,7 @@ function IlumaaAsk() {
     setTimeout(() => {
       const replyText = preset
         ? preset.reply
-        : `Thanks for your message! Our engineering team will analyze "${query}". For instant architectural discussions, reach out to connect@ilumaa.com.`;
+        : `Thanks for your message! Our engineering team will analyze "${query}". For instant architectural discussions, reach out to [connect@ilumaa.com](https://mail.google.com/mail/?view=cm&fs=1&to=connect@ilumaa.com).`;
 
       const botMsg = {
         id: (Date.now() + 1).toString(),

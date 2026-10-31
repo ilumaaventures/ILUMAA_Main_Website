@@ -54,7 +54,7 @@ export const techTracks = [
     tabLabel: "Products & Platforms",
     shortTag: "02 / Digital Engineering",
     title: "Products & Platform Development",
-    subtitle: "Building Scalable Digital Platforms with Human-Centered Innovation",
+    subtitle: "Building Scalable Digital Platforms. with Human-Centered Innovation",
     summary:
       "We collaborate with businesses, entrepreneurs and institutions to conceptualize, develop and scale technology-driven platforms tailored to modern market needs.",
     detail:

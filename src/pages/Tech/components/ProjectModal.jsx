@@ -47,6 +47,7 @@ function ProjectModal({ project, onClose }) {
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
               className="btn btn-primary btn-sm"
               data-cursor="hover"
             >

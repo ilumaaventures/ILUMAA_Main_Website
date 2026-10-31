@@ -48,7 +48,7 @@ function CTA() {
       </p>
       <div className="magnetic" style={{ marginTop: "10px" }}>
         <a
-          href="mailto:ilumaaventures@gmail.com"
+          href="https://mail.google.com/mail/?view=cm&fs=1&to=connect@ilumaa.com&su=Start%20Your%20Project" target="_blank" rel="noopener noreferrer"
           className="btn btn-primary large"
           data-cursor="hover"
         >

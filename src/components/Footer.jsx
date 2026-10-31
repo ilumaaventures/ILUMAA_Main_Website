@@ -69,7 +69,6 @@ function Footer({ isTechnologyPage }) {
       const el = document.getElementById(targetId);
       if (el) {
         event.preventDefault();
-        window.history.pushState(null, "", `#${targetId}`);
         el.scrollIntoView({ behavior: "smooth", block: "start" });
         return;
       }
@@ -144,7 +143,7 @@ function Footer({ isTechnologyPage }) {
             <h3 className="font-heading text-base font-bold text-slate-950">Contact</h3>
             <div className="mt-5 space-y-3.5 text-sm text-slate-600">
               <a
-                href="mailto:connect@ilumaa.com"
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=connect@ilumaa.com" target="_blank" rel="noopener noreferrer"
                 className="flex items-center gap-3 transition hover:text-blue-600"
               >
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 text-blue-600">
@@ -174,7 +173,7 @@ function Footer({ isTechnologyPage }) {
             <h3 className="font-heading text-base font-bold text-slate-950">Follow Us</h3>
             <div className="mt-5 flex flex-col gap-3">
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/company/ilumaa/"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.16em] text-slate-600 transition hover:translate-x-1 hover:text-blue-600"
@@ -185,7 +184,7 @@ function Footer({ isTechnologyPage }) {
                 LinkedIn
               </a>
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/ilumaatech"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.16em] text-slate-600 transition hover:translate-x-1 hover:text-blue-600"
@@ -196,7 +195,7 @@ function Footer({ isTechnologyPage }) {
                 Instagram
               </a>
               <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/ilumaatech"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.16em] text-slate-600 transition hover:translate-x-1 hover:text-blue-600"

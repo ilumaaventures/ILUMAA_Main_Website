@@ -109,10 +109,20 @@ const CTASection = () => {
           Ready to build the future together?
         </p>
         <div className="cta-btns cta-btns-anim">
-          <a href="mailto:connect@ilumaa.com" className="btn-primary">
+          <a
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=connect@ilumaa.com&su=Schedule%20a%20Consultation"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary"
+          >
             Schedule a Consultation
           </a>
-          <a href="mailto:connect@ilumaa.com" className="btn-outline">
+          <a
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=connect@ilumaa.com&su=Get%20in%20Touch"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-outline"
+          >
             Get in Touch
           </a>
         </div>

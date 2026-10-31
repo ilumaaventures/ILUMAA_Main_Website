@@ -300,7 +300,6 @@ function HomePage() {
                 if (el) {
                   e.preventDefault();
                   const targetY = Math.max(0, el.getBoundingClientRect().top + window.scrollY - 65);
-                  window.history.pushState(null, "", "#connect");
                   window.scrollTo({ top: targetY, behavior: "smooth" });
                 }
               }}
@@ -315,7 +314,6 @@ function HomePage() {
                 if (el) {
                   e.preventDefault();
                   const targetY = Math.max(0, el.getBoundingClientRect().top + window.scrollY - 65);
-                  window.history.pushState(null, "", "#solutions");
                   window.scrollTo({ top: targetY, behavior: "smooth" });
                 }
               }}
@@ -328,10 +326,8 @@ function HomePage() {
         </motion.div>
 
         <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-20 bg-gradient-to-t from-black/50 to-transparent" />
-        <div
-          className="pointer-events-none absolute -bottom-20 sm:-bottom-24 md:-bottom-28 left-1/2 z-20 h-36 sm:h-44 md:h-52 w-[130%] sm:w-[122%] -translate-x-1/2 rounded-[100%] bg-white shadow-[0_-6px_20px_rgba(0,0,0,0.12)]"
-          style={{ backgroundColor: "#ffffff" }}
-        />
+        {/* Simple straight horizontal divider line */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-px w-full bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent" />
       </section>
 
       {/* 2. WHY CHOOSE US (Bidirectional Scroll Emerge & Merge Behind Center Pillar) */}
@@ -532,14 +528,18 @@ function HomePage() {
 
               <div className="flex flex-col gap-2.5">
                 <a
-                  href="mailto:info@ilumaa.com"
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=connect@ilumaa.com&su=Schedule%20a%20Strategy%20Call"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="btn-primary flex items-center justify-center gap-2 px-5 py-2.5 text-[11px] shadow-[0_12px_32px_rgba(56,189,248,0.35)] transition duration-300 hover:scale-[1.03]"
                 >
                   <span>Schedule a Strategy Call</span>
                   <ArrowRight size={15} />
                 </a>
                 <a
-                  href="/#connect"
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=connect@ilumaa.com&su=Contact%20Us"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center justify-center rounded-full border border-white/30 bg-white/10 px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-white backdrop-blur-md transition duration-300 hover:bg-white hover:text-slate-950"
                 >
                   Contact Us

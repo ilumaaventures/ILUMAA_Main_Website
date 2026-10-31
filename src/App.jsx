@@ -67,12 +67,16 @@ function App() {
       return undefined;
     }
 
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+
     const navigationEntry = performance
       .getEntriesByType("navigation")
       .at(0);
-    const isReload = navigationEntry?.type === "reload";
+    const isReload = navigationEntry?.type === "reload" || performance.navigation?.type === 1;
 
-    if (isReload && window.location.pathname === "/") {
+    if (isReload) {
       if (window.location.hash) {
         window.history.replaceState(
           null,
@@ -81,9 +85,8 @@ function App() {
         );
       }
 
-      requestAnimationFrame(() => {
-        window.scrollTo({ top: 0, behavior: "auto" });
-      });
+      window.scrollTo({ top: 0, behavior: "instant" });
+      return;
     }
 
     const scrollToHash = () => {
@@ -97,7 +100,10 @@ function App() {
         const targetId = hash.replace(/^#/, "");
         const target = document.getElementById(targetId);
         if (target) {
-          target.scrollIntoView({ behavior: "smooth", block: "start" });
+          const navEl = document.querySelector("header");
+          const navHeight = navEl ? navEl.offsetHeight : 68;
+          const targetY = Math.max(0, target.getBoundingClientRect().top + window.scrollY - (navHeight - 1));
+          window.scrollTo({ top: targetY, behavior: "smooth" });
           return true;
         }
         return false;

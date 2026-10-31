@@ -33,10 +33,20 @@ function CTA() {
             </div>
 
             <div className="flex flex-col gap-4 lg:items-end">
-              <a href="mailto:info@ilumaa.com" className="btn-primary w-full justify-center lg:w-auto">
+              <a
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=connect@ilumaa.com&su=Schedule%20a%20Strategy%20Call"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary w-full justify-center lg:w-auto"
+              >
                 Schedule a Strategy Call
               </a>
-              <a href="mailto:info@ilumaa.com" className="btn-secondary w-full justify-center lg:w-auto">
+              <a
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=connect@ilumaa.com&su=Contact%20Us"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-secondary w-full justify-center lg:w-auto"
+              >
                 Contact Us
               </a>
             </div>
